@@ -22,7 +22,7 @@ export const VideoComments = () => {
         <DrawerHeader>
           <DrawerTitle>Comments</DrawerTitle>
         </DrawerHeader>
-        <div className='flex flex-col gap-6 overflow-y-auto px-5 pb-5'>
+        <div className='flex flex-col overflow-y-auto'>
           {Array.from({ length: 20 }).map(() => (
             <VideoComment />
           ))}
