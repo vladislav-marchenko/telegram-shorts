@@ -1,5 +1,6 @@
 import { Video } from '@/components/Video'
 import useEmblaCarousel from 'embla-carousel-react'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import { useEffect, useRef, useState } from 'react'
 
 const videos = [
@@ -18,7 +19,9 @@ const videos = [
 ]
 
 export const Videos = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: 'y' })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: 'y' }, [
+    WheelGesturesPlugin()
+  ])
   const slidesRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
 
