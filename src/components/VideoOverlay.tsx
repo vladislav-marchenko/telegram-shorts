@@ -3,9 +3,8 @@ import { VideoOptions } from './VideoOptions'
 import { VideoProgress } from './VideoProgress'
 import { VideoContext } from '@/contexts/VideoContext'
 import type { VideoValues } from '@/types/contexts'
+import { Heart, Play } from 'lucide-react'
 import { useContext } from 'react'
-import { FaPlay } from 'react-icons/fa'
-import { LuHeart } from 'react-icons/lu'
 
 export const VideoOverlay = () => {
   const { isPaused } = useContext(VideoContext) as VideoValues
@@ -17,7 +16,7 @@ export const VideoOverlay = () => {
           <div className='h-12 w-12 rounded-full bg-gray-600' />
         </button>
         <button className='flex cursor-pointer flex-col items-center gap-1 p-2 text-white/70'>
-          <LuHeart size={28} />
+          <Heart size={28} />
           <span className='text-sm'>143K</span>
         </button>
         <VideoComments />
@@ -26,7 +25,7 @@ export const VideoOverlay = () => {
       <VideoProgress />
       {isPaused && (
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-          <FaPlay size={50} className='text-white/60' />
+          <Play size={50} className='text-white/60' />
         </div>
       )}
     </>

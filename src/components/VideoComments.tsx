@@ -6,7 +6,7 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from './ui/drawer'
-import { LuMessageCircle } from 'react-icons/lu'
+import { MessageCircle } from 'lucide-react'
 
 export const VideoComments = () => {
   return (
@@ -15,7 +15,7 @@ export const VideoComments = () => {
         onClick={(event) => event.stopPropagation()}
         className='flex cursor-pointer flex-col items-center gap-1 p-2 text-white/70'
       >
-        <LuMessageCircle size={28} className='scale-x-[-1]' />
+        <MessageCircle size={28} className='scale-x-[-1]' />
         <span className='text-sm'>13K</span>
       </DrawerTrigger>
       <DrawerContent>

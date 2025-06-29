@@ -1,18 +1,18 @@
 import { Link } from '@tanstack/react-router'
-import { BiHomeAlt2 } from 'react-icons/bi'
+import { House, Search, User } from 'lucide-react'
 
 const items = [
   {
-    href: '/',
-    icon: BiHomeAlt2
+    href: '/search',
+    icon: Search
   },
   {
     href: '/',
-    icon: BiHomeAlt2
+    icon: House
   },
   {
     href: '/profile',
-    icon: BiHomeAlt2
+    icon: User
   }
 ]
 

@@ -8,13 +8,13 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from './ui/drawer'
-import { BsThreeDots } from 'react-icons/bs'
+import { Ellipsis } from 'lucide-react'
 
 export const VideoOptions = () => {
   return (
     <Drawer>
       <DrawerTrigger className='flex cursor-pointer flex-col items-center gap-1 p-2 text-white/70'>
-        <BsThreeDots size={22} />
+        <Ellipsis size={22} />
       </DrawerTrigger>
       <DrawerContent className='h-1/3'>
         <DrawerHeader>

@@ -5,8 +5,8 @@ import {
   ContextMenuTrigger
 } from './ui/context-menu'
 import { cn } from '@/lib/utils'
+import { Heart } from 'lucide-react'
 import { useState } from 'react'
-import { LuHeart } from 'react-icons/lu'
 
 export const VideoComment = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -28,7 +28,7 @@ export const VideoComment = () => {
             </span>
           </div>
           <button className='-mx-2 self-center p-2'>
-            <LuHeart size={20} />
+            <Heart size={20} />
           </button>
         </div>
       </ContextMenuTrigger>
