@@ -10,16 +10,14 @@ export const VideoProgress: FC<{
 
     videoRef.current.ontimeupdate = (event) => {
       const videoElement = event.currentTarget as HTMLVideoElement
-      setProgress(videoElement.currentTime)
+      setProgress((videoElement.currentTime / videoElement.duration) * 100)
     }
   }, [videoRef])
 
   return (
     <div
-      className='absolute bottom-0 h-0.5 w-full bg-neutral-300/50 transition-all duration-1000'
-      style={{
-        width: `${progress}%`
-      }}
+      className='absolute bottom-0 h-0.5 w-full bg-neutral-300/50 transition-all duration-200'
+      style={{ width: `${progress}%` }}
     />
   )
 }
