@@ -11,7 +11,7 @@ const items = [
     icon: House
   },
   {
-    href: '/profile',
+    href: '/account',
     icon: User
   }
 ]
