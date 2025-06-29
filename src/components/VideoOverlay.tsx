@@ -1,21 +1,15 @@
 import { VideoComments } from './VideoComments'
 import { VideoOptions } from './VideoOptions'
 import { VideoProgress } from './VideoProgress'
-import { useEffect, useState, type FC, type RefObject } from 'react'
+import { usePlaying } from '@/hooks/usePlaying'
+import { type FC, type RefObject } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { LuHeart } from 'react-icons/lu'
 
 export const VideoOverlay: FC<{
   videoRef: RefObject<HTMLVideoElement | null>
 }> = ({ videoRef }) => {
-  const [isPlaying, setIsPlaying] = useState(true)
-
-  useEffect(() => {
-    if (!videoRef.current) return
-
-    videoRef.current.onplay = () => setIsPlaying(true)
-    videoRef.current.onpause = () => setIsPlaying(false)
-  }, [videoRef])
+  const isPlaying = usePlaying(videoRef)
 
   return (
     <>
