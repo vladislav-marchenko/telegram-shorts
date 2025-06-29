@@ -9,7 +9,7 @@ export const Route = createFileRoute('/account')({
 function Account() {
   return (
     <div className='flex h-full flex-col overflow-y-auto bg-neutral-900 p-4'>
-      <AccountInfo />
+      <AccountInfo isEditable />
       <AccountVideos />
     </div>
   )
