@@ -10,13 +10,10 @@ export const Video: FC<VideoProps> = ({ url, isCurrent }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const toggle = () => {
-    if (!videoRef.current) return
+    const video = videoRef.current
+    if (!video) return
 
-    if (videoRef.current.paused) {
-      videoRef.current.play()
-    } else {
-      videoRef.current.pause()
-    }
+    video.paused ? video.play() : video.pause()
   }
 
   return (
