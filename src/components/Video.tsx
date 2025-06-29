@@ -8,7 +8,6 @@ interface VideoProps {
 
 export const Video: FC<VideoProps> = ({ url, isCurrent }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const holdTimeoutRef = useRef<number | null>(null)
 
   const toggle = () => {
     if (!videoRef.current) return
@@ -18,8 +17,6 @@ export const Video: FC<VideoProps> = ({ url, isCurrent }) => {
     } else {
       videoRef.current.pause()
     }
-
-    if (holdTimeoutRef.current) clearTimeout(holdTimeoutRef.current)
   }
 
   return (
