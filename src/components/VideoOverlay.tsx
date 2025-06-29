@@ -1,15 +1,14 @@
 import { VideoComments } from './VideoComments'
 import { VideoOptions } from './VideoOptions'
 import { VideoProgress } from './VideoProgress'
-import { usePlaying } from '@/hooks/usePlaying'
-import { type FC, type RefObject } from 'react'
+import { VideoContext } from '@/contexts/VideoContext'
+import type { VideoValues } from '@/types/contexts'
+import { useContext } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { LuHeart } from 'react-icons/lu'
 
-export const VideoOverlay: FC<{
-  videoRef: RefObject<HTMLVideoElement | null>
-}> = ({ videoRef }) => {
-  const isPlaying = usePlaying(videoRef)
+export const VideoOverlay = () => {
+  const { isPaused } = useContext(VideoContext) as VideoValues
 
   return (
     <>
@@ -24,8 +23,8 @@ export const VideoOverlay: FC<{
         <VideoComments />
         <VideoOptions />
       </div>
-      <VideoProgress videoRef={videoRef} />
-      {!isPlaying && (
+      <VideoProgress />
+      {isPaused && (
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
           <FaPlay size={50} className='text-white/60' />
         </div>

@@ -1,14 +1,14 @@
 import { useEffect, useState, type RefObject } from 'react'
 
-export const usePlaying = (videoRef: RefObject<HTMLVideoElement | null>) => {
-  const [isPlaying, setIsPlaying] = useState(true)
+export const useIsPaused = (videoRef: RefObject<HTMLVideoElement | null>) => {
+  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
-    const handlePlay = () => setIsPlaying(true)
-    const handlePause = () => setIsPlaying(false)
+    const handlePlay = () => setIsPaused(false)
+    const handlePause = () => setIsPaused(true)
 
     video.addEventListener('play', handlePlay)
     video.addEventListener('pause', handlePause)
@@ -19,5 +19,5 @@ export const usePlaying = (videoRef: RefObject<HTMLVideoElement | null>) => {
     }
   }, [videoRef])
 
-  return isPlaying
+  return isPaused
 }

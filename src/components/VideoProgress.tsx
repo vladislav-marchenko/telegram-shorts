@@ -1,10 +1,9 @@
-import { useProgress } from '@/hooks/useProgress'
-import { type FC, type RefObject } from 'react'
+import { VideoContext } from '@/contexts/VideoContext'
+import type { VideoValues } from '@/types/contexts'
+import { useContext } from 'react'
 
-export const VideoProgress: FC<{
-  videoRef: RefObject<HTMLVideoElement | null>
-}> = ({ videoRef }) => {
-  const progress = useProgress(videoRef)
+export const VideoProgress = () => {
+  const { progress } = useContext(VideoContext) as VideoValues
 
   return (
     <div

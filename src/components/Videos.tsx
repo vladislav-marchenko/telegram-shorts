@@ -1,4 +1,5 @@
 import { Video } from '@/components/Video'
+import { VideoContextProvider } from '@/contexts/VideoContext'
 import useEmblaCarousel from 'embla-carousel-react'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import { useEffect, useRef, useState } from 'react'
@@ -58,12 +59,11 @@ export const Videos = () => {
       <div ref={slidesRef} className='flex h-full flex-col'>
         {videos.map(({ id, url }, index) => {
           return (
-            <div
-              key={id}
-              className='flex h-full w-full shrink-0 items-center justify-center'
-            >
-              <Video url={url} isCurrent={index === currentIndex} />
-            </div>
+            <VideoContextProvider key={id}>
+              <div className='flex h-full w-full shrink-0 items-center justify-center'>
+                <Video url={url} isCurrent={index === currentIndex} />
+              </div>
+            </VideoContextProvider>
           )
         })}
       </div>

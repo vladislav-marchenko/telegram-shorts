@@ -1,5 +1,7 @@
 import { VideoOverlay } from './VideoOverlay'
-import { useRef, type FC } from 'react'
+import { VideoContext } from '@/contexts/VideoContext'
+import type { VideoValues } from '@/types/contexts'
+import { useContext, type FC } from 'react'
 
 interface VideoProps {
   url: string
@@ -7,19 +9,12 @@ interface VideoProps {
 }
 
 export const Video: FC<VideoProps> = ({ url, isCurrent }) => {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  const toggle = () => {
-    const video = videoRef.current
-    if (!video) return
-
-    video.paused ? video.play() : video.pause()
-  }
+  const { ref, toggle } = useContext(VideoContext) as VideoValues
 
   return (
     <div className='relative h-full w-full bg-neutral-800'>
       <video
-        ref={videoRef}
+        ref={ref}
         src={url}
         onClick={toggle}
         className='h-full w-full object-cover'
@@ -29,7 +24,7 @@ export const Video: FC<VideoProps> = ({ url, isCurrent }) => {
         loop
         muted
       />
-      <VideoOverlay videoRef={videoRef} />
+      <VideoOverlay />
     </div>
   )
 }
