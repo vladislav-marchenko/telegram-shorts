@@ -20,8 +20,12 @@ export const Navigation = () => {
   return (
     <div className='flex w-full items-center justify-around border-t border-neutral-800 bg-neutral-900'>
       {items.map(({ href, icon: Icon }) => (
-        <Link key={href} to={href} className='p-3'>
-          <Icon size={30} className='text-neutral-200' />
+        <Link
+          key={href}
+          to={href}
+          className='p-3 text-neutral-200 transition-colors duration-300 hover:text-white'
+        >
+          <Icon size={30} />
         </Link>
       ))}
     </div>
