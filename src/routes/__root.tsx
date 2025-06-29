@@ -8,7 +8,7 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <div className='flex h-dvh flex-col overflow-hidden'>
+    <div className='flex h-dvh flex-col overflow-hidden bg-neutral-800'>
       <Outlet />
       <Navigation />
     </div>
