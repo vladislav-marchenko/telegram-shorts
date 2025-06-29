@@ -15,6 +15,9 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom'
   },
+  server: {
+    allowedHosts: ['hungry-turtles-wish.loca.lt']
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src')

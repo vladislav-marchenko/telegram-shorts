@@ -23,7 +23,7 @@ export const Navigation = () => {
         <Link
           key={href}
           to={href}
-          className='p-3 text-neutral-200 transition-colors duration-300 hover:text-white'
+          className='px-8 py-3 text-neutral-200 transition-colors duration-300 hover:text-white'
         >
           <Icon size={30} />
         </Link>
