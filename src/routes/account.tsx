@@ -7,12 +7,10 @@ export const Route = createFileRoute('/account')({
 })
 
 function Account() {
-  console.log(window.Telegram.WebApp.initData)
-
   return (
     <div className='flex h-full flex-col overflow-y-auto bg-neutral-900 p-4'>
-      <AccountInfo isEditable />
-      <AccountVideos />
+      <AccountInfo />
+      {/*<AccountVideos />*/}
     </div>
   )
 }
