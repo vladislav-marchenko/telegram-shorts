@@ -40,7 +40,8 @@ const formSchema = z.object({
 export const AccountInfoEditForm = () => {
   const { data, refetch } = useQuery({
     queryKey: ['user', 'me'],
-    queryFn: () => getUser('me')
+    queryFn: () => getUser('me'),
+    staleTime: Infinity
   })
 
   const { mutate, isPending } = useMutation({
