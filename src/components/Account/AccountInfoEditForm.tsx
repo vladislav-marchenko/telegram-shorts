@@ -11,7 +11,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { getUser, updateProfileInfo } from '@/services/api'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -38,9 +38,7 @@ const formSchema = z.object({
 })
 
 export const AccountInfoEditForm = () => {
-  const queryClient = useQueryClient()
-
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['user', 'me'],
     queryFn: () => getUser('me')
   })
@@ -49,7 +47,7 @@ export const AccountInfoEditForm = () => {
     mutationFn: updateProfileInfo,
     onSuccess: () => {
       toast.success('Profile has been updated successfully.')
-      queryClient.invalidateQueries({ queryKey: ['user', 'me'] })
+      refetch()
     },
     onError: (error) => toast.error(error.message ?? 'Something went wrong.')
   })
