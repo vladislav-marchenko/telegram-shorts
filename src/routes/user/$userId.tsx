@@ -1,8 +1,7 @@
 import { AccountInfo } from '@/components/Account/AccountInfo'
-import { AccountVideos } from '@/components/Account/AccountVideos'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/account')({
+export const Route = createFileRoute('/user/$userId')({
   component: Account
 })
 

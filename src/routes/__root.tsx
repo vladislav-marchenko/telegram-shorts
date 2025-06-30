@@ -1,6 +1,7 @@
 import { Navigation } from '@/components/Navigation.tsx'
 import { Toaster } from '@/components/ui/sonner'
 import type { QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 
 interface MyRouterContext {
@@ -13,6 +14,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       <Outlet />
       <Navigation />
       <Toaster richColors position='top-center' />
+      <ReactQueryDevtools />
     </div>
   )
 })

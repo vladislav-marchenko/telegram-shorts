@@ -9,7 +9,7 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { getMe, updateProfileInfo } from '@/services/api'
+import { getUser, updateProfileInfo } from '@/services/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
@@ -41,17 +41,17 @@ export const AccountInfoEditForm = () => {
   const queryClient = useQueryClient()
 
   const { data } = useQuery({
-    queryKey: ['me'],
-    queryFn: getMe
+    queryKey: ['user', 'me'],
+    queryFn: () => getUser('me')
   })
 
   const { mutate, isPending } = useMutation({
     mutationFn: updateProfileInfo,
     onSuccess: () => {
       toast.success('Profile has been updated successfully.')
-      queryClient.invalidateQueries({ queryKey: ['me'] })
+      queryClient.invalidateQueries({ queryKey: ['user', 'me'] })
     },
-    onError: () => toast.error('Something went wrong.')
+    onError: (error) => toast.error(error.message ?? 'Something went wrong.')
   })
 
   const form = useForm<z.infer<typeof formSchema>>({

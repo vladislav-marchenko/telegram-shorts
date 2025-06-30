@@ -38,8 +38,8 @@ export const customFetch = async <Data extends object>({
   }
 }
 
-export const getMe = async () => {
-  return await customFetch<User>({ endpoint: '/user/me' })
+export const getUser = async (userId: string) => {
+  return await customFetch<User>({ endpoint: `/user/${userId}` })
 }
 
 export const updateProfileInfo = async (

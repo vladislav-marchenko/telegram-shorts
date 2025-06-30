@@ -1,13 +1,15 @@
-import { getMe } from '../../services/api'
+import { getUser } from '../../services/api'
 import { AccountInfoData } from './AccountInfoData'
 import { AccountInfoError } from './AccountInfoError'
 import { AccountInfoSkeleton } from './AccountInfoSkeleton'
 import { useQuery } from '@tanstack/react-query'
+import { useMatch } from '@tanstack/react-router'
 
 export const AccountInfo = () => {
+  const { params } = useMatch({ from: '/user/$userId' })
   const { data, isSuccess, isLoading, isError, error } = useQuery({
-    queryKey: ['me'],
-    queryFn: getMe
+    queryKey: ['user', params.userId],
+    queryFn: () => getUser(params.userId)
   })
 
   return (

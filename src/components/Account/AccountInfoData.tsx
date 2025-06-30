@@ -1,10 +1,13 @@
 import { Button } from '../ui/button'
 import { AccountInfoEdit } from './AccountInfoEdit'
 import type { User } from '@/types/api'
+import { useMatch } from '@tanstack/react-router'
 import { ExternalLink } from 'lucide-react'
 import type { FC } from 'react'
 
 export const AccountInfoData: FC<{ data: User }> = ({ data }) => {
+  const { params } = useMatch({ from: '/user/$userId' })
+
   return (
     <>
       <img
@@ -18,7 +21,8 @@ export const AccountInfoData: FC<{ data: User }> = ({ data }) => {
         <span className='text-neutral-200'>@{data.username}</span>
       </div>
       <div className='flex gap-2'>
-        <AccountInfoEdit />
+        {params.userId === 'me' && <AccountInfoEdit />}
+        {params.userId !== 'me' && <Button size='lg'>Follow</Button>}
         <Button size='lg' variant='secondary'>
           <ExternalLink strokeWidth='3' />
         </Button>
