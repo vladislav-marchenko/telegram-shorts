@@ -16,7 +16,7 @@ export default defineConfig({
     environment: 'jsdom'
   },
   server: {
-    allowedHosts: ['hungry-turtles-wish.loca.lt']
+    allowedHosts: ['dark-actors-add.loca.lt']
   },
   resolve: {
     alias: {
