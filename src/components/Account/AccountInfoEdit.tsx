@@ -24,7 +24,7 @@ export const AccountInfoEdit = () => {
         </DrawerHeader>
         <AccountInfoEditForm />
         <DrawerFooter>
-          <DrawerClose>
+          <DrawerClose asChild>
             <Button variant='outline' className='w-full'>
               Cancel
             </Button>
