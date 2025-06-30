@@ -1,3 +1,5 @@
+export type Methods = 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT'
+
 export interface Error {
   statusCode: number
   error?: string

@@ -1,4 +1,5 @@
 import { Navigation } from '@/components/Navigation.tsx'
+import { Toaster } from '@/components/ui/sonner'
 import type { QueryClient } from '@tanstack/react-query'
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 
@@ -11,6 +12,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     <div className='flex h-dvh flex-col overflow-hidden bg-neutral-800'>
       <Outlet />
       <Navigation />
+      <Toaster richColors position='top-center' />
     </div>
   )
 })

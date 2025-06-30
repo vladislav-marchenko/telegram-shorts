@@ -9,34 +9,60 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { getMe, updateProfileInfo } from '@/services/api'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.'
-  }),
-  displayName: z.string().min(2, {
-    message: 'Display name must be at least 2 characters.'
-  }),
-  photoURL: z.string().url({
-    message: 'Please enter a valid URL.'
-  })
+  username: z
+    .string()
+    .min(2, {
+      message: 'Username must be at least 2 characters.'
+    })
+    .optional(),
+  displayName: z
+    .string()
+    .min(2, {
+      message: 'Display name must be at least 2 characters.'
+    })
+    .optional(),
+  photoURL: z
+    .string()
+    .url({
+      message: 'Please enter a valid URL.'
+    })
+    .optional()
 })
 
 export const AccountInfoEditForm = () => {
+  const queryClient = useQueryClient()
+
+  const { data } = useQuery({
+    queryKey: ['me'],
+    queryFn: getMe
+  })
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateProfileInfo,
+    onSuccess: () => {
+      toast.success('Profile has been updated successfully.')
+      queryClient.invalidateQueries({ queryKey: ['me'] })
+    },
+    onError: () => toast.error('Something went wrong.')
+  })
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
-      displayName: ''
+      username: data?.username ?? '',
+      displayName: data?.displayName ?? ''
     }
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
-  }
+  const onSubmit = (values: z.infer<typeof formSchema>) => mutate(values)
 
   return (
     <Form {...form}>
@@ -86,7 +112,7 @@ export const AccountInfoEditForm = () => {
             </FormItem>
           )}
         />
-        <Button type='submit' className='w-full'>
+        <Button type='submit' isLoading={isPending} className='w-full'>
           Submit
         </Button>
       </form>
