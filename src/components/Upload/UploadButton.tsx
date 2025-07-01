@@ -3,7 +3,7 @@ import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { useMatch } from '@tanstack/react-router'
 
-export const UploadVideoButton = () => {
+export const UploadButton = () => {
   const { params } = useMatch({ from: '/user/$userId' })
   const { isLoading, isError } = useQuery({
     queryKey: ['user', params.userId],

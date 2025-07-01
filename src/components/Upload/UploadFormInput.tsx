@@ -1,19 +1,14 @@
 import { cn } from '@/lib/utils'
+import type { UploadMediaForm } from '@/types/forms'
 import { ImagePlus } from 'lucide-react'
 import type { ChangeEvent, FC } from 'react'
-import type { UseFormReturn } from 'react-hook-form'
 
-type FormValues = {
-  media: File
-  title: string
-}
-
-interface UploadMediaInputProps {
-  form: UseFormReturn<FormValues>
+interface UploadFormInputProps {
+  form: UploadMediaForm
   onChange: (...event: any[]) => void
 }
 
-export const UploadMediaInput: FC<UploadMediaInputProps> = ({
+export const UploadFormInput: FC<UploadFormInputProps> = ({
   form,
   onChange
 }) => {

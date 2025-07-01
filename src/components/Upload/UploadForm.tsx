@@ -1,4 +1,5 @@
-import { Button } from '../ui/button'
+import { UploadFormInput } from './UploadFormInput'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -7,28 +8,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '../ui/form'
-import { Input } from '../ui/input'
-import { UploadMediaInput } from './UploadMediaInput'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import type { UploadMediaForm } from '@/types/forms'
+import type { FC } from 'react'
 
-const formSchema = z.object({
-  title: z.string().min(4, {
-    message: 'Title must be at least 4 characters.'
-  }),
-  media: z.custom<File>((value) => value instanceof File, {
-    message: 'Please upload a valid video file.'
-  })
-})
+interface UploadFormProps {
+  form: UploadMediaForm
+}
 
-export const UploadVideoForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { title: '' }
-  })
-
+export const UploadForm: FC<UploadFormProps> = ({ form }) => {
   return (
     <>
       <Form {...form}>
@@ -43,7 +32,7 @@ export const UploadVideoForm = () => {
               <FormItem>
                 <FormLabel>Video File</FormLabel>
                 <FormControl>
-                  <UploadMediaInput form={form} onChange={field.onChange} />
+                  <UploadFormInput form={form} onChange={field.onChange} />
                 </FormControl>
                 <FormDescription>
                   Upload MP4 video (max 100MB, 2 mins).

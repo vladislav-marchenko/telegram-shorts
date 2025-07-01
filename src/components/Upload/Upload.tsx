@@ -1,6 +1,6 @@
+import { UploadButton } from './UploadButton'
 import { UploadExitWarning } from './UploadExitWarning'
-import { UploadVideoButton } from './UploadVideoButton'
-import { UploadVideoForm } from './UploadVideoForm'
+import { UploadForm } from './UploadForm'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -11,15 +11,35 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-export const UploadVideo = () => {
+const formSchema = z.object({
+  title: z.string().min(4, {
+    message: 'Title must be at least 4 characters.'
+  }),
+  media: z.custom<File>((value) => value instanceof File, {
+    message: 'Please upload a valid video file.'
+  })
+})
+
+export const Upload = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isWarningOpen, setIsWarningOpen] = useState(false)
 
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { title: '' }
+  })
+
   const handleOpenChange = (open: boolean) => {
-    if (!open) return setIsWarningOpen(true)
-    setIsOpen(open)
+    if (!open && form.formState.isDirty) {
+      setIsWarningOpen(true)
+    } else {
+      setIsOpen(open)
+    }
   }
 
   const confirmAction = () => {
@@ -32,14 +52,14 @@ export const UploadVideo = () => {
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
         <DrawerTrigger asChild>
           <div className='sticky bottom-0 left-0 flex w-full justify-center p-4'>
-            <UploadVideoButton />
+            <UploadButton />
           </div>
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Upload</DrawerTitle>
           </DrawerHeader>
-          <UploadVideoForm />
+          <UploadForm form={form} />
           <DrawerFooter>
             <DrawerClose asChild>
               <Button variant='outline' size='lg'>
