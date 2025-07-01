@@ -1,4 +1,5 @@
 import { getUser } from '../../services/api'
+import { AccountInfoButtons } from './AccountInfoButtons'
 import { AccountInfoData } from './AccountInfoData'
 import { AccountInfoError } from './AccountInfoError'
 import { AccountInfoSkeleton } from './AccountInfoSkeleton'
@@ -16,6 +17,7 @@ export const AccountInfo = () => {
     <div className='flex flex-col items-center justify-center gap-4 p-8'>
       {isSuccess && <AccountInfoData data={data} />}
       {isLoading && <AccountInfoSkeleton />}
+      <AccountInfoButtons />
       {isError && <AccountInfoError error={error} />}
     </div>
   )

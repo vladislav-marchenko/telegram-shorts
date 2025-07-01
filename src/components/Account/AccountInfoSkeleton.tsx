@@ -6,10 +6,6 @@ export const AccountInfoSkeleton = () => {
         <div className='h-6 w-32 animate-pulse rounded-md bg-neutral-600' />
         <div className='h-4 w-20 animate-pulse rounded-md bg-neutral-600' />
       </div>
-      <div className='flex gap-2'>
-        <div className='h-10 w-20 animate-pulse rounded-md bg-neutral-600' />
-        <div className='h-10 w-12 animate-pulse rounded-md bg-neutral-600' />
-      </div>
     </>
   )
 }

@@ -10,12 +10,24 @@ import {
   DrawerTrigger
 } from '../ui/drawer'
 import { AccountInfoEditForm } from './AccountInfoEditForm'
+import { getUser } from '@/services/api'
+import { useQuery } from '@tanstack/react-query'
+import { useMatch } from '@tanstack/react-router'
 
 export const AccountInfoEdit = () => {
+  const { params } = useMatch({ from: '/user/$userId' })
+  const { isLoading } = useQuery({
+    queryKey: ['user', params.userId],
+    queryFn: () => getUser(params.userId),
+    staleTime: Infinity
+  })
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button size='lg'>Edit</Button>
+        <Button size='lg' isLoading={isLoading} className='min-w-24'>
+          Edit
+        </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
