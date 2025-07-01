@@ -1,16 +1,24 @@
 import { cn } from '@/lib/utils'
 import { ImagePlus } from 'lucide-react'
 import type { ChangeEvent, FC } from 'react'
+import type { UseFormReturn } from 'react-hook-form'
+
+type FormValues = {
+  media: File
+  title: string
+}
 
 interface UploadMediaInputProps {
-  media?: File
+  form: UseFormReturn<FormValues>
   onChange: (...event: any[]) => void
 }
 
 export const UploadMediaInput: FC<UploadMediaInputProps> = ({
-  media,
+  form,
   onChange
 }) => {
+  const media = form.getValues('media')
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) onChange(file)

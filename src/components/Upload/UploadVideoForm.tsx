@@ -28,7 +28,6 @@ export const UploadVideoForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: { title: '' }
   })
-  const media = form.getValues('media')
 
   return (
     <>
@@ -44,7 +43,7 @@ export const UploadVideoForm = () => {
               <FormItem>
                 <FormLabel>Video File</FormLabel>
                 <FormControl>
-                  <UploadMediaInput media={media} onChange={field.onChange} />
+                  <UploadMediaInput form={form} onChange={field.onChange} />
                 </FormControl>
                 <FormDescription>
                   Upload MP4 video (max 100MB, 2 mins).
