@@ -16,7 +16,7 @@ import { useMatch } from '@tanstack/react-router'
 
 export const AccountInfoEdit = () => {
   const { params } = useMatch({ from: '/user/$userId' })
-  const { isLoading } = useQuery({
+  const { isLoading, isError } = useQuery({
     queryKey: ['user', params.userId],
     queryFn: () => getUser(params.userId),
     staleTime: Infinity
@@ -25,7 +25,12 @@ export const AccountInfoEdit = () => {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button size='lg' isLoading={isLoading} className='min-w-24'>
+        <Button
+          size='lg'
+          isLoading={isLoading}
+          disabled={isError}
+          className='min-w-24'
+        >
           Edit
         </Button>
       </DrawerTrigger>

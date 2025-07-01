@@ -5,14 +5,19 @@ import { useMatch } from '@tanstack/react-router'
 
 export const UploadVideoButton = () => {
   const { params } = useMatch({ from: '/user/$userId' })
-  const { isLoading } = useQuery({
+  const { isLoading, isError } = useQuery({
     queryKey: ['user', params.userId],
     queryFn: () => getUser(params.userId),
     staleTime: Infinity
   })
 
   return (
-    <Button size='lg' isLoading={isLoading} className='w-full max-w-xs'>
+    <Button
+      size='lg'
+      isLoading={isLoading}
+      disabled={isError}
+      className='w-full max-w-xs'
+    >
       Upload
     </Button>
   )

@@ -7,7 +7,7 @@ import { ExternalLink } from 'lucide-react'
 
 export const AccountInfoButtons = () => {
   const { params } = useMatch({ from: '/user/$userId' })
-  const { isLoading } = useQuery({
+  const { isLoading, isError } = useQuery({
     queryKey: ['user', params.userId],
     queryFn: () => getUser(params.userId),
     staleTime: Infinity
@@ -17,11 +17,16 @@ export const AccountInfoButtons = () => {
     <div className='flex gap-2'>
       {params.userId === 'me' && <AccountInfoEdit />}
       {params.userId !== 'me' && (
-        <Button size='lg' isLoading={isLoading}>
+        <Button size='lg' isLoading={isLoading} disabled={isError}>
           Follow
         </Button>
       )}
-      <Button isLoading={isLoading} size='icon' variant='secondary'>
+      <Button
+        isLoading={isLoading}
+        disabled={isError}
+        size='icon'
+        variant='secondary'
+      >
         <ExternalLink strokeWidth='3' />
       </Button>
     </div>
