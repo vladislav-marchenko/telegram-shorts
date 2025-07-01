@@ -11,41 +11,13 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-
-const formSchema = z.object({
-  title: z.string().min(4, {
-    message: 'Title must be at least 4 characters.'
-  }),
-  media: z.custom<File>((value) => value instanceof File, {
-    message: 'Please upload a valid video file.'
-  })
-})
+import { useUploadForm } from '@/hooks/useUploadForm'
 
 export const Upload = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isWarningOpen, setIsWarningOpen] = useState(false)
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { title: '' }
-  })
-
-  const handleOpenChange = (open: boolean) => {
-    if (!open && form.formState.isDirty) {
-      setIsWarningOpen(true)
-    } else {
-      setIsOpen(open)
-    }
-  }
-
-  const confirmAction = () => {
-    setIsWarningOpen(false)
-    setIsOpen(false)
-  }
+  const {
+    form: { formState, isOpen, handleOpenChange },
+    warning: { isWarningOpen, confirmExit, dismissWarning }
+  } = useUploadForm()
 
   return (
     <>
@@ -59,7 +31,7 @@ export const Upload = () => {
           <DrawerHeader>
             <DrawerTitle>Upload</DrawerTitle>
           </DrawerHeader>
-          <UploadForm form={form} />
+          <UploadForm form={formState} />
           <DrawerFooter>
             <DrawerClose asChild>
               <Button variant='outline' size='lg'>
@@ -71,8 +43,8 @@ export const Upload = () => {
       </Drawer>
       <UploadExitWarning
         isOpen={isWarningOpen}
-        onCancel={() => setIsWarningOpen(false)}
-        onAction={confirmAction}
+        onCancel={dismissWarning}
+        onAction={confirmExit}
       />
     </>
   )
