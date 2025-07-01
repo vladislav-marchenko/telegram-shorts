@@ -31,7 +31,7 @@ export const UploadVideo = () => {
     <>
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
         <DrawerTrigger asChild>
-          <div className='absolute bottom-0 left-0 flex w-full justify-center p-4'>
+          <div className='sticky bottom-0 left-0 flex w-full justify-center p-4'>
             <UploadVideoButton />
           </div>
         </DrawerTrigger>
