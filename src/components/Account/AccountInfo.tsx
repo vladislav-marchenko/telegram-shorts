@@ -17,8 +17,8 @@ export const AccountInfo = () => {
     <div className='flex flex-col items-center justify-center gap-4 p-8'>
       {isSuccess && <AccountInfoData data={data} />}
       {isLoading && <AccountInfoSkeleton />}
-      <AccountInfoButtons />
       {isError && <AccountInfoError error={error} />}
+      <AccountInfoButtons />
     </div>
   )
 }

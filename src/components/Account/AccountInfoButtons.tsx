@@ -16,7 +16,11 @@ export const AccountInfoButtons = () => {
   return (
     <div className='flex gap-2'>
       {params.userId === 'me' && <AccountInfoEdit />}
-      {params.userId !== 'me' && <Button size='lg'>Follow</Button>}
+      {params.userId !== 'me' && (
+        <Button size='lg' isLoading={isLoading}>
+          Follow
+        </Button>
+      )}
       <Button isLoading={isLoading} size='icon' variant='secondary'>
         <ExternalLink strokeWidth='3' />
       </Button>
