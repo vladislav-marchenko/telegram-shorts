@@ -3,7 +3,6 @@ import { AccountInfoEdit } from './AccountInfoEdit'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { useMatch } from '@tanstack/react-router'
-import { ExternalLink } from 'lucide-react'
 
 export const AccountInfoButtons = () => {
   const { params } = useMatch({ from: '/user/$userId' })
@@ -21,14 +20,6 @@ export const AccountInfoButtons = () => {
           Follow
         </Button>
       )}
-      <Button
-        isLoading={isLoading}
-        disabled={isError}
-        size='icon'
-        variant='secondary'
-      >
-        <ExternalLink strokeWidth='3' />
-      </Button>
     </div>
   )
 }
