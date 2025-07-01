@@ -16,7 +16,7 @@ export default defineConfig({
     environment: 'jsdom'
   },
   server: {
-    allowedHosts: ['dark-actors-add.loca.lt']
+    allowedHosts: ['petite-numbers-itch.loca.lt']
   },
   resolve: {
     alias: {

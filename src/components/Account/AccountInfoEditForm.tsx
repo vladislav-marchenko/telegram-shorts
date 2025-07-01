@@ -111,7 +111,12 @@ export const AccountInfoEditForm = () => {
             </FormItem>
           )}
         />
-        <Button type='submit' isLoading={isPending} className='w-full'>
+        <Button
+          type='submit'
+          size='lg'
+          isLoading={isPending}
+          className='w-full'
+        >
           Submit
         </Button>
       </form>

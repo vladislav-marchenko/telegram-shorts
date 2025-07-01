@@ -41,9 +41,10 @@ export const UploadVideo = () => {
           </DrawerHeader>
           <UploadVideoForm />
           <DrawerFooter>
-            <Button>Submit</Button>
             <DrawerClose asChild>
-              <Button variant='outline'>Cancel</Button>
+              <Button variant='outline' size='lg'>
+                Cancel
+              </Button>
             </DrawerClose>
           </DrawerFooter>
         </DrawerContent>
