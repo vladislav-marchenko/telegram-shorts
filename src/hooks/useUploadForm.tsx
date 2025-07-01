@@ -7,9 +7,13 @@ const formSchema = z.object({
   title: z.string().min(4, {
     message: 'Title must be at least 4 characters.'
   }),
-  media: z.custom<File>((value) => value instanceof File, {
-    message: 'Please upload a valid video file.'
-  })
+  media: z
+    .custom<File>((value) => value instanceof File, {
+      message: 'Please upload a valid video file.'
+    })
+    .refine((file) => file.size <= 100 * 1024 * 1024, {
+      message: 'File size must be less than 100MB.'
+    })
 })
 
 export const useUploadForm = () => {
