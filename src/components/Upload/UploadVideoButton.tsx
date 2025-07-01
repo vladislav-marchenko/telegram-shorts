@@ -12,10 +12,8 @@ export const UploadVideoButton = () => {
   })
 
   return (
-    <div className='absolute bottom-0 left-0 flex w-full justify-center p-4'>
-      <Button size='lg' isLoading={isLoading} className='w-full max-w-xs'>
-        Upload
-      </Button>
-    </div>
+    <Button size='lg' isLoading={isLoading} className='w-full max-w-xs'>
+      Upload
+    </Button>
   )
 }

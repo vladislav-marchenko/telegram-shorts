@@ -31,7 +31,9 @@ export const UploadVideo = () => {
     <>
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
         <DrawerTrigger asChild>
-          <UploadVideoButton />
+          <div className='absolute bottom-0 left-0 flex w-full justify-center p-4'>
+            <UploadVideoButton />
+          </div>
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
@@ -40,7 +42,7 @@ export const UploadVideo = () => {
           <UploadVideoForm />
           <DrawerFooter>
             <Button>Submit</Button>
-            <DrawerClose>
+            <DrawerClose asChild>
               <Button variant='outline'>Cancel</Button>
             </DrawerClose>
           </DrawerFooter>
