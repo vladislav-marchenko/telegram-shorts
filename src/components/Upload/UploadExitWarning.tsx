@@ -28,13 +28,14 @@ export const UploadExitWarning: FC<UploadExitWarningProps> = ({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. Unsaved changes will be lost.
+            Your changes will be permanently lost if you reload the app or leave
+            the page.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={onCancel}>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={onAction} asChild>
-            <Button variant='destructive'>Delete</Button>
+            <Button>Close</Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
