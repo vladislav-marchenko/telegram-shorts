@@ -7,6 +7,7 @@ import type { FC } from 'react'
 export const AccountVideosContent: FC<{ data: Video[] }> = ({ data }) => {
   return data.map(({ _id, title, poster, views }) => (
     <Link
+      key={_id}
       to='/video/$videoId'
       params={{ videoId: _id }}
       className='group relative aspect-[9/14] overflow-hidden rounded-md bg-neutral-600'
