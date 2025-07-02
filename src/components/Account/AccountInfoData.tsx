@@ -12,7 +12,9 @@ export const AccountInfoData: FC<{ data: User }> = ({ data }) => {
         alt={data.username}
       />
       <div className='flex flex-col items-center'>
-        <h1 className='text-2xl font-medium text-white'>{data.displayName}</h1>
+        <h1 className='text-center text-2xl font-medium text-white'>
+          {data.displayName}
+        </h1>
         <AccountInfoUsername username={data.username} />
       </div>
     </>
