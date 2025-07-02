@@ -22,11 +22,11 @@ export const Upload = () => {
   return (
     <>
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
-        <DrawerTrigger asChild>
-          <div className='sticky bottom-0 left-0 flex w-full justify-center p-4'>
+        <div className='sticky bottom-0 left-0 flex w-full justify-center p-4'>
+          <DrawerTrigger asChild>
             <UploadButton />
-          </div>
-        </DrawerTrigger>
+          </DrawerTrigger>
+        </div>
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Upload</DrawerTitle>
