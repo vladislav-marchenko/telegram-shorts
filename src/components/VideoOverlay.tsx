@@ -11,7 +11,7 @@ export const VideoOverlay = () => {
 
   return (
     <>
-      <div className='absolute right-0 bottom-1/6 flex flex-col items-center'>
+      <div className='absolute right-0 bottom-1/6 flex flex-col items-center md:right-auto md:left-full'>
         <button className='cursor-pointer p-2'>
           <div className='h-12 w-12 rounded-full bg-gray-600' />
         </button>

@@ -18,7 +18,7 @@ const items = [
 
 export const Navigation = () => {
   return (
-    <div className='sticky bottom-0 flex w-full items-center justify-around border-t border-neutral-800 bg-neutral-900/40 backdrop-blur-md'>
+    <div className='sticky bottom-0 flex w-full items-center justify-around border-t border-neutral-800 bg-neutral-900/60 backdrop-blur-sm'>
       {items.map(({ href, icon: Icon }) => (
         <Link
           key={href}
