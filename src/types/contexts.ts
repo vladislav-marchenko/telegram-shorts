@@ -6,3 +6,10 @@ export interface VideoValues {
   isPaused: boolean
   progress: number
 }
+
+export interface VolumeValues {
+  volume: number
+  isMuted: boolean
+  toggleMute: () => void
+  changeVolume: (value: number) => void
+}

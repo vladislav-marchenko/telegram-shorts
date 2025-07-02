@@ -1,4 +1,5 @@
 import { Videos } from '@/components/Video/Videos'
+import { VolumeContextProvider } from '@/contexts/VolumeContext'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
@@ -6,5 +7,9 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
-  return <Videos />
+  return (
+    <VolumeContextProvider>
+      <Videos />
+    </VolumeContextProvider>
+  )
 }
