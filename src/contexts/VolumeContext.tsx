@@ -13,7 +13,7 @@ export const VolumeContextProvider: FC<{ children: ReactNode }> = ({
     return 1
   })
 
-  const toggleMute = () => setIsMuted(!isMuted)
+  const toggleMute = () => setIsMuted((isMuted) => !isMuted)
 
   const changeVolume = (value: number) => {
     setVolume(value)

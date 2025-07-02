@@ -25,7 +25,7 @@ export const UploadFormInput: FC<UploadFormInputProps> = ({
       <input
         id='upload'
         type='file'
-        accept='video/mp4'
+        accept='video/*'
         onChange={handleChange}
         hidden
       />

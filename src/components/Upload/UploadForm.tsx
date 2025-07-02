@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input'
 import type { uploadVideoSchema } from '@/schemas'
 import { uploadVideo } from '@/services/api'
 import type { UploadMediaForm } from '@/types/forms'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import type { FC } from 'react'
 import { toast } from 'sonner'
 import type { z } from 'zod'
@@ -24,12 +24,14 @@ interface UploadFormProps {
 }
 
 export const UploadForm: FC<UploadFormProps> = ({ form, close }) => {
+  const queryClient = useQueryClient()
   const { mutate, isPending } = useMutation({
     mutationFn: uploadVideo,
     onSuccess: () => {
       form.reset()
       close()
       toast.success('Video has been uploaded successfully.')
+      queryClient.invalidateQueries({ queryKey: ['video', 'me'] })
     },
     onError: (error) => {
       toast.error(error.message ?? 'Something went wrong.')
