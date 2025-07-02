@@ -1,12 +1,12 @@
 import { VideoComments } from './VideoComments'
-import { VideoMuteButton } from './VideoMuteButton'
 import { VideoOptions } from './VideoOptions'
 import { VideoProgress } from './VideoProgress'
+import { VideoVolume } from './VideoVolume'
 import { VideoContext } from '@/contexts/VideoContext'
 import type { Video } from '@/types/api'
 import type { VideoValues } from '@/types/contexts'
 import { formatNumber } from '@/utils'
-import { Heart, Play, Volume2, VolumeOff } from 'lucide-react'
+import { Heart, Play } from 'lucide-react'
 import { useContext, type FC, type RefObject } from 'react'
 
 interface VideoOverlayProps extends Video {
@@ -37,7 +37,7 @@ export const VideoOverlay: FC<VideoOverlayProps> = ({
         <VideoOptions />
       </div>
       <VideoProgress />
-      <VideoMuteButton videoRef={videoRef} />
+      <VideoVolume videoRef={videoRef} />
       {isPaused && (
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60'>
           <Play size={70} className='fill-white stroke-white' />

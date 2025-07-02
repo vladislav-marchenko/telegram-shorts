@@ -9,8 +9,8 @@ export const VolumeContextProvider: FC<{ children: ReactNode }> = ({
   const [isMuted, setIsMuted] = useState(true)
   const [volume, setVolume] = useState(() => {
     const volume = localStorage.getItem('volume')
-    if (volume) return parseFloat(volume) || 0.5
-    return 0.5
+    if (volume) return parseFloat(volume) || 1
+    return 1
   })
 
   const toggleMute = () => setIsMuted(!isMuted)
