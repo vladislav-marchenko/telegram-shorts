@@ -15,7 +15,7 @@ import { useUploadForm } from '@/hooks/useUploadForm'
 
 export const Upload = () => {
   const {
-    form: { formState, isOpen, handleOpenChange },
+    form: { formState, isOpen, handleOpenChange, close },
     warning: { isWarningOpen, confirmExit, dismissWarning }
   } = useUploadForm()
 
@@ -31,7 +31,7 @@ export const Upload = () => {
           <DrawerHeader>
             <DrawerTitle>Upload</DrawerTitle>
           </DrawerHeader>
-          <UploadForm form={formState} />
+          <UploadForm form={formState} close={close} />
           <DrawerFooter>
             <DrawerClose asChild>
               <Button variant='outline' size='lg'>

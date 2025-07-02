@@ -1,4 +1,4 @@
-import type { Methods, User } from '@/types/api'
+import type { Methods, User, Video } from '@/types/api'
 
 const API_URL = 'http://localhost:8000'
 const initData = import.meta.env.VITE_INIT_DATA_MOCK // window.Telegram.WebApp.initData
@@ -11,18 +11,17 @@ export const customFetch = async <Data extends object>({
 }: {
   endpoint: string
   method?: Methods
-  body?: Record<string, unknown>
+  body?: string | FormData
   headers?: Record<string, string>
 }): Promise<Data> => {
   try {
     const response = await fetch(`${API_URL}${endpoint}`, {
       method,
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `tma ${initData}`,
         ...headers
       },
-      ...(body && { body: JSON.stringify(body) })
+      ...(body && { body })
     })
 
     const response_data: Data | Error = await response.json()
@@ -48,6 +47,14 @@ export const updateProfileInfo = async (
   return await customFetch<User>({
     endpoint: '/user',
     method: 'PATCH',
-    body: newData
+    body: JSON.stringify(newData)
+  })
+}
+
+export const uploadVideo = async (formData: FormData) => {
+  return await customFetch<Video>({
+    endpoint: '/video',
+    method: 'POST',
+    body: formData
   })
 }

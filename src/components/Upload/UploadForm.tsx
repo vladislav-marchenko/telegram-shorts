@@ -10,21 +10,44 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import type { uploadVideoSchema } from '@/schemas'
+import { uploadVideo } from '@/services/api'
 import type { UploadMediaForm } from '@/types/forms'
+import { useMutation } from '@tanstack/react-query'
 import type { FC } from 'react'
+import { toast } from 'sonner'
+import type { z } from 'zod'
 
 interface UploadFormProps {
   form: UploadMediaForm
+  close: () => void
 }
 
-export const UploadForm: FC<UploadFormProps> = ({ form }) => {
+export const UploadForm: FC<UploadFormProps> = ({ form, close }) => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: uploadVideo,
+    onSuccess: () => {
+      form.reset()
+      close()
+      toast.success('Video has been uploaded successfully.')
+    },
+    onError: (error) => {
+      toast.error(error.message ?? 'Something went wrong.')
+    }
+  })
+
+  const onSubmit = (values: z.infer<typeof uploadVideoSchema>) => {
+    const formData = new FormData()
+    formData.append('title', values.title)
+    formData.append('media', values.media)
+
+    mutate(formData)
+  }
+
   return (
     <>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit((values) => console.log(values))}
-          className='space-y-8 px-4'
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 px-4'>
           <FormField
             control={form.control}
             name='media'
@@ -57,7 +80,12 @@ export const UploadForm: FC<UploadFormProps> = ({ form }) => {
               </FormItem>
             )}
           />
-          <Button type='submit' size='lg' className='w-full'>
+          <Button
+            type='submit'
+            size='lg'
+            isLoading={isPending}
+            className='w-full'
+          >
             Submit
           </Button>
         </form>

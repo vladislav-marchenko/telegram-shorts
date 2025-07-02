@@ -14,3 +14,14 @@ export interface User {
   photoURL: string
   createdAt: string
 }
+
+export interface Video {
+  _id: string
+  userId: string
+  title: string
+  url: string
+  views: number
+  likesCount: number
+  commentsCount: number
+  createdAt: string
+}

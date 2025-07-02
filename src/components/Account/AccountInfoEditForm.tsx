@@ -9,33 +9,13 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { updateProfileSchema } from '@/schemas'
 import { getUser, updateProfileInfo } from '@/services/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
-
-const formSchema = z.object({
-  username: z
-    .string()
-    .min(2, {
-      message: 'Username must be at least 2 characters.'
-    })
-    .optional(),
-  displayName: z
-    .string()
-    .min(2, {
-      message: 'Display name must be at least 2 characters.'
-    })
-    .optional(),
-  photoURL: z
-    .string()
-    .url({
-      message: 'Please enter a valid URL.'
-    })
-    .optional()
-})
 
 export const AccountInfoEditForm = () => {
   const { data, refetch } = useQuery({
@@ -53,15 +33,16 @@ export const AccountInfoEditForm = () => {
     onError: (error) => toast.error(error.message ?? 'Something went wrong.')
   })
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof updateProfileSchema>>({
+    resolver: zodResolver(updateProfileSchema),
     defaultValues: {
       username: data?.username ?? '',
       displayName: data?.displayName ?? ''
     }
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => mutate(values)
+  const onSubmit = (values: z.infer<typeof updateProfileSchema>) =>
+    mutate(values)
 
   return (
     <Form {...form}>
