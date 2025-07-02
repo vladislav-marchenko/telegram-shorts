@@ -6,9 +6,14 @@ import { useContext, type FC } from 'react'
 
 interface VideoProps extends VideoType {
   isCurrent: boolean
+  muted?: boolean
 }
 
-export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
+export const Video: FC<VideoProps> = ({
+  isCurrent,
+  muted = false,
+  ...props
+}) => {
   const { ref, toggle } = useContext(VideoContext) as VideoValues
 
   return (
@@ -22,9 +27,9 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
         autoPlay={isCurrent}
         controls={false}
         loop
-        muted
+        muted={muted}
       />
-      <VideoOverlay {...props} />
+      <VideoOverlay {...props} videoRef={ref} />
     </div>
   )
 }

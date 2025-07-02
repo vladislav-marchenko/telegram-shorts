@@ -14,7 +14,11 @@ export const VideosSlider: FC<{ data: VideoType[] }> = ({ data }) => {
           return (
             <VideoContextProvider key={video._id}>
               <div className='flex h-full w-full shrink-0 items-center justify-center md:px-16'>
-                <Video {...video} isCurrent={index === currentIndex} />
+                <Video
+                  {...video}
+                  isCurrent={index === currentIndex}
+                  muted={index === 0}
+                />
               </div>
             </VideoContextProvider>
           )
