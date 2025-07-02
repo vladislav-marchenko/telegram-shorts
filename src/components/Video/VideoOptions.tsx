@@ -1,3 +1,4 @@
+import { ResponsiveDialog } from '../ResponsiveDialog'
 import {
   Drawer,
   DrawerClose,
@@ -12,19 +13,15 @@ import { Ellipsis } from 'lucide-react'
 
 export const VideoOptions = () => {
   return (
-    <Drawer>
-      <DrawerTrigger className='cursor-pointer p-4 text-neutral-200 transition-colors hover:text-white'>
-        <Ellipsis size={22} />
-      </DrawerTrigger>
-      <DrawerContent className='h-1/3'>
-        <DrawerHeader>
-          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-          <DrawerDescription>This action cannot be undone.</DrawerDescription>
-        </DrawerHeader>
-        <DrawerFooter>
-          <DrawerClose>Close</DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+    <ResponsiveDialog
+      title='Options'
+      trigger={
+        <button className='cursor-pointer p-4 text-neutral-200 transition-colors hover:text-white'>
+          <Ellipsis size={22} />
+        </button>
+      }
+    >
+      <span>Empty</span>
+    </ResponsiveDialog>
   )
 }
