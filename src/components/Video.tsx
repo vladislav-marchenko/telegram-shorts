@@ -22,6 +22,7 @@ export const Video: FC<VideoProps> = ({ url, isCurrent }) => {
         autoPlay={isCurrent}
         controls={false}
         loop
+        muted
       />
       <VideoOverlay />
     </div>

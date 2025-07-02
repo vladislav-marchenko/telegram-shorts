@@ -1,8 +1,6 @@
 import { Video } from '@/components/Video'
 import { VideoContextProvider } from '@/contexts/VideoContext'
-import useEmblaCarousel from 'embla-carousel-react'
-import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
-import { useEffect, useRef, useState } from 'react'
+import { useVideosSlider } from '@/hooks/useVideosSlider'
 
 const videos = [
   {
@@ -24,39 +22,7 @@ const videos = [
 ]
 
 export const Videos = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: 'y' }, [
-    WheelGesturesPlugin()
-  ])
-  const slidesRef = useRef<HTMLDivElement>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  useEffect(() => {
-    if (!emblaApi) return
-
-    const onSelect = () => {
-      const slides = slidesRef.current?.children
-      if (!slides) return
-
-      const currentVideo = slides[currentIndex].querySelector(
-        'video'
-      ) as HTMLVideoElement
-      currentVideo.pause()
-      currentVideo.currentTime = 0
-
-      const nextIndex = emblaApi.selectedScrollSnap()
-      const nextVideo = slides[nextIndex].querySelector(
-        'video'
-      ) as HTMLVideoElement
-      setCurrentIndex(nextIndex)
-      nextVideo.play()
-    }
-
-    emblaApi.on('select', onSelect)
-
-    return () => {
-      emblaApi.off('select', onSelect)
-    }
-  }, [emblaApi, currentIndex])
+  const { emblaRef, slidesRef, currentIndex } = useVideosSlider()
 
   return (
     <div ref={emblaRef} className='h-full w-full'>
