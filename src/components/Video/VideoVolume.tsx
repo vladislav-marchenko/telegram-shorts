@@ -19,7 +19,7 @@ export const VideoVolume = () => {
         max={100}
         step={1}
         onValueChange={changeVolume}
-        className='w-0 cursor-pointer opacity-0 transition-all group-hover:w-1/2 group-hover:opacity-100'
+        className='w-0 max-w-[200px] cursor-pointer opacity-0 transition-all group-hover:w-full group-hover:opacity-100'
       />
       <button onMouseDown={toggleMute} className='cursor-pointer'>
         {!isMuted && <Volume2 size={28} />}

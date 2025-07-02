@@ -28,7 +28,7 @@ interface ResponsiveDialogProps {
     onOpenChange: (value: boolean) => void
   }
   trigger: ReactNode
-  cancelButton: boolean
+  cancelButton?: boolean
   children: ReactNode
 }
 
