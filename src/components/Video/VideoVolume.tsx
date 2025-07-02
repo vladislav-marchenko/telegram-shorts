@@ -23,7 +23,7 @@ export const VideoVolume = () => {
       />
       <button
         onMouseDown={toggleMute}
-        className='cursor-pointer text-neutral-200 transition-colors hover:text-white'
+        className='cursor-pointer text-neutral-100 transition-colors hover:text-white'
       >
         <VideoVolumeIcon />
       </button>
