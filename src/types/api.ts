@@ -20,6 +20,7 @@ export interface Video {
   userId: string
   title: string
   url: string
+  poster: string
   views: number
   likesCount: number
   commentsCount: number
