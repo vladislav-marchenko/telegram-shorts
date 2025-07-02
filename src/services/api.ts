@@ -58,3 +58,7 @@ export const uploadVideo = async (formData: FormData) => {
     body: formData
   })
 }
+
+export const getFeed = async () => {
+  return await customFetch<Video[]>({ endpoint: '/video/feed' })
+}

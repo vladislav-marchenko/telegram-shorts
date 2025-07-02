@@ -5,15 +5,16 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger
-} from './ui/drawer'
+} from '@/components/ui/drawer'
 import { MessageCircle } from 'lucide-react'
+import type { FC } from 'react'
 
-export const VideoComments = () => {
+export const VideoComments: FC<{ count: string }> = ({ count }) => {
   return (
     <Drawer>
       <DrawerTrigger className='flex cursor-pointer flex-col items-center gap-1 p-4 text-white/70'>
         <MessageCircle size={28} className='scale-x-[-1]' />
-        <span className='text-sm'>13K</span>
+        <span className='text-sm'>{count}</span>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>

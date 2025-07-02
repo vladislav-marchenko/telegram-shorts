@@ -3,7 +3,7 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger
-} from './ui/context-menu'
+} from '@/components/ui/context-menu'
 import { cn } from '@/lib/utils'
 import { Heart } from 'lucide-react'
 import { useState } from 'react'

@@ -7,7 +7,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger
-} from './ui/drawer'
+} from '@/components/ui/drawer'
 import { Ellipsis } from 'lucide-react'
 
 export const VideoOptions = () => {
