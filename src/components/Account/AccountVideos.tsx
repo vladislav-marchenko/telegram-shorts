@@ -12,7 +12,7 @@ export const AccountVideos = () => {
   })
 
   return (
-    <div className='mx-auto grid w-full max-w-6xl grid-cols-[repeat(auto-fit,minmax(126px,1fr))] justify-center gap-4 lg:grid-cols-[repeat(auto-fit,minmax(156px,200px))]'>
+    <div className='mx-auto grid w-full max-w-6xl grid-cols-[repeat(auto-fit,minmax(126px,1fr))] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(156px,200px))]'>
       {isSuccess && !!data.length && <AccountVideosContent data={data} />}
       {isSuccess && !data.length && <AccountVideosContentEmpty />}
       {isLoading && <AccountVideosSkeleton />}
