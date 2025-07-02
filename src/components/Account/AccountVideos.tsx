@@ -4,10 +4,12 @@ import { AccountVideosContentEmpty } from './AccountVideosContentEmpty'
 import { AccountVideosSkeleton } from './AccountVideosSkeleton'
 import { getMyVideos } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
+import { useMatch } from '@tanstack/react-router'
 
 export const AccountVideos = () => {
+  const { params } = useMatch({ from: '/user/$userId' })
   const { data, refetch, isSuccess, isLoading, isError, error } = useQuery({
-    queryKey: ['video', 'me'],
+    queryKey: ['video', params.userId],
     queryFn: getMyVideos
   })
 

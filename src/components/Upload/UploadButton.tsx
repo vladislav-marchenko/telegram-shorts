@@ -2,6 +2,7 @@ import { Button } from '../ui/button'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { useMatch } from '@tanstack/react-router'
+import { UploadIcon } from 'lucide-react'
 
 export const UploadButton = ({ ...props }) => {
   const { params } = useMatch({ from: '/user/$userId' })
@@ -19,7 +20,7 @@ export const UploadButton = ({ ...props }) => {
       disabled={isError}
       className='w-full max-w-xs'
     >
-      Upload
+      Upload <UploadIcon />
     </Button>
   )
 }

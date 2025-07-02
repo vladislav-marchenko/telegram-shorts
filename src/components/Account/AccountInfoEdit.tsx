@@ -23,6 +23,7 @@ export const AccountInfoEdit = () => {
           isLoading={isLoading}
           disabled={isError}
           className='min-w-24'
+          variant='secondary'
         >
           Edit
         </Button>

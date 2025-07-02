@@ -12,7 +12,7 @@ export const Upload = () => {
 
   return (
     <>
-      <div className='sticky bottom-0 flex justify-center p-4 pb-0'>
+      <div className='sticky top-0 flex justify-center pb-4'>
         <ResponsiveDialog
           state={{ open: isOpen, onOpenChange: handleOpenChange }}
           trigger={<UploadButton />}

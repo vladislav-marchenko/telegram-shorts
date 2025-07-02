@@ -14,7 +14,7 @@ export const AccountInfo = () => {
   })
 
   return (
-    <div className='flex flex-col items-center justify-center gap-4 p-8'>
+    <div className='flex flex-col items-center justify-center gap-4 py-8'>
       {isSuccess && <AccountInfoData data={data} />}
       {isLoading && <AccountInfoSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
