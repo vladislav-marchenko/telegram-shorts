@@ -1,13 +1,13 @@
+import { VideoVolumeIcon } from './VideoVolumeIcon'
 import { Slider } from '@/components/ui/slider'
 import { VideoContext } from '@/contexts/VideoContext'
 import { VolumeContext } from '@/contexts/VolumeContext'
 import { useVolume } from '@/hooks/useVolume'
 import type { VideoValues, VolumeValues } from '@/types/contexts'
-import { Volume2, VolumeOff } from 'lucide-react'
 import { useContext } from 'react'
 
 export const VideoVolume = () => {
-  const { isMuted, volume } = useContext(VolumeContext) as VolumeValues
+  const { volume } = useContext(VolumeContext) as VolumeValues
 
   const { ref } = useContext(VideoContext) as VideoValues
   const { toggleMute, changeVolume } = useVolume(ref)
@@ -21,9 +21,11 @@ export const VideoVolume = () => {
         onValueChange={changeVolume}
         className='w-0 max-w-[200px] cursor-pointer opacity-0 transition-all group-hover:w-full group-hover:opacity-100'
       />
-      <button onMouseDown={toggleMute} className='cursor-pointer'>
-        {!isMuted && <Volume2 size={28} />}
-        {isMuted && <VolumeOff size={28} />}
+      <button
+        onMouseDown={toggleMute}
+        className='cursor-pointer text-neutral-200 transition-colors hover:text-white'
+      >
+        <VideoVolumeIcon />
       </button>
     </div>
   )

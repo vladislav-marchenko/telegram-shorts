@@ -17,6 +17,7 @@ export const VolumeContextProvider: FC<{ children: ReactNode }> = ({
 
   const changeVolume = (value: number) => {
     setVolume(value)
+    if (value === 0) setIsMuted(true)
     localStorage.setItem('volume', value.toString())
   }
 

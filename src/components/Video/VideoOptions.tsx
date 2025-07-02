@@ -13,7 +13,7 @@ import { Ellipsis } from 'lucide-react'
 export const VideoOptions = () => {
   return (
     <Drawer>
-      <DrawerTrigger className='cursor-pointer p-4 text-white/70'>
+      <DrawerTrigger className='cursor-pointer p-4 text-neutral-200 transition-colors hover:text-white'>
         <Ellipsis size={22} />
       </DrawerTrigger>
       <DrawerContent className='h-1/3'>
