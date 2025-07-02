@@ -28,6 +28,7 @@ interface ResponsiveDialogProps {
     onOpenChange: (value: boolean) => void
   }
   trigger: ReactNode
+  cancelButton: boolean
   children: ReactNode
 }
 
@@ -36,7 +37,8 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
   description,
   state,
   trigger,
-  children
+  children,
+  cancelButton = true
 }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const [isOpen, setIsOpen] = useState(false)
@@ -48,14 +50,16 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent className='w-full md:max-w-md'>
+        <DialogContent>
           <DialogHeader>
             {title && <DialogTitle>{title}</DialogTitle>}
             {description && (
               <DialogDescription>{description}</DialogDescription>
             )}
           </DialogHeader>
-          {children}
+          <div className='-mx-6 max-h-[70vh] overflow-y-auto px-6'>
+            {children}
+          </div>
         </DialogContent>
       </Dialog>
     )
@@ -70,13 +74,15 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
         {children}
-        <DrawerFooter className='pt-2'>
-          <DrawerClose asChild>
-            <Button variant='outline' size='lg'>
-              Cancel
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
+        {cancelButton && (
+          <DrawerFooter className='pt-2'>
+            <DrawerClose asChild>
+              <Button variant='outline' size='lg'>
+                Cancel
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>
+        )}
       </DrawerContent>
     </Drawer>
   )
