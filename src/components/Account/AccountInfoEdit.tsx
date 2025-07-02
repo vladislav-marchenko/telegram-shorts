@@ -1,14 +1,5 @@
+import { ResponsiveDialog } from '../ResponsiveDialog'
 import { Button } from '../ui/button'
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger
-} from '../ui/drawer'
 import { AccountInfoEditForm } from './AccountInfoEditForm'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
@@ -23,8 +14,10 @@ export const AccountInfoEdit = () => {
   })
 
   return (
-    <Drawer>
-      <DrawerTrigger asChild>
+    <ResponsiveDialog
+      title='Edit Profile'
+      description='Update your profile details.'
+      trigger={
         <Button
           size='lg'
           isLoading={isLoading}
@@ -33,21 +26,9 @@ export const AccountInfoEdit = () => {
         >
           Edit
         </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Edit Profile</DrawerTitle>
-          <DrawerDescription>Update your profile details.</DrawerDescription>
-        </DrawerHeader>
-        <AccountInfoEditForm />
-        <DrawerFooter>
-          <DrawerClose asChild>
-            <Button variant='outline' size='lg' className='w-full'>
-              Cancel
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+      }
+    >
+      <AccountInfoEditForm />
+    </ResponsiveDialog>
   )
 }

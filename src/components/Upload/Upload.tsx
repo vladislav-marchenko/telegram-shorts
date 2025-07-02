@@ -1,16 +1,7 @@
+import { ResponsiveDialog } from '../ResponsiveDialog'
 import { UploadButton } from './UploadButton'
 import { UploadExitWarning } from './UploadExitWarning'
 import { UploadForm } from './UploadForm'
-import { Button } from '@/components/ui/button'
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger
-} from '@/components/ui/drawer'
 import { useUploadForm } from '@/hooks/useUploadForm'
 
 export const Upload = () => {
@@ -21,26 +12,15 @@ export const Upload = () => {
 
   return (
     <>
-      <Drawer open={isOpen} onOpenChange={handleOpenChange}>
-        <div className='sticky bottom-0 left-0 flex w-full justify-center p-4 pb-0'>
-          <DrawerTrigger asChild>
-            <UploadButton />
-          </DrawerTrigger>
-        </div>
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerTitle>Upload</DrawerTitle>
-          </DrawerHeader>
+      <div className='sticky bottom-0 flex justify-center'>
+        <ResponsiveDialog
+          state={{ open: isOpen, onOpenChange: handleOpenChange }}
+          trigger={<UploadButton />}
+          title='Upload'
+        >
           <UploadForm form={formState} close={close} />
-          <DrawerFooter>
-            <DrawerClose asChild>
-              <Button variant='outline' size='lg'>
-                Cancel
-              </Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+        </ResponsiveDialog>
+      </div>
       <UploadExitWarning
         isOpen={isWarningOpen}
         onCancel={dismissWarning}
