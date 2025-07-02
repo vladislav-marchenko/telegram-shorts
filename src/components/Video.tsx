@@ -17,7 +17,7 @@ export const Video: FC<VideoProps> = ({ url, isCurrent }) => {
         ref={ref}
         src={url}
         onClick={toggle}
-        className='h-full w-full object-cover'
+        className='h-dvh w-full'
         playsInline
         autoPlay={isCurrent}
         controls={false}

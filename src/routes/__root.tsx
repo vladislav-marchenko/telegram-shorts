@@ -10,7 +10,7 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <div className='flex h-dvh flex-col overflow-hidden bg-neutral-800'>
+    <div className='flex h-dvh flex-col bg-neutral-800'>
       <Outlet />
       <Navigation />
       <Toaster richColors position='top-center' />
