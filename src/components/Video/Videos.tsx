@@ -5,7 +5,7 @@ import { getFeed } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 
 export const Videos = () => {
-  const { data, isSuccess, isLoading, isError, error } = useQuery({
+  const { data, refetch, isSuccess, isLoading, isError, error } = useQuery({
     queryKey: ['video', 'feed'],
     queryFn: getFeed
   })
@@ -14,7 +14,7 @@ export const Videos = () => {
     <div className='h-full'>
       {isSuccess && <VideosSlider data={data} />}
       {isLoading && <VideosSkeleton />}
-      {isError && <Error error={error} />}
+      {isError && <Error error={error} refetch={refetch} />}
     </div>
   )
 }

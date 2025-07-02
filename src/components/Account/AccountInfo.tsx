@@ -8,7 +8,7 @@ import { useMatch } from '@tanstack/react-router'
 
 export const AccountInfo = () => {
   const { params } = useMatch({ from: '/user/$userId' })
-  const { data, isSuccess, isLoading, isError, error } = useQuery({
+  const { data, refetch, isSuccess, isLoading, isError, error } = useQuery({
     queryKey: ['user', params.userId],
     queryFn: () => getUser(params.userId)
   })
@@ -17,7 +17,7 @@ export const AccountInfo = () => {
     <div className='flex flex-col items-center justify-center gap-4 p-8'>
       {isSuccess && <AccountInfoData data={data} />}
       {isLoading && <AccountInfoSkeleton />}
-      {isError && <Error error={error} />}
+      {isError && <Error error={error} refetch={refetch} />}
       <AccountInfoButtons />
     </div>
   )
