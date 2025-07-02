@@ -9,15 +9,7 @@ import { formatNumber } from '@/utils'
 import { Heart, Play } from 'lucide-react'
 import { useContext, type FC, type RefObject } from 'react'
 
-interface VideoOverlayProps extends Video {
-  videoRef: RefObject<HTMLVideoElement | null>
-}
-
-export const VideoOverlay: FC<VideoOverlayProps> = ({
-  likesCount,
-  commentsCount,
-  videoRef
-}) => {
+export const VideoOverlay: FC<Video> = ({ likesCount, commentsCount }) => {
   const { isPaused } = useContext(VideoContext) as VideoValues
 
   const likesCountString = formatNumber(likesCount)
@@ -37,7 +29,7 @@ export const VideoOverlay: FC<VideoOverlayProps> = ({
         <VideoOptions />
       </div>
       <VideoProgress />
-      <VideoVolume videoRef={videoRef} />
+      <VideoVolume />
       {isPaused && (
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60'>
           <Play size={70} className='fill-white stroke-white' />

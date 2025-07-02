@@ -29,7 +29,7 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
         loop
         muted={isMuted}
       />
-      <VideoOverlay {...props} videoRef={ref} />
+      <VideoOverlay {...props} />
     </div>
   )
 }

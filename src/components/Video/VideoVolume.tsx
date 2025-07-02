@@ -1,30 +1,16 @@
 import { Slider } from '@/components/ui/slider'
+import { VideoContext } from '@/contexts/VideoContext'
 import { VolumeContext } from '@/contexts/VolumeContext'
-import type { VolumeValues } from '@/types/contexts'
+import { useVolume } from '@/hooks/useVolume'
+import type { VideoValues, VolumeValues } from '@/types/contexts'
 import { Volume2, VolumeOff } from 'lucide-react'
-import { useContext, type FC, type RefObject } from 'react'
+import { useContext } from 'react'
 
-export const VideoVolume: FC<{
-  videoRef: RefObject<HTMLVideoElement | null>
-}> = ({ videoRef }) => {
-  const { isMuted, toggleMute, volume, changeVolume } = useContext(
-    VolumeContext
-  ) as VolumeValues
+export const VideoVolume = () => {
+  const { isMuted, volume } = useContext(VolumeContext) as VolumeValues
 
-  const toggle = () => {
-    if (!videoRef.current) return
-    videoRef.current.muted = !videoRef.current.muted
-    toggleMute()
-  }
-
-  const change = (value: number[]) => {
-    if (!videoRef.current) return
-    if (isMuted) toggle()
-
-    const newVolume = value[0] / 100
-    videoRef.current.volume = newVolume
-    changeVolume(newVolume)
-  }
+  const { ref } = useContext(VideoContext) as VideoValues
+  const { toggleMute, changeVolume } = useVolume(ref)
 
   return (
     <div className='group absolute right-0 bottom-16 flex w-full justify-end gap-4 p-4'>
@@ -32,10 +18,10 @@ export const VideoVolume: FC<{
         value={[volume * 100]}
         max={100}
         step={1}
-        onValueChange={change}
+        onValueChange={changeVolume}
         className='w-0 cursor-pointer opacity-0 transition-all group-hover:w-1/2 group-hover:opacity-100'
       />
-      <button onMouseDown={toggle} className='cursor-pointer'>
+      <button onMouseDown={toggleMute} className='cursor-pointer'>
         {!isMuted && <Volume2 size={28} />}
         {isMuted && <VolumeOff size={28} />}
       </button>
