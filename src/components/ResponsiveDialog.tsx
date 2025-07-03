@@ -73,16 +73,18 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
           {title && <DrawerTitle>{title}</DrawerTitle>}
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
-        {children}
-        {cancelButton && (
-          <DrawerFooter className='pt-2'>
-            <DrawerClose asChild>
-              <Button variant='outline' size='lg'>
-                Cancel
-              </Button>
-            </DrawerClose>
-          </DrawerFooter>
-        )}
+        <div className='overflow-y-auto'>
+          {children}
+          {cancelButton && (
+            <DrawerFooter className='pt-2'>
+              <DrawerClose asChild>
+                <Button variant='outline' size='lg'>
+                  Cancel
+                </Button>
+              </DrawerClose>
+            </DrawerFooter>
+          )}
+        </div>
       </DrawerContent>
     </Drawer>
   )
