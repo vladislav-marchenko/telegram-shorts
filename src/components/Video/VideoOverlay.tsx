@@ -18,14 +18,12 @@ export const VideoOverlay: FC<Video> = ({ likesCount, commentsCount }) => {
   return (
     <>
       <div className='absolute right-0 bottom-0 flex h-full flex-col items-center justify-end pb-24'>
-        <button className='cursor-pointer p-2 drop-shadow-sm drop-shadow-black/30'>
+        <button className='video-button p-2'>
           <div className='h-12 w-12 rounded-full bg-gray-600' />
         </button>
         <button className='video-button flex flex-col items-center gap-1'>
-          <Heart size={28} className='drop-shadow-sm drop-shadow-black/30' />
-          <span className='text-sm drop-shadow-sm drop-shadow-black/30'>
-            {likesCountString}
-          </span>
+          <Heart size={28} />
+          <span>{likesCountString}</span>
         </button>
         <VideoComments count={commentsCountString} />
         <VideoOptions />

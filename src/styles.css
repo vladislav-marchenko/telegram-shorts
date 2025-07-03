@@ -140,6 +140,6 @@ code {
 
 @layer components {
   .video-button {
-    @apply p-4 text-neutral-200 drop-shadow-sm drop-shadow-black/30 cursor-pointer transition-colors hover:text-white;
+    @apply p-4 text-neutral-100 drop-shadow-sm drop-shadow-black/30 cursor-pointer transition-colors hover:text-white;
   }
 }
