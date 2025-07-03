@@ -16,7 +16,7 @@ function Account() {
   })
 
   return (
-    <div className='flex h-full flex-col overflow-hidden bg-neutral-900 p-4'>
+    <div className='flex h-full flex-col bg-neutral-900 p-4'>
       <AccountInfo />
       {!isError && <AccountVideos />}
     </div>

@@ -11,7 +11,7 @@ export const Videos = () => {
   })
 
   return (
-    <div className='h-full'>
+    <div className='h-dvh overflow-hidden'>
       {isSuccess && <VideosSlider data={data} />}
       {isLoading && <VideosSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
