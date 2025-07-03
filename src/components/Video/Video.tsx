@@ -14,7 +14,7 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
   const { isMuted } = useContext(VolumeContext) as VolumeValues
 
   return (
-    <div className='group relative h-full w-max bg-neutral-800 max-[520px]:w-full'>
+    <div className='relative h-full w-max bg-neutral-800 max-[520px]:w-full'>
       <video
         ref={ref}
         src={props.url}
