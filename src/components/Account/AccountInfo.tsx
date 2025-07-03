@@ -14,10 +14,10 @@ export const AccountInfo = () => {
   })
 
   return (
-    <div className='flex flex-col items-center justify-center gap-4 py-8'>
+    <div className='flex h-full flex-col items-center justify-center gap-4 py-8'>
       {isSuccess && <AccountInfoData data={data} />}
       {isLoading && <AccountInfoSkeleton />}
-      {isError && <Error error={error} refetch={refetch} />}
+      {isError && <Error error={error} refetch={refetch} className='h-full' />}
       {!isError && <AccountInfoButtons />}
     </div>
   )
