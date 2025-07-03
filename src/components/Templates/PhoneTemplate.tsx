@@ -17,7 +17,7 @@ export const PhoneTemplate: FC<PhoneTemplateProps> = ({
         className
       )}
     >
-      <div className='mt-1 h-2 w-12 rounded-full bg-white/80' />
+      <div className='mt-1 h-2 w-10 rounded-full bg-white/80' />
       {children}
     </div>
   )
