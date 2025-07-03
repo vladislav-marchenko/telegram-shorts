@@ -17,7 +17,7 @@ export const VideoOverlay: FC<Video> = ({ likesCount, commentsCount }) => {
 
   return (
     <>
-      <div className='absolute right-0 bottom-1/6 flex flex-col items-center'>
+      <div className='absolute right-0 bottom-0 flex h-full flex-col items-center justify-end pb-24'>
         <button className='cursor-pointer p-2'>
           <div className='h-12 w-12 rounded-full bg-gray-600' />
         </button>
@@ -27,9 +27,9 @@ export const VideoOverlay: FC<Video> = ({ likesCount, commentsCount }) => {
         </button>
         <VideoComments count={commentsCountString} />
         <VideoOptions />
+        <VideoVolume />
       </div>
       <VideoProgress />
-      <VideoVolume />
       {isPaused && (
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60'>
           <Play size={70} className='fill-white stroke-white' />

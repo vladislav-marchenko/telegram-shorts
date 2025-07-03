@@ -13,17 +13,17 @@ export const VideoVolume = () => {
   const { toggleMute, changeVolume } = useVolume(ref)
 
   return (
-    <div className='group absolute right-0 bottom-16 flex w-full justify-end gap-4 p-4'>
+    <div className='group relative flex w-full justify-end gap-4'>
       <Slider
         value={[volume * 100]}
         max={100}
         step={1}
         onValueChange={changeVolume}
-        className='w-0 max-w-[200px] cursor-pointer opacity-0 transition-all group-hover:w-full group-hover:opacity-100'
+        className='absolute top-1/2 right-full w-0 -translate-y-1/2 cursor-pointer px-4 py-6 opacity-0 transition-all group-hover:w-[180px] group-hover:opacity-100 hover:opacity-100'
       />
       <button
         onMouseDown={toggleMute}
-        className='cursor-pointer text-neutral-100 transition-colors hover:text-white'
+        className='cursor-pointer p-4 text-neutral-100 transition-colors hover:text-white'
       >
         <VideoVolumeIcon />
       </button>
