@@ -12,15 +12,13 @@ export const Upload = () => {
 
   return (
     <>
-      <div className='sticky top-0 flex justify-center pb-4'>
-        <ResponsiveDialog
-          state={{ open: isOpen, onOpenChange: handleOpenChange }}
-          trigger={<UploadButton />}
-          title='Upload'
-        >
-          <UploadForm form={formState} close={close} />
-        </ResponsiveDialog>
-      </div>
+      <ResponsiveDialog
+        state={{ open: isOpen, onOpenChange: handleOpenChange }}
+        trigger={<UploadButton />}
+        title='Upload'
+      >
+        <UploadForm form={formState} close={close} />
+      </ResponsiveDialog>
       <UploadExitWarning
         isOpen={isWarningOpen}
         onCancel={dismissWarning}

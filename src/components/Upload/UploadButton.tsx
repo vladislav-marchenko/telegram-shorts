@@ -13,13 +13,7 @@ export const UploadButton = ({ ...props }) => {
   })
 
   return (
-    <Button
-      {...props}
-      size='lg'
-      isLoading={isLoading}
-      disabled={isError}
-      className='w-full max-w-xs'
-    >
+    <Button {...props} size='lg' isLoading={isLoading} disabled={isError}>
       Upload <UploadIcon />
     </Button>
   )
