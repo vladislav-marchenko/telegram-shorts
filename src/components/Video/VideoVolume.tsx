@@ -21,10 +21,7 @@ export const VideoVolume = () => {
         onValueChange={changeVolume}
         className='absolute top-1/2 right-full w-0 -translate-y-1/2 cursor-pointer px-4 py-6 opacity-0 transition-all group-hover:w-[180px] group-hover:opacity-100 hover:opacity-100'
       />
-      <button
-        onMouseDown={toggleMute}
-        className='cursor-pointer p-4 text-neutral-100 transition-colors hover:text-white'
-      >
+      <button onMouseDown={toggleMute} className='video-button'>
         <VideoVolumeIcon />
       </button>
     </div>
