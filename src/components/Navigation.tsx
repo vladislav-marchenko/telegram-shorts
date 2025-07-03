@@ -18,7 +18,7 @@ const items = [
 
 export const Navigation = () => {
   return (
-    <div className='sticky bottom-0 w-full md:p-2'>
+    <nav className='sticky bottom-0 w-full md:p-2'>
       <div className='mx-auto flex items-center justify-around rounded-t-xl border-t border-neutral-800 bg-neutral-900/60 backdrop-blur-sm md:max-w-sm md:rounded-xl md:border md:border-neutral-700'>
         {items.map(({ href, icon: Icon }) => (
           <Link
@@ -30,6 +30,6 @@ export const Navigation = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </nav>
   )
 }
