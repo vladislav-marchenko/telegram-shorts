@@ -15,24 +15,24 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
   const { isMuted } = useContext(VolumeContext) as VolumeValues
 
   const video = ref.current
-  const width = video?.clientWidth ?? 0
-  const height = video?.clientHeight ?? 0
+  const width = video?.videoWidth ?? 0
+  const height = video?.videoHeight ?? 0
   const ratio = width / height
 
   return (
     <div
-      className={cn('relative h-full w-max bg-neutral-800', {
-        'max-[1200px]:w-full': ratio > 1,
-        'max-[720px]:w-full': ratio < 1
+      className={cn('relative flex h-dvh w-max items-center bg-neutral-800', {
+        'max-[1200px]:w-full': ratio > 1.5,
+        'max-[720px]:w-full': ratio < 1.5
       })}
     >
       <video
         ref={ref}
         src={props.url}
         onClick={toggle}
-        className={cn('h-dvh w-full', {
-          'max-[1200px]:object-cover': ratio > 1,
-          'max-[720px]:object-cover': ratio < 1
+        className={cn('h-full w-full', {
+          'max-[1200px]:object-cover': ratio > 1.5,
+          'max-[720px]:object-cover': ratio < 1.5
         })}
         playsInline
         autoPlay={isCurrent}
