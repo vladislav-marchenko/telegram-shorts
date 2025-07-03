@@ -10,8 +10,10 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <div className='relative flex h-dvh flex-col overflow-hidden bg-neutral-900'>
-      <Outlet />
+    <div className='relative flex min-h-dvh flex-col bg-neutral-900'>
+      <main className='flex-auto overflow-y-auto'>
+        <Outlet />
+      </main>
       <Navigation />
       <Toaster richColors position='top-center' />
       <ReactQueryDevtools />
