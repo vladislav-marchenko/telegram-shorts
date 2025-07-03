@@ -16,7 +16,7 @@ export default defineConfig({
     environment: 'jsdom'
   },
   server: {
-    allowedHosts: ['petite-numbers-itch.loca.lt']
+    allowedHosts: ['shy-lions-heal.loca.lt']
   },
   resolve: {
     alias: {

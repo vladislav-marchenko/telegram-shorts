@@ -21,7 +21,7 @@ export const UploadFormInput: FC<UploadFormInputProps> = ({
   }
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col overflow-x-hidden'>
       <input
         id='upload'
         type='file'
@@ -41,7 +41,7 @@ export const UploadFormInput: FC<UploadFormInputProps> = ({
         )}
       >
         <ImagePlus size={52} />
-        <span className='text-center text-xl font-bold'>
+        <span className='max-w-full truncate text-center text-xl font-bold'>
           {media?.name || 'Select a Video'}
         </span>
       </label>

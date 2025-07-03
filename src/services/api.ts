@@ -1,6 +1,7 @@
 import type { Methods, User, Video } from '@/types/api'
 
 const API_URL = 'http://localhost:8000'
+console.log(window.Telegram.WebApp.initData)
 const initData = import.meta.env.VITE_INIT_DATA_MOCK // window.Telegram.WebApp.initData
 
 export const customFetch = async <Data extends object>({
