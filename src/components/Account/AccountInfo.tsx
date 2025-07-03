@@ -18,7 +18,7 @@ export const AccountInfo = () => {
       {isSuccess && <AccountInfoData data={data} />}
       {isLoading && <AccountInfoSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
-      <AccountInfoButtons />
+      {!isError && <AccountInfoButtons />}
     </div>
   )
 }
