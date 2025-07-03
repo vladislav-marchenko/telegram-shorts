@@ -22,8 +22,8 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
   return (
     <div
       className={cn('relative flex h-dvh w-max items-center bg-neutral-800', {
-        'max-[1200px]:w-full': ratio > 1.5,
-        'max-[720px]:w-full': ratio < 1.5
+        'max-[1200px]:w-full': ratio >= 1,
+        'max-[720px]:w-full': ratio < 1
       })}
     >
       <video
@@ -31,8 +31,8 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
         src={props.url}
         onClick={toggle}
         className={cn('h-full w-full', {
-          'max-[1200px]:object-cover': ratio > 1.5,
-          'max-[720px]:object-cover': ratio < 1.5
+          'max-[1200px]:object-cover': ratio >= 1,
+          'max-[720px]:object-cover': ratio < 1
         })}
         playsInline
         autoPlay={isCurrent}
