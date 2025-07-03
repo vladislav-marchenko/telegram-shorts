@@ -5,6 +5,7 @@ export interface VideoValues {
   toggle: () => void
   isPaused: boolean
   progress: number
+  changeProgress: (value: number) => void
 }
 
 export interface VolumeValues {

@@ -31,5 +31,5 @@ export const useProgress = (videoRef: RefObject<HTMLVideoElement | null>) => {
     }
   }, [videoRef])
 
-  return progress
+  return [progress, setProgress] as const
 }

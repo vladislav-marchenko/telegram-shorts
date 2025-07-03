@@ -1,24 +1,30 @@
+import { Slider } from '@/components/ui/slider'
 import { VideoContext } from '@/contexts/VideoContext'
 import { cn } from '@/lib/utils'
 import type { VideoValues } from '@/types/contexts'
 import { useContext } from 'react'
 
 export const VideoProgress = () => {
-  const { progress, isPaused } = useContext(VideoContext) as VideoValues
+  const { progress, changeProgress, isPaused } = useContext(
+    VideoContext
+  ) as VideoValues
 
   return (
     <div
       className={cn(
-        'group/progress absolute bottom-10 w-full px-2 py-4 drop-shadow-md drop-shadow-black/30 transition-opacity duration-300 md:bottom-14 md:p-6',
+        'absolute bottom-8 w-full p-2 drop-shadow-md drop-shadow-black/30 transition-opacity duration-300 md:bottom-14 md:px-6',
         !isPaused && 'hover:opacity-100 any-pointer-fine:opacity-0'
       )}
     >
-      <div className='group relative h-0.5 w-full cursor-pointer overflow-hidden rounded-full bg-neutral-600/50 transition-all group-active/progress:h-2 group-active/progress:bg-neutral-600 hover:h-2 hover:bg-neutral-600 md:h-1.5'>
-        <div
-          className='absolute top-0 left-0 h-full w-full bg-neutral-200/70 transition-colors group-hover:bg-neutral-200 group-active/progress:bg-neutral-200'
-          style={{ width: `${progress}%` }}
-        />
-      </div>
+      <Slider
+        value={[progress]}
+        max={100}
+        step={1}
+        onValueChange={(value) => changeProgress(value[0])}
+        className='h-2 cursor-pointer py-4 opacity-70 transition-all duration-300 hover:opacity-100 md:h-[38px]'
+        trackClassName='md:data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:h-0.5'
+        thumb={false}
+      />
     </div>
   )
 }
