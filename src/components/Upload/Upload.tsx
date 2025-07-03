@@ -2,6 +2,7 @@ import { ResponsiveDialog } from '../ResponsiveDialog'
 import { UploadButton } from './UploadButton'
 import { UploadExitWarning } from './UploadExitWarning'
 import { UploadForm } from './UploadForm'
+import { UploadPreview } from './UploadPreview'
 import { useUploadForm } from '@/hooks/useUploadForm'
 
 export const Upload = () => {
@@ -9,6 +10,7 @@ export const Upload = () => {
     form: { formState, isOpen, handleOpenChange, close },
     warning: { isWarningOpen, confirmExit, dismissWarning }
   } = useUploadForm()
+  const media = formState.watch('media')
 
   return (
     <>
@@ -17,6 +19,7 @@ export const Upload = () => {
         trigger={<UploadButton />}
         title='Upload'
       >
+        {media && <UploadPreview media={media} />}
         <UploadForm form={formState} close={close} />
       </ResponsiveDialog>
       <UploadExitWarning
