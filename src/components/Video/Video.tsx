@@ -13,7 +13,9 @@ interface VideoProps extends VideoType {
 }
 
 export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
-  const { ref, ratio, toggle } = useContext(VideoContext) as VideoValues
+  const { ref, ratio, isPaused, toggle } = useContext(
+    VideoContext
+  ) as VideoValues
   const { isMuted } = useContext(VolumeContext) as VolumeValues
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -38,7 +40,7 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
           'max-[720px]:object-cover': ratio < 1
         })}
         playsInline
-        autoPlay={isCurrent}
+        autoPlay={isCurrent && !isPaused}
         controls={false}
         loop
         muted={isMuted}
