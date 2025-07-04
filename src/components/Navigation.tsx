@@ -8,7 +8,7 @@ const items = [
     icon: Search
   },
   {
-    href: '/',
+    href: '/video/feed',
     icon: House
   },
   {
