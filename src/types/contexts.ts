@@ -2,10 +2,14 @@ import type { RefObject } from 'react'
 
 export interface VideoValues {
   ref: RefObject<HTMLVideoElement | null>
+  ratio: number
   toggle: () => void
   isPaused: boolean
   progress: number
   changeProgress: (value: number) => void
+  volume: number
+  changeVolume: (value: number) => void
+  toggleMute: () => void
 }
 
 export interface VolumeValues {

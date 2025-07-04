@@ -19,11 +19,14 @@ export const useVolume = (ref: RefObject<HTMLVideoElement | null>) => {
   }, [video])
 
   const changeVolume = useCallback(
-    (value: number[]) => {
+    (value: number) => {
       if (!video) return
-
       if (isMuted) toggleMute()
-      const newVolume = value[0] / 100
+
+      let newVolume = value / 100
+      if (newVolume < 0) newVolume = 0
+      if (newVolume > 1) newVolume = 1
+
       video.volume = newVolume
       changeGlobalVolume(newVolume)
     },
@@ -37,5 +40,5 @@ export const useVolume = (ref: RefObject<HTMLVideoElement | null>) => {
     video.volume = volume
   }, [ref, volume])
 
-  return { toggleMute, changeVolume }
+  return { volume: volume * 100, toggleMute, changeVolume }
 }

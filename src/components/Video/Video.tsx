@@ -2,6 +2,7 @@ import { VideoOverlay } from './VideoOverlay'
 import { VideosSkeleton } from './VideosSkeleton'
 import { VideoContext } from '@/contexts/VideoContext'
 import { VolumeContext } from '@/contexts/VolumeContext'
+import { useVideoShortcuts } from '@/hooks/useVideoShortcuts'
 import { cn } from '@/lib/utils'
 import type { Video as VideoType } from '@/types/api'
 import type { VideoValues, VolumeValues } from '@/types/contexts'
@@ -12,14 +13,11 @@ interface VideoProps extends VideoType {
 }
 
 export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
-  const { ref, toggle } = useContext(VideoContext) as VideoValues
+  const { ref, ratio, toggle } = useContext(VideoContext) as VideoValues
   const { isMuted } = useContext(VolumeContext) as VolumeValues
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const video = ref.current
-  const width = video?.videoWidth ?? 0
-  const height = video?.videoHeight ?? 0
-  const ratio = width / height
+  useVideoShortcuts({ enable: isCurrent })
 
   return (
     <div

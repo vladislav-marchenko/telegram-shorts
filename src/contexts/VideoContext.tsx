@@ -1,5 +1,7 @@
 import { useIsPaused } from '@/hooks/useIsPaused'
 import { useProgress } from '@/hooks/useProgress'
+import { useVideoRatio } from '@/hooks/useVideoRatio'
+import { useVolume } from '@/hooks/useVolume'
 import { type VideoValues } from '@/types/contexts'
 import { createContext, useRef, type FC, type ReactNode } from 'react'
 
@@ -10,8 +12,11 @@ export const VideoContextProvider: FC<{ children: ReactNode }> = ({
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const video = videoRef.current
+
   const isPaused = useIsPaused(videoRef)
+  const ratio = useVideoRatio(videoRef)
   const [progress, setProgress] = useProgress(videoRef)
+  const { volume, changeVolume, toggleMute } = useVolume(videoRef)
 
   const toggle = () => {
     if (!video) return
@@ -27,10 +32,14 @@ export const VideoContextProvider: FC<{ children: ReactNode }> = ({
 
   const value = {
     ref: videoRef,
+    ratio,
     toggle,
     isPaused,
     progress,
-    changeProgress
+    changeProgress,
+    volume,
+    changeVolume,
+    toggleMute
   }
 
   return <VideoContext.Provider value={value}>{children}</VideoContext.Provider>
