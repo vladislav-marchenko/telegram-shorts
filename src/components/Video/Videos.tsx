@@ -1,6 +1,6 @@
-import { Error } from '../Error'
-import { VideosSkeleton } from './VideosSkeleton'
+import { VideoSkeleton } from './VideoSkeleton'
 import { VideosSlider } from './VideosSlider'
+import { Error } from '@/components/Error'
 import { getFeed } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 
@@ -13,7 +13,7 @@ export const Videos = () => {
   return (
     <div className='h-dvh overflow-hidden'>
       {isSuccess && <VideosSlider data={data} />}
-      {isLoading && <VideosSkeleton />}
+      {isLoading && <VideoSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
     </div>
   )

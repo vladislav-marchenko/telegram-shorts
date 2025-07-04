@@ -2,12 +2,24 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import { useEffect, useRef, useState, useCallback } from 'react'
 
-export const useVideosSlider = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: 'y' }, [
+// Using URLSearchParams instead of tanstack-router API to avoid unnecessary re-renders when the carousel updates the video index.
+const setNewURLIndex = (index: number) => {
+  const searchParams = new URLSearchParams(window.location.search)
+  searchParams.set('index', String(index))
+  const newUrl = `${window.location.pathname}?${searchParams.toString()}`
+  window.history.replaceState(null, '', newUrl)
+}
+
+export const useVideosSlider = ({
+  startIndex = 0
+}: {
+  startIndex?: number
+}) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ axis: 'y', startIndex }, [
     WheelGesturesPlugin()
   ])
   const slidesRef = useRef<HTMLDivElement>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(startIndex)
 
   const handleSelect = useCallback(() => {
     if (!emblaApi || !slidesRef.current) return
@@ -25,7 +37,10 @@ export const useVideosSlider = () => {
     const nextVideo = slides[nextIndex]?.querySelector(
       'video'
     ) as HTMLVideoElement
-    if (nextVideo) nextVideo.play()
+    if (nextVideo) {
+      setNewURLIndex(nextIndex)
+      nextVideo.play()
+    }
 
     setCurrentIndex(nextIndex)
   }, [emblaApi, currentIndex])

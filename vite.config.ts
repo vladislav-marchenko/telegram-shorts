@@ -16,7 +16,7 @@ export default defineConfig({
     environment: 'jsdom'
   },
   server: {
-    allowedHosts: ['shy-lions-heal.loca.lt']
+    allowedHosts: ['old-garlics-drive.loca.lt']
   },
   resolve: {
     alias: {

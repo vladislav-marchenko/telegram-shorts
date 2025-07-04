@@ -4,13 +4,13 @@ import { AccountInfoData } from './AccountInfoData'
 import { AccountInfoSkeleton } from './AccountInfoSkeleton'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
-import { useMatch } from '@tanstack/react-router'
+import { useParams } from '@tanstack/react-router'
 
 export const AccountInfo = () => {
-  const { params } = useMatch({ from: '/user/$userId' })
+  const { userId } = useParams({ from: '/user/$userId' })
   const { data, refetch, isSuccess, isLoading, isError, error } = useQuery({
-    queryKey: ['user', params.userId],
-    queryFn: () => getUser(params.userId)
+    queryKey: ['user', userId],
+    queryFn: () => getUser(userId)
   })
 
   return (

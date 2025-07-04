@@ -5,11 +5,12 @@ import { Play } from 'lucide-react'
 import type { FC } from 'react'
 
 export const AccountVideosContent: FC<{ data: Video[] }> = ({ data }) => {
-  return data.map(({ _id, title, poster, views }) => (
+  return data.map(({ _id, userId, title, poster, views }, index) => (
     <Link
       key={_id}
-      to='/video/$videoId'
-      params={{ videoId: _id }}
+      to='/video/user/$userId'
+      params={{ userId }}
+      search={{ index }}
       className='group relative aspect-[9/14] overflow-hidden rounded-md bg-neutral-600'
     >
       <img src={poster} className='h-full w-full object-cover' />

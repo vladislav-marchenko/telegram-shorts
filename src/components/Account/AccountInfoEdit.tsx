@@ -3,13 +3,13 @@ import { Button } from '../ui/button'
 import { AccountInfoEditForm } from './AccountInfoEditForm'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
-import { useMatch } from '@tanstack/react-router'
+import { useParams } from '@tanstack/react-router'
 
 export const AccountInfoEdit = () => {
-  const { params } = useMatch({ from: '/user/$userId' })
+  const { userId } = useParams({ from: '/user/$userId' })
   const { isLoading, isError } = useQuery({
-    queryKey: ['user', params.userId],
-    queryFn: () => getUser(params.userId),
+    queryKey: ['user', userId],
+    queryFn: () => getUser(userId),
     staleTime: Infinity
   })
 

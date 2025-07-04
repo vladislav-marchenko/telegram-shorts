@@ -68,3 +68,7 @@ export const getFeed = async () => {
 export const getUserVideos = async (userId: string) => {
   return await customFetch<Video[]>({ endpoint: `/video/user/${userId}` })
 }
+
+export const getVideo = async (videoId: string) => {
+  return await customFetch<Video>({ endpoint: `/video/${videoId}` })
+}

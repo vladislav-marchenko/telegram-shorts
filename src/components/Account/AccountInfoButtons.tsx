@@ -3,18 +3,18 @@ import { Upload } from '@/components/Upload/Upload'
 import { Button } from '@/components/ui/button'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
-import { useMatch } from '@tanstack/react-router'
+import { useParams } from '@tanstack/react-router'
 import { Send } from 'lucide-react'
 
 export const AccountInfoButtons = () => {
-  const { params } = useMatch({ from: '/user/$userId' })
+  const { userId } = useParams({ from: '/user/$userId' })
   const { isLoading, isError } = useQuery({
-    queryKey: ['user', params.userId],
-    queryFn: () => getUser(params.userId),
+    queryKey: ['user', userId],
+    queryFn: () => getUser(userId),
     staleTime: Infinity
   })
 
-  if (params.userId === 'me') {
+  if (userId === 'me') {
     return (
       <div className='flex gap-2'>
         <AccountInfoEdit />

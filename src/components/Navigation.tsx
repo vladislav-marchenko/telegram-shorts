@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { Link, useLocation, useMatch } from '@tanstack/react-router'
+import { Link, useLocation } from '@tanstack/react-router'
 import { House, Search, User } from 'lucide-react'
 
 const items = [
@@ -23,8 +23,8 @@ export const Navigation = () => {
   return (
     <nav
       className={cn('bottom-0 w-full md:p-2', {
-        fixed: href === '/',
-        sticky: href !== '/'
+        fixed: href.includes('video'),
+        sticky: !href.includes('video')
       })}
     >
       <div className='mx-auto flex items-center justify-around rounded-t-xl border-t border-neutral-800 bg-neutral-900/60 backdrop-blur-sm md:max-w-sm md:rounded-xl md:border md:border-neutral-700'>

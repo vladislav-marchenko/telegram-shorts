@@ -2,17 +2,17 @@ import { AccountInfo } from '@/components/Account/AccountInfo'
 import { AccountVideos } from '@/components/Account/AccountVideos'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
-import { createFileRoute, useMatch } from '@tanstack/react-router'
+import { createFileRoute, useParams } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/user/$userId')({
-  component: Account
+  component: AccountPage
 })
 
-function Account() {
-  const { params } = useMatch({ from: '/user/$userId' })
+function AccountPage() {
+  const { userId } = useParams({ from: '/user/$userId' })
   const { isError } = useQuery({
-    queryKey: ['user', params.userId],
-    queryFn: () => getUser(params.userId)
+    queryKey: ['user', userId],
+    queryFn: () => getUser(userId)
   })
 
   return (
