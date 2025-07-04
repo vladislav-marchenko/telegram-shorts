@@ -1,10 +1,11 @@
 import { VideoOverlay } from './VideoOverlay'
+import { VideosSkeleton } from './VideosSkeleton'
 import { VideoContext } from '@/contexts/VideoContext'
 import { VolumeContext } from '@/contexts/VolumeContext'
 import { cn } from '@/lib/utils'
 import type { Video as VideoType } from '@/types/api'
 import type { VideoValues, VolumeValues } from '@/types/contexts'
-import { useContext, type FC } from 'react'
+import { useContext, useState, type FC } from 'react'
 
 interface VideoProps extends VideoType {
   isCurrent: boolean
@@ -13,6 +14,7 @@ interface VideoProps extends VideoType {
 export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
   const { ref, toggle } = useContext(VideoContext) as VideoValues
   const { isMuted } = useContext(VolumeContext) as VolumeValues
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const video = ref.current
   const width = video?.videoWidth ?? 0
@@ -21,16 +23,19 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
 
   return (
     <div
-      className={cn('relative flex h-dvh w-max items-center bg-neutral-800', {
+      className={cn('relative flex h-dvh w-max items-center', {
         'max-[1200px]:w-full': ratio >= 1,
         'max-[720px]:w-full': ratio < 1
       })}
     >
+      {!isLoaded && <VideosSkeleton />}
       <video
         ref={ref}
         src={props.url}
         onClick={toggle}
+        onLoadedData={() => setIsLoaded(true)}
         className={cn('h-full w-full', {
+          hidden: !isLoaded,
           'max-[1200px]:object-cover': ratio >= 1,
           'max-[720px]:object-cover': ratio < 1
         })}
@@ -40,7 +45,7 @@ export const Video: FC<VideoProps> = ({ isCurrent, ...props }) => {
         loop
         muted={isMuted}
       />
-      <VideoOverlay {...props} />
+      {isLoaded && <VideoOverlay {...props} />}
     </div>
   )
 }
