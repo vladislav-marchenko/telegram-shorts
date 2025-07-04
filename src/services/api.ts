@@ -48,7 +48,8 @@ export const updateProfileInfo = async (
   return await customFetch<User>({
     endpoint: '/user',
     method: 'PATCH',
-    body: JSON.stringify(newData)
+    body: JSON.stringify(newData),
+    headers: { 'Content-Type': 'application/json' }
   })
 }
 
