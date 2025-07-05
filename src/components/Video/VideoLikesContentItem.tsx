@@ -13,7 +13,7 @@ export const VideoLikesContentItem: FC<
     >
       <img
         src={photoURL}
-        className='h-10 w-10 rounded-full'
+        className='flex h-10 w-10 items-center justify-center rounded-full bg-neutral-600 font-bold'
         alt={displayName.charAt(0)}
       />
       <div className='flex flex-col gap-1 leading-none'>
