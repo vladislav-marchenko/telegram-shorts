@@ -1,5 +1,5 @@
 import { Video } from './Video'
-import { VideoContextProvider } from '@/contexts/VideoContext'
+import { VideoSkeleton } from './VideoSkeleton'
 import { useVideosSlider } from '@/hooks/useVideosSlider'
 import type { Video as VideoType } from '@/types/api'
 import { type FC } from 'react'
@@ -16,10 +16,16 @@ export const VideosSlider: FC<VideosSliderProps> = ({ data, startIndex }) => {
     <div ref={emblaRef} className='h-full w-full'>
       <div ref={slidesRef} className='flex h-full flex-col'>
         {data.map((video, index) => {
+          const isVisible = Math.abs(currentIndex - index) <= 1
+          if (!isVisible) return <VideoSkeleton />
+
           return (
-            <VideoContextProvider key={video._id}>
+            <div
+              key={video._id}
+              className='flex h-dvh w-full items-center justify-center'
+            >
               <Video {...video} isCurrent={index === currentIndex} />
-            </VideoContextProvider>
+            </div>
           )
         })}
       </div>

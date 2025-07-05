@@ -1,11 +1,13 @@
 import type { Video } from '@/types/api'
 import { formatNumber } from '@/utils'
-import { Link } from '@tanstack/react-router'
+import { Link, useParams } from '@tanstack/react-router'
 import { Play } from 'lucide-react'
 import type { FC } from 'react'
 
 export const AccountVideosContent: FC<{ data: Video[] }> = ({ data }) => {
-  return data.map(({ _id, userId, title, poster, views }, index) => (
+  const { userId } = useParams({ from: '/user/$userId' })
+
+  return data.map(({ _id, title, poster, views }, index) => (
     <Link
       key={_id}
       to='/video/user/$userId'

@@ -9,7 +9,7 @@ import { useParams } from '@tanstack/react-router'
 export const AccountVideos = () => {
   const { userId } = useParams({ from: '/user/$userId' })
   const { data, refetch, isSuccess, isLoading, isError, error } = useQuery({
-    queryKey: ['video', userId],
+    queryKey: ['video', 'user', userId],
     queryFn: () => getUserVideos(userId)
   })
 

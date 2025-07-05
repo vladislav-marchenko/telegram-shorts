@@ -1,7 +1,6 @@
 import { Error } from '@/components/Error'
 import { Video } from '@/components/Video/Video'
 import { VideoSkeleton } from '@/components/Video/VideoSkeleton'
-import { VideoContextProvider } from '@/contexts/VideoContext'
 import { getVideo } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute, useParams } from '@tanstack/react-router'
@@ -19,11 +18,7 @@ function VideoPage() {
 
   return (
     <div className='h-dvh overflow-hidden'>
-      {isSuccess && (
-        <VideoContextProvider>
-          <Video {...data} />
-        </VideoContextProvider>
-      )}
+      {isSuccess && <Video {...data} />}
       {isLoading && <VideoSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
     </div>

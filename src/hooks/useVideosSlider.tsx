@@ -26,7 +26,7 @@ export const useVideosSlider = ({
   const handleSelect = useCallback(() => {
     if (!emblaApi || !slidesRef.current) return
 
-    const slides = slidesRef.current.children
+    const slides = emblaApi.slideNodes()
     const currentSlide = slides[currentIndex]
     if (!currentSlide) return
 
