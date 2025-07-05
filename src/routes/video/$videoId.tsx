@@ -5,12 +5,12 @@ import { getVideo } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute, useParams } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/video/_layout/$videoId')({
+export const Route = createFileRoute('/video/$videoId')({
   component: VideoPage
 })
 
 function VideoPage() {
-  const { videoId } = useParams({ from: '/video/_layout/$videoId' })
+  const { videoId } = useParams({ from: '/video/$videoId' })
   const { data, refetch, isSuccess, isLoading, isError, error } = useQuery({
     queryKey: ['video', videoId],
     queryFn: () => getVideo(videoId)

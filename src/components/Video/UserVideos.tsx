@@ -4,7 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
 
 export const UserVideos = () => {
-  const { userId } = useParams({ from: '/video/_layout/user/$userId' })
+  const { userId } = useParams({ from: '/video/user/$userId' })
   const { data, isSuccess, fetchNextPage } = useInfiniteQuery({
     queryKey: ['video', 'user', userId],
     queryFn: ({ pageParam }) => getUserVideos({ userId, page: pageParam }),
