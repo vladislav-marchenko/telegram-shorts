@@ -29,5 +29,6 @@ export interface Video {
 
 export interface InfiniteVideos {
   videos: Video[]
-  hasMore: boolean
+  hasPrevious?: boolean
+  hasNext: boolean
 }

@@ -9,10 +9,10 @@ export const Videos = () => {
     useInfiniteQuery({
       queryKey: ['video', 'feed'],
       queryFn: ({ pageParam }) => getFeed(pageParam),
+      initialPageParam: 1,
       getNextPageParam: (lastPage, pages) => {
-        if (lastPage.hasMore) return pages.length + 1
-      },
-      initialPageParam: 1
+        if (lastPage.hasNext) return pages.length + 1
+      }
     })
 
   return (

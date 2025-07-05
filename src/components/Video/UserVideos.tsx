@@ -9,7 +9,7 @@ export const UserVideos = () => {
     queryKey: ['video', 'user', userId],
     queryFn: ({ pageParam }) => getUserVideos({ userId, page: pageParam }),
     getNextPageParam: (lastPage, pages) => {
-      if (lastPage.hasMore) return pages.length + 1
+      if (lastPage.hasNext) return pages.length + 1
     },
     initialPageParam: 1
   })
