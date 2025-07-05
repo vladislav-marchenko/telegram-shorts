@@ -90,3 +90,10 @@ export const getUserVideo = async () => {
 export const getVideo = async (videoId: string) => {
   return await customFetch<Video>({ endpoint: `/video/${videoId}` })
 }
+
+export const likeVideo = async (videoId: string) => {
+  return await customFetch<Video>({
+    endpoint: `/like/${videoId}`,
+    method: 'POST'
+  })
+}

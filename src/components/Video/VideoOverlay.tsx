@@ -1,19 +1,16 @@
 import { VideoComments } from './VideoComments'
+import { VideoLike } from './VideoLike'
 import { VideoOptions } from './VideoOptions'
 import { VideoProgress } from './VideoProgress'
 import { VideoVolume } from './VideoVolume'
 import { VideoContext } from '@/contexts/VideoContext'
 import type { Video } from '@/types/api'
 import type { VideoValues } from '@/types/contexts'
-import { formatNumber } from '@/utils'
-import { Heart, Play } from 'lucide-react'
+import { Play } from 'lucide-react'
 import { useContext, type FC } from 'react'
 
-export const VideoOverlay: FC<Video> = ({ likesCount, commentsCount }) => {
+export const VideoOverlay: FC<Video> = ({ _id, likesCount, commentsCount }) => {
   const { isManuallyPaused } = useContext(VideoContext) as VideoValues
-
-  const likesCountString = formatNumber(likesCount)
-  const commentsCountString = formatNumber(commentsCount)
 
   return (
     <>
@@ -21,11 +18,8 @@ export const VideoOverlay: FC<Video> = ({ likesCount, commentsCount }) => {
         <button className='video-button p-2'>
           <div className='h-12 w-12 rounded-full bg-gray-600' />
         </button>
-        <button className='video-button flex flex-col items-center gap-1'>
-          <Heart size={28} />
-          <span>{likesCountString}</span>
-        </button>
-        <VideoComments count={commentsCountString} />
+        <VideoLike count={likesCount} videoId={_id} />
+        <VideoComments count={commentsCount} />
         <VideoOptions />
         <VideoVolume />
       </div>
