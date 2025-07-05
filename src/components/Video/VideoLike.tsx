@@ -1,9 +1,7 @@
-import { likeVideo } from '@/services/api'
+import { useLike } from '@/hooks/useLike'
 import { formatNumber } from '@/utils'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Heart } from 'lucide-react'
 import { type FC } from 'react'
-import { toast } from 'sonner'
 
 interface VideoLikeProps {
   count: number
@@ -11,27 +9,11 @@ interface VideoLikeProps {
 }
 
 export const VideoLike: FC<VideoLikeProps> = ({ count, videoId }) => {
-  const queryClient = useQueryClient()
-  const { mutate } = useMutation({
-    mutationFn: likeVideo,
-    onMutate: async () => {
-      const previousValue = queryClient.getQueryData(['video', videoId])
-      queryClient.setQueryData(['video', videoId], (old: any) => ({
-        ...old,
-        likesCount: old.likesCount + 1
-      }))
-
-      return { previousValue }
-    },
-    onError: (error, _, context) => {
-      toast.error(error.message ?? 'Something went wrong')
-      queryClient.setQueryData(['video', videoId], context?.previousValue)
-    }
-  })
+  const like = useLike(videoId)
 
   return (
     <button
-      onClick={() => mutate(videoId)}
+      onClick={like}
       className='video-button flex flex-col items-center gap-1'
     >
       <Heart size={28} />
