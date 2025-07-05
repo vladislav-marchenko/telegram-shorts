@@ -25,8 +25,11 @@ export const VideoOverlay: FC<Video> = ({ _id, likesCount, commentsCount }) => {
       </div>
       <VideoProgress />
       {isManuallyPaused && (
-        <div className='pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60'>
-          <Play size={70} className='fill-white stroke-white' />
+        <div className='pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70'>
+          <Play
+            size={70}
+            className='fill-white stroke-white drop-shadow-md drop-shadow-black/50'
+          />
         </div>
       )}
     </>
