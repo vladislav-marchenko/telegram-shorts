@@ -10,7 +10,6 @@ interface VideosSliderProps {
 
 export const VideosSlider: FC<VideosSliderProps> = ({ data, startIndex }) => {
   const { emblaRef, slidesRef, currentIndex } = useVideosSlider({ startIndex })
-  console.log('@ render')
 
   return (
     <div ref={emblaRef} className='h-full w-full'>
