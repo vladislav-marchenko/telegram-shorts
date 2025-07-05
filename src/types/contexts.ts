@@ -4,7 +4,7 @@ export interface VideoValues {
   ref: RefObject<HTMLVideoElement | null>
   ratio: number
   toggle: () => void
-  isPaused: boolean
+  isManuallyPaused: boolean
 }
 
 export interface VolumeValues {

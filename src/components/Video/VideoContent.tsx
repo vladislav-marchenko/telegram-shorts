@@ -17,9 +17,7 @@ export const VideoContent: FC<VideoContentProps> = ({
   ...props
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
-  const { ref, ratio, isPaused, toggle } = useContext(
-    VideoContext
-  ) as VideoValues
+  const { ref, ratio, toggle } = useContext(VideoContext) as VideoValues
   const { isMuted } = useContext(VolumeContext) as VolumeValues
   useVideoShortcuts({ enable: isCurrent })
 
@@ -42,7 +40,7 @@ export const VideoContent: FC<VideoContentProps> = ({
           'max-[720px]:object-cover': ratio < 1
         })}
         playsInline
-        autoPlay={isCurrent && !isPaused}
+        autoPlay={isCurrent}
         controls={false}
         loop
         muted={isMuted}

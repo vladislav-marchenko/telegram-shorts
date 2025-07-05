@@ -33,8 +33,8 @@ export const useVideosSlider = ({
     const prevVideo = slides[currentIndex].querySelector('video')
     if (!prevVideo) return
 
-    prevVideo.pause()
-    prevVideo.currentTime = 0
+    //prevVideo.pause()
+    //prevVideo.currentTime = 0
 
     const nextIndex = emblaApi.selectedScrollSnap()
     const nextSlide = slides[nextIndex]
@@ -44,7 +44,7 @@ export const useVideosSlider = ({
     if (!nextVideo) return
 
     setNewURLIndex(nextIndex)
-    nextVideo.play()
+    //nextVideo.play()
 
     setCurrentIndex(nextIndex)
   }, [emblaApi, currentIndex])

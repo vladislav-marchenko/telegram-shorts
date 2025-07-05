@@ -6,14 +6,14 @@ import type { VideoValues } from '@/types/contexts'
 import { useContext } from 'react'
 
 export const VideoProgress = () => {
-  const { ref, isPaused } = useContext(VideoContext) as VideoValues
+  const { ref, isManuallyPaused } = useContext(VideoContext) as VideoValues
   const [progress, changeProgress] = useProgress(ref)
 
   return (
     <div
       className={cn(
         'absolute bottom-8 w-full p-2 drop-shadow-md drop-shadow-black/30 transition-opacity duration-300 md:bottom-14 md:px-6',
-        !isPaused && 'hover:opacity-100 any-pointer-fine:opacity-0'
+        !isManuallyPaused && 'hover:opacity-100 any-pointer-fine:opacity-0'
       )}
     >
       <Slider

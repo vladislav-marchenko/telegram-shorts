@@ -1,16 +1,25 @@
-import { useEffect, useRef, useState, type RefObject } from 'react'
+import { useCallback, useEffect, useRef, useState, type RefObject } from 'react'
+
+type ValueFn = (value: number) => number
 
 export const useProgress = (videoRef: RefObject<HTMLVideoElement | null>) => {
   const [progress, setProgress] = useState(0)
   const requestId = useRef<number | null>(null)
 
-  const changeProgress = (value: number) => {
-    const video = videoRef.current
-    if (!video) return
+  const changeProgress = useCallback(
+    (value: number | ValueFn) => {
+      const video = videoRef.current
+      if (!video) return
 
-    video.currentTime = (video.duration / 100) * value
-    setProgress(value)
-  }
+      let newValue = typeof value === 'number' ? value : value(progress)
+      if (newValue < 0) newValue = 0
+      if (newValue > 100) newValue = 100
+
+      video.currentTime = (video.duration / 100) * newValue
+      setProgress(value)
+    },
+    [videoRef, setProgress]
+  )
 
   useEffect(() => {
     const video = videoRef.current
@@ -31,6 +40,10 @@ export const useProgress = (videoRef: RefObject<HTMLVideoElement | null>) => {
 
     video.addEventListener('play', handlePlay)
     video.addEventListener('pause', handlePause)
+
+    if (!video.paused) {
+      requestId.current = requestAnimationFrame(updateProgress)
+    }
 
     return () => {
       video.removeEventListener('play', handlePlay)

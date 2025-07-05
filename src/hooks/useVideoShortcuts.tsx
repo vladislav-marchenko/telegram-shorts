@@ -6,7 +6,7 @@ import { useContext, useEffect } from 'react'
 
 export const useVideoShortcuts = ({ enable }: { enable: boolean }) => {
   const { ref, toggle } = useContext(VideoContext) as VideoValues
-  const [progress, changeProgress] = useProgress(ref)
+  const changeProgress = useProgress(ref)[1]
   const { volume, changeVolume } = useVolume(ref)
 
   const handleKeydown = (event: globalThis.KeyboardEvent) => {
@@ -17,11 +17,11 @@ export const useVideoShortcuts = ({ enable }: { enable: boolean }) => {
         break
       case 'ArrowLeft':
         event.preventDefault()
-        changeProgress(progress - 10)
+        changeProgress((progress) => progress - 10)
         break
       case 'ArrowRight':
         event.preventDefault()
-        changeProgress(progress + 10)
+        changeProgress((progress) => progress + 10)
         break
       case 'ArrowUp':
         event.preventDefault()
