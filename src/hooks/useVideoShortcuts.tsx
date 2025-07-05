@@ -1,11 +1,13 @@
+import { useProgress } from './useProgress'
+import { useVolume } from './useVolume'
 import { VideoContext } from '@/contexts/VideoContext'
 import type { VideoValues } from '@/types/contexts'
 import { useContext, useEffect } from 'react'
 
 export const useVideoShortcuts = ({ enable }: { enable: boolean }) => {
-  const { toggle, progress, changeProgress, volume, changeVolume } = useContext(
-    VideoContext
-  ) as VideoValues
+  const { ref, toggle } = useContext(VideoContext) as VideoValues
+  const [progress, changeProgress] = useProgress(ref)
+  const { volume, changeVolume } = useVolume(ref)
 
   const handleKeydown = (event: globalThis.KeyboardEvent) => {
     switch (event.key) {
