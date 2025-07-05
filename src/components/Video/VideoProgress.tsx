@@ -12,7 +12,7 @@ export const VideoProgress = () => {
   return (
     <div
       className={cn(
-        'absolute bottom-8 w-full p-2 drop-shadow-md drop-shadow-black/30 transition-opacity duration-300 md:bottom-14 md:px-6',
+        'absolute bottom-8 w-full px-3 py-2 drop-shadow-md drop-shadow-black/30 transition-opacity duration-300 md:bottom-14 md:px-6',
         !isManuallyPaused && 'hover:opacity-100 any-pointer-fine:opacity-0'
       )}
     >
