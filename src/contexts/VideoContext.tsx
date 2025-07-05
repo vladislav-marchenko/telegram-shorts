@@ -26,8 +26,6 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
     video.paused ? video.play() : video.pause()
   }
 
-  if (!isVisible) return <VideoSkeleton />
-
   const value = {
     ref: videoRef,
     ratio,
@@ -35,5 +33,6 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
     isPaused
   }
 
+  if (!isVisible) return <VideoSkeleton />
   return <VideoContext.Provider value={value}>{children}</VideoContext.Provider>
 }
