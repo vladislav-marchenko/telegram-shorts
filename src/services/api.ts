@@ -1,4 +1,4 @@
-import type { Methods, User, Video } from '@/types/api'
+import type { InfiniteVideos, Methods, User, Video } from '@/types/api'
 
 const API_URL = 'http://localhost:8000'
 console.log(window.Telegram.WebApp.initData)
@@ -61,8 +61,10 @@ export const uploadVideo = async (formData: FormData) => {
   })
 }
 
-export const getFeed = async () => {
-  return await customFetch<Video[]>({ endpoint: '/video/feed' })
+export const getFeed = async (page: number) => {
+  return await customFetch<InfiniteVideos>({
+    endpoint: `/video/feed?page=${page}`
+  })
 }
 
 export const getUserVideos = async (userId: string) => {

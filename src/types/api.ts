@@ -26,3 +26,8 @@ export interface Video {
   commentsCount: number
   createdAt: string
 }
+
+export interface InfiniteVideos {
+  videos: Video[]
+  hasMore: boolean
+}
