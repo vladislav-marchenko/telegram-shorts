@@ -1,13 +1,13 @@
 import { Slider } from '@/components/ui/slider'
 import { VideoContext } from '@/contexts/VideoContext'
+import { useProgress } from '@/hooks/useProgress'
 import { cn } from '@/lib/utils'
 import type { VideoValues } from '@/types/contexts'
 import { useContext } from 'react'
 
 export const VideoProgress = () => {
-  const { progress, changeProgress, isPaused } = useContext(
-    VideoContext
-  ) as VideoValues
+  const { ref, isPaused } = useContext(VideoContext) as VideoValues
+  const [progress, changeProgress] = useProgress(ref)
 
   return (
     <div
