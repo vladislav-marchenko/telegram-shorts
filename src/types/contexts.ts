@@ -5,9 +5,6 @@ export interface VideoValues {
   ratio: number
   toggle: () => void
   isPaused: boolean
-  volume: number
-  changeVolume: (value: number) => void
-  toggleMute: () => void
 }
 
 export interface VolumeValues {

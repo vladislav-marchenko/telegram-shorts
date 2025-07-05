@@ -1,13 +1,13 @@
 import { VideoVolumeIcon } from './VideoVolumeIcon'
 import { Slider } from '@/components/ui/slider'
 import { VideoContext } from '@/contexts/VideoContext'
+import { useVolume } from '@/hooks/useVolume'
 import type { VideoValues } from '@/types/contexts'
 import { useContext } from 'react'
 
 export const VideoVolume = () => {
-  const { volume, toggleMute, changeVolume } = useContext(
-    VideoContext
-  ) as VideoValues
+  const { ref } = useContext(VideoContext) as VideoValues
+  const { volume, changeVolume, toggleMute } = useVolume(ref)
 
   return (
     <div className='group relative flex w-full justify-end gap-4'>
