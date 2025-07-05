@@ -11,8 +11,8 @@ export const VideoComments: FC<{ count: number }> = ({ count }) => {
       cancelButton={false}
       trigger={<VideoCommentsButton>{formatNumber(count)}</VideoCommentsButton>}
     >
-      {Array.from({ length: 20 }).map(() => (
-        <VideoComment />
+      {Array.from({ length: 20 }).map((_, index) => (
+        <VideoComment key={index} />
       ))}
     </ResponsiveDialog>
   )
