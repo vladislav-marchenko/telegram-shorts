@@ -1,3 +1,4 @@
+import { Empty } from '../Empty'
 import { VideoLikesContent } from './VideoLikesContent'
 import { VideoLikesSkeleton } from './VideoLikesSkeleton'
 import { Error } from '@/components/Error'
@@ -26,7 +27,8 @@ export const VideoLikes: FC<VideoLikesProps> = ({ children, videoId }) => {
       trigger={<button className='video-button pt-0'>{children}</button>}
       cancelButton={false}
     >
-      {isSuccess && <VideoLikesContent data={data} />}
+      {isSuccess && !!data.length && <VideoLikesContent data={data} />}
+      {isSuccess && !data.length && <Empty title='No likes found' />}
       {isLoading && <VideoLikesSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
     </ResponsiveDialog>

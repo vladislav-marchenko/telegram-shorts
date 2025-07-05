@@ -1,6 +1,6 @@
+import { Empty } from '../Empty'
 import { Error } from '../Error'
 import { AccountVideosContent } from './AccountVideosContent'
-import { AccountVideosContentEmpty } from './AccountVideosContentEmpty'
 import { AccountVideosSkeleton } from './AccountVideosSkeleton'
 import { getUserVideos } from '@/services/api'
 import { useInfiniteQuery } from '@tanstack/react-query'
@@ -29,7 +29,7 @@ export const AccountVideos = () => {
       {isSuccess && !!videos.length && (
         <AccountVideosContent data={videos} fetchNextPage={fetchNextPage} />
       )}
-      {isSuccess && !videos.length && <AccountVideosContentEmpty />}
+      {isSuccess && !videos.length && <Empty title='No videos found' />}
       {isLoading && <AccountVideosSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
     </div>
