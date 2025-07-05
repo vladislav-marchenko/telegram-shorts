@@ -1,3 +1,4 @@
+import { VideoSkeleton } from '@/components/Video/VideoSkeleton'
 import { useIsPaused } from '@/hooks/useIsPaused'
 import { useProgress } from '@/hooks/useProgress'
 import { useVideoRatio } from '@/hooks/useVideoRatio'
@@ -7,8 +8,14 @@ import { createContext, useRef, type FC, type ReactNode } from 'react'
 
 export const VideoContext = createContext<VideoValues | null>(null)
 
-export const VideoContextProvider: FC<{ children: ReactNode }> = ({
-  children
+interface VideoContextProdiverProps {
+  children: ReactNode
+  isVisible?: boolean
+}
+
+export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
+  children,
+  isVisible = true
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const video = videoRef.current
@@ -29,6 +36,8 @@ export const VideoContextProvider: FC<{ children: ReactNode }> = ({
     video.currentTime = (video.duration / 100) * value
     setProgress(value)
   }
+
+  if (!isVisible) return <VideoSkeleton />
 
   const value = {
     ref: videoRef,
