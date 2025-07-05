@@ -67,8 +67,16 @@ export const getFeed = async (page: number) => {
   })
 }
 
-export const getUserVideos = async (userId: string) => {
-  return await customFetch<Video[]>({ endpoint: `/video/user/${userId}` })
+export const getUserVideos = async ({
+  userId,
+  page
+}: {
+  userId: string
+  page: number
+}) => {
+  return await customFetch<InfiniteVideos>({
+    endpoint: `/video/user/${userId}?page=${page}`
+  })
 }
 
 export const getVideo = async (videoId: string) => {

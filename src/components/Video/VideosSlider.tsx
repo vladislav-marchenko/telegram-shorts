@@ -1,17 +1,19 @@
-import { VideosSliderItem } from './VideosSliderItems'
+import { VideosSliderItem } from './VideosSliderItem'
 import { useVideosSlider } from '@/hooks/useVideosSlider'
 import type { InfiniteVideos } from '@/types/api'
 import { useMemo, type FC } from 'react'
 
 interface VideosSliderProps {
   data: { pages: InfiniteVideos[] }
-  startIndex?: number
-  fetchNextPage?: () => void
+  fetchNextPage: () => void
 }
+
+// Using URLSearchParams instead of useSearch to avoid unnecessary re-renders when the carousel updates the video index.
+const searchParams = new URLSearchParams(window.location.search)
+const startIndex = parseInt(searchParams.get('index') || '0', 10)
 
 export const VideosSlider: FC<VideosSliderProps> = ({
   data,
-  startIndex,
   fetchNextPage
 }) => {
   const { emblaRef, slidesRef, currentIndex } = useVideosSlider({ startIndex })

@@ -1,23 +1,22 @@
 import { VideosSlider } from './VideosSlider'
 import { getUserVideos } from '@/services/api'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
 
 export const UserVideos = () => {
   const { userId } = useParams({ from: '/video/_layout/user/$userId' })
-
-  // Using URLSearchParams instead of useSearch to avoid unnecessary re-renders when the carousel updates the video index.
-  const searchParams = new URLSearchParams(window.location.search)
-  const index = parseInt(searchParams.get('index') || '0', 10)
-
-  const { data, isSuccess } = useQuery({
+  const { data, isSuccess, fetchNextPage } = useInfiniteQuery({
     queryKey: ['video', 'user', userId],
-    queryFn: () => getUserVideos(userId)
+    queryFn: ({ pageParam }) => getUserVideos({ userId, page: pageParam }),
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.hasMore) return pages.length + 1
+    },
+    initialPageParam: 1
   })
 
   return (
     <div className='h-dvh overflow-hidden'>
-      {isSuccess && <VideosSlider data={data} startIndex={index} />}
+      {isSuccess && <VideosSlider data={data} fetchNextPage={fetchNextPage} />}
     </div>
   )
 }

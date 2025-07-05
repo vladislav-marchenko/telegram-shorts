@@ -6,7 +6,7 @@ import { useEffect, type FC } from 'react'
 interface VideosSliderItemProps extends VideoType {
   isVisible: boolean
   isCurrent: boolean
-  fetchNextPage?: () => void
+  fetchNextPage: () => void
   shouldFetchNextPage?: boolean
 }
 
@@ -18,7 +18,7 @@ export const VideosSliderItem: FC<VideosSliderItemProps> = ({
   ...video
 }) => {
   useEffect(() => {
-    if (shouldFetchNextPage && fetchNextPage) fetchNextPage()
+    if (shouldFetchNextPage) fetchNextPage()
   }, [shouldFetchNextPage])
 
   return (
