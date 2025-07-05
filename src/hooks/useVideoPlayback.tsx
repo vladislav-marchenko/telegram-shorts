@@ -1,20 +1,12 @@
-import {
-  useEffect,
-  type Dispatch,
-  type RefObject,
-  type SetStateAction
-} from 'react'
+import { VideoContext } from '@/contexts/VideoContext'
+import type { VideoValues } from '@/types/contexts'
+import { useContext, useEffect } from 'react'
 
-export const useVideoPlayback = (
-  ref: RefObject<HTMLVideoElement | null>,
-  {
-    isCurrent,
-    setIsManuallyPaused
-  }: {
-    isCurrent: boolean
-    setIsManuallyPaused: Dispatch<SetStateAction<boolean>>
-  }
-) => {
+export const useVideoPlayback = () => {
+  const { ref, isCurrent, setIsManuallyPaused } = useContext(
+    VideoContext
+  ) as VideoValues
+
   useEffect(() => {
     const video = ref.current
     if (!video) return

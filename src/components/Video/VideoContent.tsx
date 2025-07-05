@@ -2,31 +2,32 @@ import { VideoOverlay } from './VideoOverlay'
 import { VideoSkeleton } from './VideoSkeleton'
 import { VideoContext } from '@/contexts/VideoContext'
 import { VolumeContext } from '@/contexts/VolumeContext'
+import { useVideoPlayback } from '@/hooks/useVideoPlayback'
 import { useVideoShortcuts } from '@/hooks/useVideoShortcuts'
 import { cn } from '@/lib/utils'
 import type { Video } from '@/types/api'
 import type { VideoValues, VolumeValues } from '@/types/contexts'
 import { useContext, useState, type FC } from 'react'
 
-interface VideoContentProps extends Video {
-  isCurrent: boolean
-}
-
-export const VideoContent: FC<VideoContentProps> = ({
-  isCurrent,
-  ...props
-}) => {
+export const VideoContent: FC<Video> = (props) => {
   const [isLoaded, setIsLoaded] = useState(false)
-  const { ref, ratio, toggle } = useContext(VideoContext) as VideoValues
+  const { ref, isCurrent, ratio, toggle } = useContext(
+    VideoContext
+  ) as VideoValues
   const { isMuted } = useContext(VolumeContext) as VolumeValues
-  useVideoShortcuts({ enable: isCurrent })
+
+  useVideoPlayback()
+  useVideoShortcuts()
 
   return (
     <div
-      className={cn('relative flex h-dvh w-max items-center', {
-        'max-[1200px]:w-full': ratio >= 1,
-        'max-[720px]:w-full': ratio < 1
-      })}
+      className={cn(
+        'relative flex h-dvh w-max items-center border-y border-neutral-900',
+        {
+          'max-[1200px]:w-full': ratio >= 1,
+          'max-[720px]:w-full': ratio < 1
+        }
+      )}
     >
       {!isLoaded && <VideoSkeleton />}
       <video

@@ -1,21 +1,18 @@
 import { useCallback, useEffect, useRef, useState, type RefObject } from 'react'
 
-type ValueFn = (value: number) => number
-
 export const useProgress = (videoRef: RefObject<HTMLVideoElement | null>) => {
   const [progress, setProgress] = useState(0)
   const requestId = useRef<number | null>(null)
 
   const changeProgress = useCallback(
-    (value: number | ValueFn) => {
+    (value: number) => {
       const video = videoRef.current
       if (!video) return
 
-      let newValue = typeof value === 'number' ? value : value(progress)
-      if (newValue < 0) newValue = 0
-      if (newValue > 100) newValue = 100
+      if (value < 0) value = 0
+      if (value > 100) value = 100
 
-      video.currentTime = (video.duration / 100) * newValue
+      video.currentTime = (video.duration / 100) * value
       setProgress(value)
     },
     [videoRef, setProgress]

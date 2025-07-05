@@ -15,7 +15,7 @@ export const Video: FC<VideoProps> = ({
 }) => {
   return (
     <VideoContextProvider isVisible={isVisible} isCurrent={isCurrent}>
-      <VideoContent {...props} isCurrent={isCurrent} />
+      <VideoContent {...props} />
     </VideoContextProvider>
   )
 }

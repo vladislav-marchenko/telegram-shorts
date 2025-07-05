@@ -43,13 +43,13 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
     }
   }
 
-  useVideoPlayback(videoRef, { isCurrent, setIsManuallyPaused })
-
   const value = {
     ref: videoRef,
+    isCurrent,
     ratio,
     toggle,
-    isManuallyPaused
+    isManuallyPaused,
+    setIsManuallyPaused
   }
 
   if (!isVisible) return <VideoSkeleton />

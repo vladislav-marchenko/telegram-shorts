@@ -4,9 +4,9 @@ import { VideoContext } from '@/contexts/VideoContext'
 import type { VideoValues } from '@/types/contexts'
 import { useContext, useEffect } from 'react'
 
-export const useVideoShortcuts = ({ enable }: { enable: boolean }) => {
-  const { ref, toggle } = useContext(VideoContext) as VideoValues
-  const changeProgress = useProgress(ref)[1]
+export const useVideoShortcuts = () => {
+  const { ref, isCurrent, toggle } = useContext(VideoContext) as VideoValues
+  const [progress, changeProgress] = useProgress(ref)
   const { volume, changeVolume } = useVolume(ref)
 
   const handleKeydown = (event: globalThis.KeyboardEvent) => {
@@ -17,11 +17,11 @@ export const useVideoShortcuts = ({ enable }: { enable: boolean }) => {
         break
       case 'ArrowLeft':
         event.preventDefault()
-        changeProgress((progress) => progress - 10)
+        changeProgress(progress - 10)
         break
       case 'ArrowRight':
         event.preventDefault()
-        changeProgress((progress) => progress + 10)
+        changeProgress(progress + 10)
         break
       case 'ArrowUp':
         event.preventDefault()
@@ -35,7 +35,7 @@ export const useVideoShortcuts = ({ enable }: { enable: boolean }) => {
   }
 
   useEffect(() => {
-    if (!enable) return
+    if (!isCurrent) return
 
     document.addEventListener('keydown', handleKeydown)
     return () => document.removeEventListener('keydown', handleKeydown)
