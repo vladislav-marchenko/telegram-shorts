@@ -5,17 +5,19 @@ import { type FC } from 'react'
 
 interface VideoProps extends VideoType {
   isCurrent?: boolean
-  isVisible: boolean
+  isVisible?: boolean
+  backButton?: boolean
 }
 
 export const Video: FC<VideoProps> = ({
   isCurrent = true,
-  isVisible,
+  isVisible = true,
+  backButton = false,
   ...props
 }) => {
   return (
     <VideoContextProvider isVisible={isVisible} isCurrent={isCurrent}>
-      <VideoContent {...props} />
+      <VideoContent {...props} backButton={backButton} />
     </VideoContextProvider>
   )
 }

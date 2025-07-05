@@ -1,9 +1,9 @@
 import { useObserver } from '@/hooks/useObserver'
 import type { Video } from '@/types/api'
 import { formatNumber } from '@/utils'
-import { Link, useParams } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { Play } from 'lucide-react'
-import { useEffect, useRef, type FC } from 'react'
+import { type FC } from 'react'
 
 interface AccountVideosItemProps extends Video {
   isLast: boolean
@@ -11,21 +11,20 @@ interface AccountVideosItemProps extends Video {
 }
 
 export const AccountVideosItem: FC<AccountVideosItemProps> = ({
+  _id,
   poster,
   title,
   views,
   isLast,
   fetchNextPage
 }) => {
-  const { userId } = useParams({ from: '/user/$userId' })
   const ref = useObserver<HTMLAnchorElement>(fetchNextPage, isLast)
 
   return (
     <Link
       ref={ref}
-      to='/video/user/$userId'
-      params={{ userId }}
-      //search={{ index }}
+      to='/video/$videoId'
+      params={{ videoId: _id }}
       className='group relative aspect-[9/14] overflow-hidden rounded-md bg-neutral-600'
     >
       <img src={poster} className='h-full w-full object-cover' />

@@ -1,3 +1,4 @@
+import { VideoBackButton } from './VideoBackButton'
 import { VideoOverlay } from './VideoOverlay'
 import { VideoSkeleton } from './VideoSkeleton'
 import { VideoContext } from '@/contexts/VideoContext'
@@ -9,7 +10,14 @@ import type { Video } from '@/types/api'
 import type { VideoValues, VolumeValues } from '@/types/contexts'
 import { useContext, useState, type FC } from 'react'
 
-export const VideoContent: FC<Video> = (props) => {
+interface VideoContentProps extends Video {
+  backButton: boolean
+}
+
+export const VideoContent: FC<VideoContentProps> = ({
+  backButton,
+  ...props
+}) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const { ref, isCurrent, ratio, toggle } = useContext(
     VideoContext
@@ -29,6 +37,7 @@ export const VideoContent: FC<Video> = (props) => {
         }
       )}
     >
+      {backButton && <VideoBackButton />}
       {!isLoaded && <VideoSkeleton />}
       <video
         ref={ref}

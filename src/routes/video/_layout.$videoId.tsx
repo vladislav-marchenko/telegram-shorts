@@ -17,8 +17,8 @@ function VideoPage() {
   })
 
   return (
-    <div className='h-dvh overflow-hidden'>
-      {isSuccess && <Video {...data} />}
+    <div className='flex h-dvh justify-center overflow-hidden'>
+      {isSuccess && <Video {...data} backButton />}
       {isLoading && <VideoSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
     </div>
