@@ -27,9 +27,7 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const video = videoRef.current
-
   const [isManuallyPaused, setIsManuallyPaused] = useState(false)
-  const ratio = useVideoRatio(videoRef)
 
   const toggle = () => {
     if (!video) return
@@ -46,7 +44,6 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
   const value = {
     ref: videoRef,
     isCurrent,
-    ratio,
     toggle,
     isManuallyPaused,
     setIsManuallyPaused

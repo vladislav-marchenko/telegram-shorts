@@ -3,7 +3,6 @@ import type { Dispatch, RefObject, SetStateAction } from 'react'
 export interface VideoValues {
   ref: RefObject<HTMLVideoElement | null>
   isCurrent: boolean
-  ratio: number
   toggle: () => void
   isManuallyPaused: boolean
   setIsManuallyPaused: Dispatch<SetStateAction<boolean>>

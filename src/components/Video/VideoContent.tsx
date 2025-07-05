@@ -4,6 +4,7 @@ import { VideoSkeleton } from './VideoSkeleton'
 import { VideoContext } from '@/contexts/VideoContext'
 import { VolumeContext } from '@/contexts/VolumeContext'
 import { useVideoPlayback } from '@/hooks/useVideoPlayback'
+import { useVideoRatio } from '@/hooks/useVideoRatio'
 import { useVideoShortcuts } from '@/hooks/useVideoShortcuts'
 import { cn } from '@/lib/utils'
 import type { Video } from '@/types/api'
@@ -19,10 +20,9 @@ export const VideoContent: FC<VideoContentProps> = ({
   ...props
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
-  const { ref, isCurrent, ratio, toggle } = useContext(
-    VideoContext
-  ) as VideoValues
+  const { ref, isCurrent, toggle } = useContext(VideoContext) as VideoValues
   const { isMuted } = useContext(VolumeContext) as VolumeValues
+  const ratio = useVideoRatio(ref, { enabled: isLoaded })
 
   useVideoPlayback()
   useVideoShortcuts()
