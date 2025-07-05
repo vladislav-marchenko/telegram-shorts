@@ -22,19 +22,12 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
 
   const isPaused = useIsPaused(videoRef)
   const ratio = useVideoRatio(videoRef)
-  const [progress, setProgress] = useProgress(videoRef)
+  const [progress, changeProgress] = useProgress(videoRef)
   const { volume, changeVolume, toggleMute } = useVolume(videoRef)
 
   const toggle = () => {
     if (!video) return
     video.paused ? video.play() : video.pause()
-  }
-
-  const changeProgress = (value: number) => {
-    if (!video) return
-
-    video.currentTime = (video.duration / 100) * value
-    setProgress(value)
   }
 
   if (!isVisible) return <VideoSkeleton />

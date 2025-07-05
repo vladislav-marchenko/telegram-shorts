@@ -4,6 +4,14 @@ export const useProgress = (videoRef: RefObject<HTMLVideoElement | null>) => {
   const [progress, setProgress] = useState(0)
   const requestId = useRef<number | null>(null)
 
+  const changeProgress = (value: number) => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.currentTime = (video.duration / 100) * value
+    setProgress(value)
+  }
+
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
@@ -31,5 +39,5 @@ export const useProgress = (videoRef: RefObject<HTMLVideoElement | null>) => {
     }
   }, [videoRef])
 
-  return [progress, setProgress] as const
+  return [progress, changeProgress] as const
 }
