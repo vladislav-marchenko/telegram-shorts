@@ -5,7 +5,7 @@ import { toast } from 'sonner'
 
 type VideoData = { pages: InfiniteVideos[] }
 
-export const useLike = (videoId: string) => {
+export const useLikeVideo = (videoId: string) => {
   const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationFn: likeVideo,
@@ -26,6 +26,9 @@ export const useLike = (videoId: string) => {
       }
 
       return { previousVideoValue, previousFeedValue }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['likes', videoId] })
     },
     onError: (error, _, context) => {
       toast.error(error.message ?? 'Something went wrong')

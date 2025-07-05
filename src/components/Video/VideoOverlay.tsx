@@ -1,5 +1,5 @@
 import { VideoComments } from './VideoComments'
-import { VideoLike } from './VideoLike'
+import { VideoLikeButton } from './VideoLikeButton'
 import { VideoOptions } from './VideoOptions'
 import { VideoProgress } from './VideoProgress'
 import { VideoVolume } from './VideoVolume'
@@ -18,7 +18,7 @@ export const VideoOverlay: FC<Video> = ({ _id, likesCount, commentsCount }) => {
         <button className='video-button p-2'>
           <div className='h-12 w-12 rounded-full bg-gray-600' />
         </button>
-        <VideoLike count={likesCount} videoId={_id} />
+        <VideoLikeButton count={likesCount} videoId={_id} />
         <VideoComments count={commentsCount} />
         <VideoOptions />
         <VideoVolume />

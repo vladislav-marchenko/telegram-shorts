@@ -32,3 +32,9 @@ export interface InfiniteVideos {
   hasPrevious?: boolean
   hasNext: boolean
 }
+
+export interface Like {
+  _id: string
+  videoId: string
+  user: Omit<User, 'telegramId' | 'createdAt'>
+}
