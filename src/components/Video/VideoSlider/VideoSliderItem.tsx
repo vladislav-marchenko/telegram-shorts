@@ -1,4 +1,4 @@
-import { VideoContent } from './VideoContent'
+import { VideoContent } from '@/components/Video/VideoContent'
 import { VideoContextProvider } from '@/contexts/VideoContext'
 import { type Video as VideoType } from '@/types/api'
 import { useEffect, type FC } from 'react'
@@ -10,7 +10,7 @@ interface VideosSliderItemProps extends VideoType {
   shouldFetchNextPage?: boolean
 }
 
-export const VideosSliderItem: FC<VideosSliderItemProps> = ({
+export const VideoSliderItem: FC<VideosSliderItemProps> = ({
   isVisible,
   isCurrent,
   fetchNextPage,

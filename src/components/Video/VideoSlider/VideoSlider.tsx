@@ -1,4 +1,4 @@
-import { VideosSliderItem } from './VideosSliderItem'
+import { VideoSliderItem } from './VideoSliderItem'
 import { useVideosSlider } from '@/hooks/useVideosSlider'
 import type { InfiniteVideos } from '@/types/api'
 import { useMemo, type FC } from 'react'
@@ -12,10 +12,7 @@ interface VideosSliderProps {
 const searchParams = new URLSearchParams(window.location.search)
 const startIndex = parseInt(searchParams.get('index') || '0', 10)
 
-export const VideosSlider: FC<VideosSliderProps> = ({
-  data,
-  fetchNextPage
-}) => {
+export const VideoSlider: FC<VideosSliderProps> = ({ data, fetchNextPage }) => {
   const { emblaRef, slidesRef, currentIndex } = useVideosSlider({ startIndex })
   const videos = useMemo(() => {
     return data.pages.flatMap(({ videos }) => videos)
@@ -30,7 +27,7 @@ export const VideosSlider: FC<VideosSliderProps> = ({
           const shouldFetchNextPage = isVisible && isLast // isVisible && isLast guarantee that the user has scrolled to the end
 
           return (
-            <VideosSliderItem
+            <VideoSliderItem
               key={video._id}
               isVisible={isVisible}
               isCurrent={currentIndex === index}

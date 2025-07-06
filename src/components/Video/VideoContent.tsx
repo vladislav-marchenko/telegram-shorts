@@ -12,11 +12,11 @@ import type { VideoValues, VolumeValues } from '@/types/contexts'
 import { useContext, useState, type FC } from 'react'
 
 interface VideoContentProps extends Video {
-  backButton: boolean
+  backButton?: boolean
 }
 
 export const VideoContent: FC<VideoContentProps> = ({
-  backButton,
+  backButton = false,
   ...props
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)

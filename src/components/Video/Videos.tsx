@@ -1,5 +1,5 @@
 import { VideoSkeleton } from './VideoSkeleton'
-import { VideosSlider } from './VideosSlider'
+import { VideoSlider } from './VideoSlider/VideoSlider'
 import { Error } from '@/components/Error'
 import { getFeed } from '@/services/api'
 import { useInfiniteQuery } from '@tanstack/react-query'
@@ -17,7 +17,7 @@ export const Videos = () => {
 
   return (
     <div className='h-dvh overflow-hidden'>
-      {isSuccess && <VideosSlider data={data} fetchNextPage={fetchNextPage} />}
+      {isSuccess && <VideoSlider data={data} fetchNextPage={fetchNextPage} />}
       {isLoading && <VideoSkeleton />}
       {isError && <Error error={error} refetch={refetch} />}
     </div>

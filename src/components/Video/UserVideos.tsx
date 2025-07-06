@@ -1,4 +1,4 @@
-import { VideosSlider } from './VideosSlider'
+import { VideoSlider } from './VideoSlider/VideoSlider'
 import { getUserVideos } from '@/services/api'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
@@ -16,7 +16,7 @@ export const UserVideos = () => {
 
   return (
     <div className='h-dvh overflow-hidden'>
-      {isSuccess && <VideosSlider data={data} fetchNextPage={fetchNextPage} />}
+      {isSuccess && <VideoSlider data={data} fetchNextPage={fetchNextPage} />}
     </div>
   )
 }

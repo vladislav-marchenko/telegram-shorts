@@ -1,6 +1,6 @@
-import { Empty } from '../Empty'
 import { VideoLikesContent } from './VideoLikesContent'
 import { VideoLikesSkeleton } from './VideoLikesSkeleton'
+import { Empty } from '@/components/Empty'
 import { Error } from '@/components/Error'
 import { ResponsiveDialog } from '@/components/ResponsiveDialog'
 import { getVideoLikes } from '@/services/api'

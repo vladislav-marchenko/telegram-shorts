@@ -1,6 +1,6 @@
-import { ResponsiveDialog } from '../ResponsiveDialog'
 import { VideoComment } from './VideoComment'
 import { VideoCommentsButton } from './VideoCommentsButton'
+import { ResponsiveDialog } from '@/components/ResponsiveDialog'
 import { formatNumber } from '@/utils'
 import type { FC } from 'react'
 
