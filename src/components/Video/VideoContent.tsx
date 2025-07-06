@@ -3,6 +3,7 @@ import { VideoOverlay } from './VideoOverlay'
 import { VideoSkeleton } from './VideoSkeleton'
 import { VideoContext } from '@/contexts/VideoContext'
 import { VolumeContext } from '@/contexts/VolumeContext'
+import { useTrackView } from '@/hooks/useTrackView'
 import { useVideoPlayback } from '@/hooks/useVideoPlayback'
 import { useVideoRatio } from '@/hooks/useVideoRatio'
 import { useVideoShortcuts } from '@/hooks/useVideoShortcuts'
@@ -24,6 +25,7 @@ export const VideoContent: FC<VideoContentProps> = ({
   const { isMuted } = useContext(VolumeContext) as VolumeValues
   const ratio = useVideoRatio(ref, { enabled: isLoaded })
 
+  useTrackView({ videoId: props._id, isCurrent })
   useVideoPlayback()
   useVideoShortcuts()
 

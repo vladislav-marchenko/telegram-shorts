@@ -1,7 +1,6 @@
 import type {
   InfiniteLikes,
   InfiniteVideos,
-  Like,
   Methods,
   User,
   Video
@@ -127,5 +126,12 @@ export const getVideoLikes = async ({
 export const getLikeStatus = async (videoId: string) => {
   return await customFetch<{ isLiked: boolean }>({
     endpoint: `/like/status/${videoId}`
+  })
+}
+
+export const trackView = async (videoId: string) => {
+  return await customFetch({
+    endpoint: `/view/${videoId}`,
+    method: 'POST'
   })
 }
