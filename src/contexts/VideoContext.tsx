@@ -16,10 +16,10 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
   isCurrent
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  const video = videoRef.current
   const [isManuallyPaused, setIsManuallyPaused] = useState(false)
 
   const toggle = () => {
+    const video = videoRef.current
     if (!video) return
 
     if (video.paused) {
