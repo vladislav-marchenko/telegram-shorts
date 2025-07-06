@@ -1,12 +1,27 @@
+import { useObserver } from '@/hooks/useObserver'
 import type { User } from '@/types/api'
 import { Link } from '@tanstack/react-router'
 import type { FC } from 'react'
 
-export const VideoLikesContentItem: FC<
-  Omit<User, 'telegramId' | 'createdAt'>
-> = ({ _id, username, displayName, photoURL }) => {
+interface VideoLikesContentItemProps
+  extends Omit<User, 'telegramId' | 'createdAt'> {
+  fetchNextPage: () => void
+  isLast: boolean
+}
+
+export const VideoLikesContentItem: FC<VideoLikesContentItemProps> = ({
+  _id,
+  username,
+  displayName,
+  photoURL,
+  fetchNextPage,
+  isLast
+}) => {
+  const ref = useObserver<HTMLAnchorElement>(fetchNextPage, isLast)
+
   return (
     <Link
+      ref={ref}
       to='/user/$userId'
       params={{ userId: _id }}
       className='hover:bg-accent active:bg-acent flex gap-2 rounded-md p-4 transition-colors duration-200'

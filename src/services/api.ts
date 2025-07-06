@@ -1,4 +1,11 @@
-import type { InfiniteVideos, Like, Methods, User, Video } from '@/types/api'
+import type {
+  InfiniteLikes,
+  InfiniteVideos,
+  Like,
+  Methods,
+  User,
+  Video
+} from '@/types/api'
 
 const API_URL = 'http://localhost:8000'
 console.log(window.Telegram.WebApp.initData)
@@ -105,9 +112,15 @@ export const toggleVideoLike = async (videoId: string) => {
   })
 }
 
-export const getVideoLikes = async (videoId: string) => {
-  return await customFetch<Like[]>({
-    endpoint: `/like/${videoId}`
+export const getVideoLikes = async ({
+  videoId,
+  page = 1
+}: {
+  videoId: string
+  page: number
+}) => {
+  return await customFetch<InfiniteLikes>({
+    endpoint: `/like/${videoId}?page=${page}`
   })
 }
 
