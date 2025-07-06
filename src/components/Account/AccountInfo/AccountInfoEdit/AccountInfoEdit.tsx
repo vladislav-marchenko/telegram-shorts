@@ -1,6 +1,6 @@
-import { ResponsiveDialog } from '../ResponsiveDialog'
-import { Button } from '../ui/button'
 import { AccountInfoEditForm } from './AccountInfoEditForm'
+import { ResponsiveDialog } from '@/components/ResponsiveDialog'
+import { Button } from '@/components/ui/button'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'

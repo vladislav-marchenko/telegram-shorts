@@ -1,5 +1,5 @@
-import { AccountInfo } from '@/components/Account/AccountInfo'
-import { AccountVideos } from '@/components/Account/AccountVideos'
+import { AccountInfo } from '@/components/Account/AccountInfo/AccountInfo'
+import { AccountVideos } from '@/components/Account/AccountVideos/AccountVideos'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute, useParams } from '@tanstack/react-router'

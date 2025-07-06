@@ -1,4 +1,4 @@
-import { AccountInfoAvatarSkeleton } from './AccountInfoAvatarSkeleton'
+import { AccountInfoAvatarSkeleton } from './AccountInfoAvatar/AccountInfoAvatarSkeleton'
 
 export const AccountInfoSkeleton = () => {
   return (

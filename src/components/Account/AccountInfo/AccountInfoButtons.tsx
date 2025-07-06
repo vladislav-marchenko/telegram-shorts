@@ -1,4 +1,4 @@
-import { AccountInfoEdit } from './AccountInfoEdit'
+import { AccountInfoEdit } from './AccountInfoEdit/AccountInfoEdit'
 import { Upload } from '@/components/Upload/Upload'
 import { Button } from '@/components/ui/button'
 import { getUser } from '@/services/api'

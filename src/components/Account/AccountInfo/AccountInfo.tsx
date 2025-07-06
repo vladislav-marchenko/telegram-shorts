@@ -1,7 +1,7 @@
-import { Error } from '../Error'
 import { AccountInfoButtons } from './AccountInfoButtons'
 import { AccountInfoData } from './AccountInfoData'
 import { AccountInfoSkeleton } from './AccountInfoSkeleton'
+import { Error } from '@/components/Error'
 import { getUser } from '@/services/api'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'

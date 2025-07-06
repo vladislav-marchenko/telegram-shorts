@@ -1,4 +1,4 @@
-import { AccountInfoAvatar } from './AccountInfoAvatar'
+import { AccountInfoAvatar } from './AccountInfoAvatar/AccountInfoAvatar'
 import { AccountInfoUsername } from './AccountInfoUsername'
 import type { User } from '@/types/api'
 import { type FC } from 'react'
