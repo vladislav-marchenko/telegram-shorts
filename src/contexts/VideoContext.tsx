@@ -1,16 +1,6 @@
 import { VideoSkeleton } from '@/components/Video/VideoSkeleton'
-import { useIsPaused } from '@/hooks/useIsPaused'
-import { useVideoPlayback } from '@/hooks/useVideoPlayback'
-import { useVideoRatio } from '@/hooks/useVideoRatio'
 import { type VideoValues } from '@/types/contexts'
-import {
-  createContext,
-  useEffect,
-  useRef,
-  useState,
-  type FC,
-  type ReactNode
-} from 'react'
+import { createContext, useRef, useState, type FC, type ReactNode } from 'react'
 
 export const VideoContext = createContext<VideoValues | null>(null)
 
