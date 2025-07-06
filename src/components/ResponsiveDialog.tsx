@@ -68,7 +68,7 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className='min-h-1/2'>
         <DrawerHeader className='text-left'>
           {title && <DrawerTitle>{title}</DrawerTitle>}
           {description && <DrawerDescription>{description}</DrawerDescription>}
