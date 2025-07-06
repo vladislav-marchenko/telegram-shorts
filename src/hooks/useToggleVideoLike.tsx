@@ -1,27 +1,27 @@
-import { likeVideo } from '@/services/api'
+import { getLikeStatus, toggleVideoLike } from '@/services/api'
 import type { InfiniteVideos, Video } from '@/types/api'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 type VideoData = { pages: InfiniteVideos[] }
 
-export const useLikeVideo = (videoId: string) => {
+export const useToggleVideoLike = (videoId: string) => {
   const queryClient = useQueryClient()
-  const { mutate } = useMutation({
-    mutationFn: likeVideo,
+  const { mutate, isPending } = useMutation({
+    mutationFn: toggleVideoLike,
     onMutate: async () => {
       const previousVideoValue = queryClient.getQueryData(['video', videoId])
       const previousFeedValue = queryClient.getQueryData(['video', 'feed'])
 
       if (previousVideoValue) {
         queryClient.setQueryData(['video', videoId], (video: Video) =>
-          incrementVideoLikes(video)
+          updateVideoLikes(video)
         )
       }
 
       if (previousFeedValue) {
         queryClient.setQueryData(['video', 'feed'], (videoData: VideoData) =>
-          updateFeedWithIncrementedLikes(videoData)
+          updateFeedWithUpdatedLikes(videoData)
         )
       }
 
@@ -37,17 +37,31 @@ export const useLikeVideo = (videoId: string) => {
     }
   })
 
-  function incrementVideoLikes(video: Video): Video {
+  const { data, isSuccess } = useQuery({
+    queryKey: ['like', 'status', videoId],
+    queryFn: () => getLikeStatus(videoId)
+  })
+
+  function updateVideoLikes(video: Video): Video {
+    if (!isSuccess) return video
+
+    queryClient.setQueryData(['like', 'status', videoId], {
+      isLiked: !data.isLiked
+    })
+
+    if (data.isLiked) {
+      return { ...video, likesCount: video.likesCount - 1 }
+    }
     return { ...video, likesCount: video.likesCount + 1 }
   }
 
   function findVideoAndIncrementLikes(videos: Video[]) {
     return videos.map((video) =>
-      video._id === videoId ? incrementVideoLikes(video) : video
+      video._id === videoId ? updateVideoLikes(video) : video
     )
   }
 
-  function updateFeedWithIncrementedLikes(videoData: VideoData) {
+  function updateFeedWithUpdatedLikes(videoData: VideoData) {
     return {
       ...videoData,
       pages: mapPagesWithUpdatedVideos(videoData.pages)
@@ -61,5 +75,5 @@ export const useLikeVideo = (videoId: string) => {
     }))
   }
 
-  return () => mutate(videoId)
+  return { toggleLike: () => mutate(videoId), isPending }
 }

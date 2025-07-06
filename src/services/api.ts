@@ -4,7 +4,7 @@ const API_URL = 'http://localhost:8000'
 console.log(window.Telegram.WebApp.initData)
 const initData = import.meta.env.VITE_INIT_DATA_MOCK // window.Telegram.WebApp.initData
 
-export const customFetch = async <Data extends object>({
+export const customFetch = async <Data extends object = {}>({
   endpoint,
   method = 'GET',
   body,
@@ -25,10 +25,17 @@ export const customFetch = async <Data extends object>({
       ...(body && { body })
     })
 
-    const response_data: Data | Error = await response.json()
+    if (response.status === 204 && method !== 'GET') {
+      return {} as Data
+    }
 
-    if (!response.ok && 'message' in response_data) {
-      throw new Error(response_data.message ?? 'Something went wrong')
+    const response_data: Data | Error = await response.json()
+    if (!response.ok) {
+      throw new Error(
+        'message' in response_data
+          ? response_data?.message
+          : 'Something went wrong'
+      )
     }
 
     return response_data as Data
@@ -91,9 +98,9 @@ export const getVideo = async (videoId: string) => {
   return await customFetch<Video>({ endpoint: `/video/${videoId}` })
 }
 
-export const likeVideo = async (videoId: string) => {
-  return await customFetch<Video>({
-    endpoint: `/like/${videoId}`,
+export const toggleVideoLike = async (videoId: string) => {
+  return await customFetch({
+    endpoint: `/like/toggle/${videoId}`,
     method: 'POST'
   })
 }
@@ -101,5 +108,11 @@ export const likeVideo = async (videoId: string) => {
 export const getVideoLikes = async (videoId: string) => {
   return await customFetch<Like[]>({
     endpoint: `/like/${videoId}`
+  })
+}
+
+export const getLikeStatus = async (videoId: string) => {
+  return await customFetch<{ isLiked: boolean }>({
+    endpoint: `/like/status/${videoId}`
   })
 }
