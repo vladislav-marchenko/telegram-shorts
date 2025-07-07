@@ -16,7 +16,8 @@ export const VideoCommentContent: FC<VideoCommentContentProps> = ({
   isLast,
   isMenuOpen,
   text,
-  user
+  user,
+  ...props
 }) => {
   const ref = useObserver<HTMLDivElement>(fetchNextPage, isLast)
 
@@ -30,6 +31,7 @@ export const VideoCommentContent: FC<VideoCommentContentProps> = ({
           'hover:bg-accent active:bg-accent': !isMenuOpen
         }
       )}
+      {...props}
     >
       <img
         src={user.photoURL}
