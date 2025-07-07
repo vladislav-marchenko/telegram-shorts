@@ -14,18 +14,16 @@ export const VideoCommentsContent: FC<VideoCommentsContentProps> = ({
 }) => {
   const comments = data.pages.flatMap(({ comments }) => comments)
 
-  if (!comments.length) return <Empty title='No comments found' />
+  if (!comments.length) {
+    return <Empty title='No comments found' className='flex-auto' />
+  }
 
-  return (
-    <div className='flex-auto overflow-y-auto px-2'>
-      {comments.map((comment, index) => (
-        <VideoComment
-          key={index}
-          fetchNextPage={fetchNextPage}
-          isLast={index === comments.length - 1}
-          {...comment}
-        />
-      ))}
-    </div>
-  )
+  return comments.map((comment, index) => (
+    <VideoComment
+      key={index}
+      fetchNextPage={fetchNextPage}
+      isLast={index === comments.length - 1}
+      {...comment}
+    />
+  ))
 }
