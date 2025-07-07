@@ -37,9 +37,9 @@ export const VideoComment: FC<VideoCommentProps> = ({
         <ContextMenuItem onClick={() => setReplyingTo(props)}>
           Reply
         </ContextMenuItem>
-        <ContextMenuItem>Billing</ContextMenuItem>
-        <ContextMenuItem>Team</ContextMenuItem>
-        <ContextMenuItem>Subscription</ContextMenuItem>
+        <ContextMenuItem>Edit</ContextMenuItem>
+        <ContextMenuItem variant='destructive'>Delete</ContextMenuItem>
+        <ContextMenuItem variant='destructive'>Report</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   )
