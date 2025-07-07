@@ -17,6 +17,7 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer'
+import { cn } from '@/lib/utils'
 import { useState, type FC, type ReactNode } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
@@ -27,9 +28,10 @@ interface ResponsiveDialogProps {
     open: boolean
     onOpenChange: (value: boolean) => void
   }
-  trigger: ReactNode
-  cancelButton?: boolean
   children: ReactNode
+  trigger: ReactNode
+  className?: string
+  cancelButton?: boolean
 }
 
 export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
@@ -38,7 +40,8 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
   state,
   trigger,
   children,
-  cancelButton = true
+  cancelButton = true,
+  className
 }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const [isOpen, setIsOpen] = useState(false)
@@ -57,7 +60,9 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
               <DialogDescription>{description}</DialogDescription>
             )}
           </DialogHeader>
-          <div className='-mx-6 max-h-[70vh] overflow-y-auto px-6'>
+          <div
+            className={cn('-mx-6 max-h-[70vh] overflow-y-auto px-6', className)}
+          >
             {children}
           </div>
         </DialogContent>
@@ -73,7 +78,7 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
           {title && <DrawerTitle>{title}</DrawerTitle>}
           {description && <DrawerDescription>{description}</DrawerDescription>}
         </DrawerHeader>
-        <div className='overflow-y-auto'>
+        <div className={cn('overflow-y-auto', className)}>
           {children}
           {cancelButton && (
             <DrawerFooter className='pt-2'>

@@ -16,7 +16,7 @@ export const VideoComment = () => {
       <ContextMenuTrigger asChild>
         <div
           className={cn(
-            'flex gap-2 rounded-md p-4 transition-colors duration-200',
+            'flex gap-2 rounded-md px-2 py-3 transition-colors duration-200 md:p-4',
             {
               'bg-accent': isMenuOpen,
               'hover:bg-accent active:bg-accent': !isMenuOpen

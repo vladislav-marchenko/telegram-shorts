@@ -19,7 +19,7 @@ export const VideoOverlay: FC<Video> = ({ _id, likesCount, commentsCount }) => {
           <div className='h-12 w-12 rounded-full bg-gray-600' />
         </button>
         <VideoLikeButton count={likesCount} videoId={_id} />
-        <VideoComments count={commentsCount} />
+        <VideoComments count={commentsCount} videoId={_id} />
         <VideoOptions />
         <VideoVolume />
       </div>

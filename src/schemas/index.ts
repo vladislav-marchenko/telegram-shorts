@@ -33,3 +33,9 @@ export const uploadVideoSchema = z.object({
       message: 'File size must be less than 100MB.'
     })
 })
+
+export const createCommentSchema = z.object({
+  comment: z.string().min(4, {
+    message: 'Comment must be at least 4 characters.'
+  })
+})
