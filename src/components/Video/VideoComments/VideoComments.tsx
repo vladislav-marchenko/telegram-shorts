@@ -44,13 +44,15 @@ export const VideoComments: FC<VideoCommentsProps> = ({ count, videoId }) => {
       onOpenChange={onOpenChange}
       cancelButton={false}
       trigger={<VideoCommentsButton>{formatNumber(count)}</VideoCommentsButton>}
-      className='flex h-full flex-col overflow-hidden px-0'
+      className='flex h-full flex-auto flex-col overflow-hidden px-0'
     >
-      {isSuccess && (
-        <VideoCommentsContent data={data} fetchNextPage={fetchNextPage} />
-      )}
-      {isLoading && <VideoCommentsSkeleton />}
-      {isError && <Error error={error} refetch={refetch} />}
+      <div className='flex-auto py-2'>
+        {isSuccess && (
+          <VideoCommentsContent data={data} fetchNextPage={fetchNextPage} />
+        )}
+        {isLoading && <VideoCommentsSkeleton />}
+        {isError && <Error error={error} refetch={refetch} />}
+      </div>
       <VideoCommentsForm videoId={videoId} />
     </ResponsiveDialog>
   )
