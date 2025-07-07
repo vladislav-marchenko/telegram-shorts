@@ -35,7 +35,8 @@ export const uploadVideoSchema = z.object({
 })
 
 export const createCommentSchema = z.object({
-  comment: z.string().min(4, {
-    message: 'Comment must be at least 4 characters.'
-  })
+  text: z
+    .string()
+    .min(4, { message: 'Comment must be at least 4 characters.' })
+    .max(350, { message: 'Comment must be less than 350 characters.' })
 })

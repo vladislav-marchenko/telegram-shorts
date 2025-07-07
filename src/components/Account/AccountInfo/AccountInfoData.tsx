@@ -8,7 +8,7 @@ export const AccountInfoData: FC<{ data: User }> = ({ data }) => {
     <>
       <AccountInfoAvatar url={data.photoURL} alt={data.displayName.charAt(0)} />
       <div className='flex flex-col items-center'>
-        <h1 className='text-center text-2xl font-medium text-white'>
+        <h1 className='max-w-lg truncate text-center text-2xl font-medium text-white'>
           {data.displayName}
         </h1>
         <AccountInfoUsername username={data.username} />

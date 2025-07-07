@@ -1,4 +1,5 @@
 import type {
+  InfiniteComments,
   InfiniteLikes,
   InfiniteVideos,
   Methods,
@@ -133,5 +134,32 @@ export const trackView = async (videoId: string) => {
   return await customFetch({
     endpoint: `/view/${videoId}`,
     method: 'POST'
+  })
+}
+
+export const createComment = async ({
+  videoId,
+  text
+}: {
+  videoId: string
+  text: string
+}) => {
+  return await customFetch({
+    endpoint: `/comment/${videoId}`,
+    method: 'POST',
+    body: JSON.stringify({ text }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+}
+
+export const getVideoComments = async ({
+  videoId,
+  page = 1
+}: {
+  videoId: string
+  page: number
+}) => {
+  return await customFetch<InfiniteComments>({
+    endpoint: `/comment/${videoId}?page=${page}`
   })
 }

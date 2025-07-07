@@ -43,3 +43,17 @@ export interface InfiniteLikes {
   likes: Like[]
   hasNext: boolean
 }
+
+export interface Comment {
+  _id: string
+  videoId: string
+  parentId?: string
+  user: Omit<User, 'telegramId' | 'createdAt'>
+  text: string
+  createdAt: string
+}
+
+export interface InfiniteComments {
+  comments: Comment[]
+  hasNext: boolean
+}

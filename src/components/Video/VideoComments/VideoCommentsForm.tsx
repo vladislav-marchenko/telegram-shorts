@@ -2,28 +2,40 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { createCommentSchema } from '@/schemas'
+import { createComment } from '@/services/api'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SendHorizonal } from 'lucide-react'
 import type { FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import type { z } from 'zod'
 
 export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
   const form = useForm<z.infer<typeof createCommentSchema>>({
     resolver: zodResolver(createCommentSchema),
-    defaultValues: { comment: '' }
+    defaultValues: { text: '' }
+  })
+
+  const queryClient = useQueryClient()
+  const { mutate, isPending } = useMutation({
+    mutationFn: createComment,
+    onSuccess: () => {
+      form.reset()
+      queryClient.invalidateQueries({ queryKey: ['comment', videoId] })
+      toast.success('Comment has been successfully created')
+    },
+    onError: (error) => toast.error(error.message ?? 'Something went wrong')
   })
 
   const onSubmit = (values: z.infer<typeof createCommentSchema>) => {
-    console.log(values)
+    mutate({ videoId, text: values.text })
   }
 
   return (
@@ -35,7 +47,7 @@ export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
         <div className='flex gap-2'>
           <FormField
             control={form.control}
-            name='comment'
+            name='text'
             render={({ field }) => (
               <FormItem className='w-full'>
                 <FormControl>
@@ -49,7 +61,7 @@ export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
               </FormItem>
             )}
           />
-          <Button type='submit' size='icon'>
+          <Button type='submit' isLoading={isPending} size='icon'>
             <SendHorizonal />
           </Button>
         </div>

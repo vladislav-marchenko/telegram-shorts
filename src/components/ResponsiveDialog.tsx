@@ -61,7 +61,10 @@ export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
             )}
           </DialogHeader>
           <div
-            className={cn('-mx-6 max-h-[70vh] overflow-y-auto px-6', className)}
+            className={cn(
+              '-mx-6 max-h-[70vh] overflow-x-hidden overflow-y-auto px-6',
+              className
+            )}
           >
             {children}
           </div>
