@@ -13,7 +13,7 @@ export const VideoCommentsFormReply = () => {
   return (
     <div className='flex h-11 flex-auto overflow-hidden rounded-md bg-neutral-900'>
       <div className='h-full w-0.5 shrink-0 bg-white' />
-      <div className='flex w-full flex-auto px-2 py-1'>
+      <div className='flex w-full flex-auto justify-between px-2 py-1'>
         <div className='flex flex-col overflow-hidden'>
           <h6 className='truncate text-xs font-bold'>
             Reply to {replyingTo.user.displayName}
