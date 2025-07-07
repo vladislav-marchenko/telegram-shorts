@@ -1,3 +1,4 @@
+import { VideoCommentsFormReply } from './VideoCommentsFormReply'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -12,7 +13,7 @@ import { createComment } from '@/services/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SendHorizonal } from 'lucide-react'
-import type { FC } from 'react'
+import { type FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { z } from 'zod'
@@ -42,8 +43,9 @@ export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='border-t border-neutral-800 p-4 md:p-6 md:pb-0'
+        className='flex flex-col gap-2 border-t border-neutral-800 p-4 md:p-6 md:pb-0'
       >
+        <VideoCommentsFormReply />
         <div className='flex gap-2'>
           <FormField
             control={form.control}

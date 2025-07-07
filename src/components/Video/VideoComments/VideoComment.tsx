@@ -1,13 +1,14 @@
 import { VideoCommentContent } from './VideoCommentContent'
-import { VideoCommentsContent } from './VideoCommentsContent'
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger
 } from '@/components/ui/context-menu'
+import { CommentsContext } from '@/contexts/CommentsContext'
 import type { Comment } from '@/types/api'
-import { useState, type FC } from 'react'
+import type { CommentsValues } from '@/types/contexts'
+import { useContext, useState, type FC } from 'react'
 
 interface VideoCommentProps extends Comment {
   fetchNextPage: () => void
@@ -20,6 +21,7 @@ export const VideoComment: FC<VideoCommentProps> = ({
   ...props
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { setReplyingTo } = useContext(CommentsContext) as CommentsValues
 
   return (
     <ContextMenu onOpenChange={setIsMenuOpen}>
@@ -32,7 +34,9 @@ export const VideoComment: FC<VideoCommentProps> = ({
         />
       </ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuItem>Profile</ContextMenuItem>
+        <ContextMenuItem onClick={() => setReplyingTo(props)}>
+          Reply
+        </ContextMenuItem>
         <ContextMenuItem>Billing</ContextMenuItem>
         <ContextMenuItem>Team</ContextMenuItem>
         <ContextMenuItem>Subscription</ContextMenuItem>

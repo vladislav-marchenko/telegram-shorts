@@ -5,6 +5,7 @@ import { VideoCommentsForm } from './VideoCommentsForm'
 import { VideoCommentsSkeleton } from './VideoCommentsSkeleton'
 import { Error } from '@/components/Error'
 import { ResponsiveDialog } from '@/components/ResponsiveDialog'
+import { CommentsContextProvider } from '@/contexts/CommentsContext'
 import { VideoContext } from '@/contexts/VideoContext'
 import { getVideoComments } from '@/services/api'
 import type { VideoValues } from '@/types/contexts'
@@ -46,16 +47,18 @@ export const VideoComments: FC<VideoCommentsProps> = ({ count, videoId }) => {
       trigger={<VideoCommentsButton>{formatNumber(count)}</VideoCommentsButton>}
       className='flex h-full flex-auto flex-col overflow-hidden px-0'
     >
-      <div className='flex flex-auto flex-col overflow-y-auto p-2'>
-        {isSuccess && (
-          <VideoCommentsContent data={data} fetchNextPage={fetchNextPage} />
-        )}
-        {isLoading && <VideoCommentsSkeleton />}
-        {isError && (
-          <Error error={error} refetch={refetch} className='flex-auto' />
-        )}
-      </div>
-      <VideoCommentsForm videoId={videoId} />
+      <CommentsContextProvider>
+        <div className='flex flex-auto flex-col overflow-y-auto p-2'>
+          {isSuccess && (
+            <VideoCommentsContent data={data} fetchNextPage={fetchNextPage} />
+          )}
+          {isLoading && <VideoCommentsSkeleton />}
+          {isError && (
+            <Error error={error} refetch={refetch} className='flex-auto' />
+          )}
+        </div>
+        <VideoCommentsForm videoId={videoId} />
+      </CommentsContextProvider>
     </ResponsiveDialog>
   )
 }

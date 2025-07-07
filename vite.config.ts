@@ -16,7 +16,7 @@ export default defineConfig({
     environment: 'jsdom'
   },
   server: {
-    allowedHosts: ['empty-weeks-feel.loca.lt']
+    allowedHosts: ['old-garlics-drive.loca.lt']
   },
   resolve: {
     alias: {

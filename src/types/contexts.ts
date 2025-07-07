@@ -1,3 +1,4 @@
+import type { Comment } from './api'
 import type { Dispatch, RefObject, SetStateAction } from 'react'
 
 export interface VideoValues {
@@ -15,4 +16,9 @@ export interface VolumeValues {
   isMuted: boolean
   toggleMute: () => void
   changeVolume: (value: number) => void
+}
+
+export interface CommentsValues {
+  replyingTo: Comment | null
+  setReplyingTo: Dispatch<SetStateAction<Comment | null>>
 }
