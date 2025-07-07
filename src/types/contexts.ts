@@ -6,6 +6,8 @@ export interface VideoValues {
   toggle: () => void
   isManuallyPaused: boolean
   setIsManuallyPaused: Dispatch<SetStateAction<boolean>>
+  isShortcutsDisabled: boolean
+  setIsShortcutsDisabled: Dispatch<SetStateAction<boolean>>
 }
 
 export interface VolumeValues {

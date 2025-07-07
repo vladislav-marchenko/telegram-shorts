@@ -4,11 +4,15 @@ import type { VideoValues } from '@/types/contexts'
 import { useContext, useEffect } from 'react'
 
 export const useVideoShortcuts = () => {
-  const { ref, isCurrent, toggle } = useContext(VideoContext) as VideoValues
+  const { ref, isCurrent, toggle, isShortcutsDisabled } = useContext(
+    VideoContext
+  ) as VideoValues
   const { volume, changeVolume } = useVolume(ref)
   const video = ref.current
 
   const handleKeydown = (event: globalThis.KeyboardEvent) => {
+    if (!isCurrent || isShortcutsDisabled) return
+
     switch (event.key) {
       case ' ':
         event.preventDefault()
@@ -34,9 +38,9 @@ export const useVideoShortcuts = () => {
   }
 
   useEffect(() => {
-    if (!isCurrent) return
+    if (!isCurrent || isShortcutsDisabled) return
 
     document.addEventListener('keydown', handleKeydown)
     return () => document.removeEventListener('keydown', handleKeydown)
-  }, [handleKeydown])
+  }, [handleKeydown, isShortcutsDisabled, isCurrent])
 }

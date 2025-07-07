@@ -17,6 +17,7 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [isManuallyPaused, setIsManuallyPaused] = useState(false)
+  const [isShortcutsDisabled, setIsShortcutsDisabled] = useState(false)
 
   const toggle = () => {
     const video = videoRef.current
@@ -36,7 +37,9 @@ export const VideoContextProvider: FC<VideoContextProdiverProps> = ({
     isCurrent,
     toggle,
     isManuallyPaused,
-    setIsManuallyPaused
+    setIsManuallyPaused,
+    isShortcutsDisabled,
+    setIsShortcutsDisabled
   }
 
   if (!isVisible) return <VideoSkeleton />

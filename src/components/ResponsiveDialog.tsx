@@ -24,10 +24,8 @@ import { useMediaQuery } from 'usehooks-ts'
 interface ResponsiveDialogProps {
   title?: string
   description?: string
-  state?: {
-    open: boolean
-    onOpenChange: (value: boolean) => void
-  }
+  open?: boolean
+  onOpenChange?: (value: boolean) => void
   children: ReactNode
   trigger: ReactNode
   className?: string
@@ -37,17 +35,14 @@ interface ResponsiveDialogProps {
 export const ResponsiveDialog: FC<ResponsiveDialogProps> = ({
   title,
   description,
-  state,
+  open,
+  onOpenChange,
   trigger,
   children,
   cancelButton = true,
   className
 }) => {
   const isDesktop = useMediaQuery('(min-width: 768px)')
-  const [isOpen, setIsOpen] = useState(false)
-
-  const open = state ? state.open : isOpen
-  const onOpenChange = state ? state.onOpenChange : setIsOpen
 
   if (isDesktop) {
     return (
