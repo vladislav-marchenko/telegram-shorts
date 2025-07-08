@@ -13,11 +13,14 @@ import { useContext, useState, type FC } from 'react'
 interface VideoCommentProps extends Comment {
   fetchNextPage: () => void
   isLast: boolean
+  isReply?: boolean
+  hasNextPage?: boolean
 }
 
 export const VideoComment: FC<VideoCommentProps> = ({
   fetchNextPage,
   isLast,
+  isReply = false,
   ...props
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -30,6 +33,7 @@ export const VideoComment: FC<VideoCommentProps> = ({
           {...props}
           fetchNextPage={fetchNextPage}
           isLast={isLast}
+          isReply={isReply}
           isMenuOpen={isMenuOpen}
         />
       </ContextMenuTrigger>

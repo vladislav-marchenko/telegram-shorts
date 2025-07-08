@@ -8,17 +8,20 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { CommentsContext } from '@/contexts/CommentsContext'
 import { createCommentSchema } from '@/schemas'
 import { createComment } from '@/services/api'
+import type { CommentsValues } from '@/types/contexts'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SendHorizonal } from 'lucide-react'
-import { type FC } from 'react'
+import { useContext, type FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type { z } from 'zod'
 
 export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
+  const { replyingTo } = useContext(CommentsContext) as CommentsValues
   const form = useForm<z.infer<typeof createCommentSchema>>({
     resolver: zodResolver(createCommentSchema),
     defaultValues: { text: '' }
@@ -36,7 +39,7 @@ export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
   })
 
   const onSubmit = (values: z.infer<typeof createCommentSchema>) => {
-    mutate({ videoId, text: values.text })
+    mutate({ videoId, parentId: replyingTo?._id, text: values.text })
   }
 
   return (

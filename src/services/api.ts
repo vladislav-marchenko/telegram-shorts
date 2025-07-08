@@ -139,15 +139,17 @@ export const trackView = async (videoId: string) => {
 
 export const createComment = async ({
   videoId,
+  parentId,
   text
 }: {
   videoId: string
+  parentId?: string
   text: string
 }) => {
   return await customFetch({
     endpoint: `/comment/${videoId}`,
     method: 'POST',
-    body: JSON.stringify({ text }),
+    body: JSON.stringify({ text, parentId }),
     headers: { 'Content-Type': 'application/json' }
   })
 }
@@ -161,5 +163,17 @@ export const getVideoComments = async ({
 }) => {
   return await customFetch<InfiniteComments>({
     endpoint: `/comment/${videoId}?page=${page}`
+  })
+}
+
+export const getCommentReplies = async ({
+  commentId,
+  page = 1
+}: {
+  commentId: string
+  page: number
+}) => {
+  return await customFetch<InfiniteComments>({
+    endpoint: `/comment/replies/${commentId}?page=${page}`
   })
 }
