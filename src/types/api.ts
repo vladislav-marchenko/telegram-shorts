@@ -50,6 +50,7 @@ export interface Comment {
   parentId?: string
   user: Omit<User, 'telegramId' | 'createdAt'>
   text: string
+  repliesCount: number
   createdAt: string
 }
 

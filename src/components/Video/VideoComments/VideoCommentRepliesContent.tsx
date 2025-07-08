@@ -6,7 +6,7 @@ import {
 import { useCommentReplies } from '@/hooks/useCommentReplies'
 import type { InfiniteComments } from '@/types/api'
 import type { CommentValues } from '@/types/contexts'
-import { useContext, type FC } from 'react'
+import { useContext, useMemo, type FC } from 'react'
 
 interface VideoCommentRepliesContentProps {
   data: { pages: InfiniteComments[] }
@@ -15,7 +15,10 @@ interface VideoCommentRepliesContentProps {
 export const VideoCommentRepliesContent: FC<
   VideoCommentRepliesContentProps
 > = ({ data }) => {
-  const replies = data.pages.flatMap(({ comments }) => comments)
+  const replies = useMemo(
+    () => data.pages.flatMap(({ comments }) => comments),
+    [data]
+  )
 
   const { commentId } = useContext(CommentContext) as CommentValues
   const { fetchNextPage } = useCommentReplies(commentId)

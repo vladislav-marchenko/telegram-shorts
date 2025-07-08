@@ -7,7 +7,12 @@ import type { FC } from 'react'
 export const VideoCommentActions: FC<Comment> = (props) => {
   return (
     <div className='flex justify-between'>
-      <VideoCommentViewReplies commentId={props._id} />
+      {props.repliesCount > 0 && (
+        <VideoCommentViewReplies
+          commentId={props._id}
+          count={props.repliesCount}
+        />
+      )}
       <div className='flex gap-2'>
         <VideoCommentReply {...props} />
         <VideoCommentReport />

@@ -21,7 +21,9 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 
 export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
-  const { replyingTo } = useContext(CommentsContext) as CommentsValues
+  const { replyingTo, setReplyingTo } = useContext(
+    CommentsContext
+  ) as CommentsValues
   const form = useForm<z.infer<typeof createCommentSchema>>({
     resolver: zodResolver(createCommentSchema),
     defaultValues: { text: '' }
@@ -32,8 +34,15 @@ export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
     mutationFn: createComment,
     onSuccess: () => {
       form.reset()
-      queryClient.invalidateQueries({ queryKey: ['comment', videoId] })
       toast.success('Comment has been successfully created')
+
+      queryClient.invalidateQueries({ queryKey: ['comment', videoId] })
+      if (replyingTo) {
+        queryClient.refetchQueries({
+          queryKey: ['comment', 'replies', replyingTo.parentId]
+        })
+        setReplyingTo(null)
+      }
     },
     onError: (error) => toast.error(error.message ?? 'Something went wrong')
   })
