@@ -2,6 +2,7 @@ import { VideoCommentAction } from './VideoCommentAction'
 import { VideoCommentRepliesContent } from './VideoCommentRepliesContent'
 import { VideoCommentRepliesLine } from './VideoCommentRepliesLine'
 import { VideoCommentRepliesSkeleton } from './VideoCommentRepliesSkeleton'
+import { Error } from '@/components/Error'
 import { CommentContext } from '@/contexts/CommentContext'
 import { useCommentReplies } from '@/hooks/useCommentReplies'
 import type { CommentValues } from '@/types/contexts'
@@ -11,8 +12,16 @@ export const VideoCommentReplies = () => {
   const { commentId, isRepliesOpen, setIsRepliesOpen } = useContext(
     CommentContext
   ) as CommentValues
-  const { data, fetchNextPage, hasNextPage, isSuccess, isLoading } =
-    useCommentReplies(commentId)
+  const {
+    data,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+    isSuccess,
+    isLoading,
+    isError,
+    error
+  } = useCommentReplies(commentId)
 
   return (
     <div className='pl-8'>
@@ -25,6 +34,7 @@ export const VideoCommentReplies = () => {
             <VideoCommentRepliesContent data={data} />
           )}
           {isLoading && <VideoCommentRepliesSkeleton />}
+          {isError && <Error error={error} refetch={refetch} />}
         </div>
       </div>
       {hasNextPage && isRepliesOpen && (
