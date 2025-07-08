@@ -21,6 +21,7 @@ export const VideoCommentsFormReply = () => {
           <p className='truncate text-sm text-neutral-200'>{replyingTo.text}</p>
         </div>
         <button
+          type='button'
           onClick={() => setReplyingTo(null)}
           className='shrink-0 cursor-pointer self-center rounded-sm p-1 text-neutral-200 transition-colors hover:bg-neutral-700/60 hover:text-white'
         >
