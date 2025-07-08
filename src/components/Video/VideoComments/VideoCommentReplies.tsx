@@ -29,13 +29,13 @@ export const VideoCommentReplies = () => {
         <VideoCommentRepliesLine
           onClick={() => setIsRepliesOpen(!isRepliesOpen)}
         />
-        <div className='flex flex-auto flex-col'>
-          {isSuccess && isRepliesOpen && (
-            <VideoCommentRepliesContent data={data} />
-          )}
-          {isLoading && <VideoCommentRepliesSkeleton />}
-          {isError && <Error error={error} refetch={refetch} />}
-        </div>
+        {isRepliesOpen && (
+          <div className='flex flex-auto flex-col'>
+            {isSuccess && <VideoCommentRepliesContent data={data} />}
+            {isLoading && <VideoCommentRepliesSkeleton />}
+            {isError && <Error error={error} refetch={refetch} />}
+          </div>
+        )}
       </div>
       {hasNextPage && isRepliesOpen && (
         <VideoCommentAction onClick={() => fetchNextPage()}>
