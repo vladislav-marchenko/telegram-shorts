@@ -8,7 +8,7 @@ export interface Error {
 
 export interface User {
   _id: string
-  telegramId: string
+  telegramId: number
   username: string
   displayName: string
   photoURL: string

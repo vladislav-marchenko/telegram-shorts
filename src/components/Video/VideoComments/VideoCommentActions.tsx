@@ -1,10 +1,14 @@
+import { VideoCommentAction } from './VideoCommentAction'
 import { VideoCommentReply } from './VideoCommentReply'
 import { VideoCommentReport } from './VideoCommentReport'
 import { VideoCommentViewReplies } from './VideoCommentViewReplies'
+import { isMe } from '@/lib/utils'
 import type { Comment } from '@/types/api'
 import type { FC } from 'react'
 
 export const VideoCommentActions: FC<Comment> = (props) => {
+  const isMyComment = isMe(props.user.telegramId)
+
   return (
     <div className='flex justify-between'>
       {props.repliesCount > 0 && (
@@ -15,7 +19,11 @@ export const VideoCommentActions: FC<Comment> = (props) => {
       )}
       <div className='flex gap-2'>
         <VideoCommentReply {...props} />
-        <VideoCommentReport />
+        {!isMyComment && <VideoCommentReport />}
+        {isMyComment && <VideoCommentAction>Edit</VideoCommentAction>}
+        {isMyComment && (
+          <VideoCommentAction variant='destructive'>Delete</VideoCommentAction>
+        )}
       </div>
     </div>
   )
