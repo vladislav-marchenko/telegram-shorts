@@ -38,6 +38,9 @@ export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
 
       queryClient.invalidateQueries({ queryKey: ['comment', videoId] })
       if (replyingTo) {
+        queryClient.invalidateQueries({
+          queryKey: ['comment', 'replies', replyingTo._id]
+        })
         queryClient.refetchQueries({
           queryKey: ['comment', 'replies', replyingTo.parentId]
         })
