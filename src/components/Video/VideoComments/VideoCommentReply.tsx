@@ -1,4 +1,4 @@
-import { VideoCommentOption } from './VideoCommentOption'
+import { VideoCommentAction } from './VideoCommentAction'
 import { CommentsContext } from '@/contexts/CommentsContext'
 import type { Comment } from '@/types/api'
 import type { CommentsValues } from '@/types/contexts'
@@ -8,8 +8,8 @@ export const VideoCommentReply: FC<Comment> = (props) => {
   const { setReplyingTo } = useContext(CommentsContext) as CommentsValues
 
   return (
-    <VideoCommentOption onClick={() => setReplyingTo(props)}>
+    <VideoCommentAction onClick={() => setReplyingTo(props)}>
       Reply
-    </VideoCommentOption>
+    </VideoCommentAction>
   )
 }

@@ -1,5 +1,5 @@
-import { VideoCommentOption } from './VideoCommentOption'
+import { VideoCommentAction } from './VideoCommentAction'
 
 export const VideoCommentReport = () => {
-  return <VideoCommentOption>Report</VideoCommentOption>
+  return <VideoCommentAction>Report</VideoCommentAction>
 }

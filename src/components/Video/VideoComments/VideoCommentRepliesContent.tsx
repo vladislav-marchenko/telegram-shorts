@@ -1,6 +1,12 @@
 import { VideoComment } from './VideoComment'
+import {
+  CommentContext,
+  CommentContextProvider
+} from '@/contexts/CommentContext'
+import { useCommentReplies } from '@/hooks/useCommentReplies'
 import type { InfiniteComments } from '@/types/api'
-import type { FC } from 'react'
+import type { CommentValues } from '@/types/contexts'
+import { useContext, type FC } from 'react'
 
 interface VideoCommentRepliesContentProps {
   data: { pages: InfiniteComments[] }
@@ -11,12 +17,15 @@ export const VideoCommentRepliesContent: FC<
 > = ({ data }) => {
   const replies = data.pages.flatMap(({ comments }) => comments)
 
+  const { commentId } = useContext(CommentContext) as CommentValues
+  const { fetchNextPage } = useCommentReplies(commentId)
+
   return replies.map((comment, index) => (
-    <VideoComment
-      key={index}
-      isLast={index === replies.length - 1}
-      isReply
-      {...comment}
-    />
+    <CommentContextProvider
+      commentId={comment._id}
+      fetchNextPage={fetchNextPage}
+    >
+      <VideoComment key={index} {...comment} />
+    </CommentContextProvider>
   ))
 }

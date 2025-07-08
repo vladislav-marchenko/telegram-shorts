@@ -22,3 +22,13 @@ export interface CommentsValues {
   replyingTo: Comment | null
   setReplyingTo: Dispatch<SetStateAction<Comment | null>>
 }
+
+export interface CommentValues {
+  isContextMenuOpen: boolean
+  setIsContextMenuOpen: Dispatch<SetStateAction<boolean>>
+  isRepliesOpen: boolean
+  setIsRepliesOpen: Dispatch<SetStateAction<boolean>>
+  commentId: string
+  fetchNextPage: () => void
+  isLast: boolean
+}

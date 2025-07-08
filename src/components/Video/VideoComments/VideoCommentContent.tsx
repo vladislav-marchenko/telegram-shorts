@@ -1,52 +1,33 @@
+import { VideoCommentActions } from './VideoCommentActions'
 import { VideoCommentUsername } from './VideoCommentContentUsername'
 import { VideoCommentLike } from './VideoCommentLike'
-import { VideoCommentOption } from './VideoCommentOption'
 import { VideoCommentReplies } from './VideoCommentReplies'
-import { VideoCommentReply } from './VideoCommentReply'
-import { VideoCommentReport } from './VideoCommentReport'
-import { VideoCommentViewReplies } from './VideoCommentViewReplies'
+import { CommentContext } from '@/contexts/CommentContext'
 import { CommentsContext } from '@/contexts/CommentsContext'
-import { useCommentReplies } from '@/hooks/useCommentReplies'
 import { useObserver } from '@/hooks/useObserver'
 import { cn } from '@/lib/utils'
 import type { Comment } from '@/types/api'
-import type { CommentsValues } from '@/types/contexts'
+import type { CommentsValues, CommentValues } from '@/types/contexts'
 import { useContext, type FC } from 'react'
 
-interface VideoCommentContentProps extends Comment {
-  fetchNextPage: () => void
-  isLast: boolean
-  isReply?: boolean
-  isMenuOpen: boolean
-}
-
-export const VideoCommentContent: FC<VideoCommentContentProps> = ({
-  fetchNextPage,
-  isLast,
-  isReply = false,
-  isMenuOpen,
-  ...props
-}) => {
-  const { hasNextPage } = useCommentReplies(props._id)
-  const ref = useObserver<HTMLDivElement>(fetchNextPage, isLast && !isReply)
+export const VideoCommentContent: FC<Comment> = ({ ...props }) => {
   const { setReplyingTo } = useContext(CommentsContext) as CommentsValues
+  const { isContextMenuOpen, fetchNextPage, isLast } = useContext(
+    CommentContext
+  ) as CommentValues
+  const ref = useObserver<HTMLDivElement>(fetchNextPage, isLast)
   const { _id, displayName, username } = props.user
 
   return (
-    <div
-      className={cn(
-        'flex flex-col',
-        isReply && 'border-l-2 border-neutral-500'
-      )}
-    >
+    <div className='flex flex-col'>
       <div
         ref={ref}
         onDoubleClick={() => setReplyingTo(props)}
         className={cn(
-          'flex gap-2 rounded-md px-2 py-3 transition-colors duration-200 md:p-4',
+          'flex min-w-80 gap-2 rounded-md px-2 py-3 transition-colors duration-200 md:p-4',
           {
-            'bg-accent': isMenuOpen,
-            'hover:bg-accent active:bg-accent': !isMenuOpen
+            'bg-accent': isContextMenuOpen,
+            'hover:bg-accent active:bg-accent': !isContextMenuOpen
           }
         )}
         {...props}
@@ -65,23 +46,10 @@ export const VideoCommentContent: FC<VideoCommentContentProps> = ({
             <span className='leading-tight break-words'>{props.text}</span>
             <VideoCommentLike />
           </div>
-          <div className='flex justify-between'>
-            <VideoCommentViewReplies commentId={props._id} />
-            <div className='flex gap-2'>
-              <VideoCommentReply {...props} />
-              <VideoCommentReport />
-            </div>
-          </div>
+          <VideoCommentActions {...props} />
         </div>
       </div>
-      <div className='pl-10'>
-        <VideoCommentReplies commentId={props._id} />
-        {hasNextPage && (
-          <VideoCommentOption onClick={fetchNextPage}>
-            —— View more replies
-          </VideoCommentOption>
-        )}
-      </div>
+      <VideoCommentReplies />
     </div>
   )
 }

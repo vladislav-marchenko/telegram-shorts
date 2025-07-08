@@ -5,37 +5,20 @@ import {
   ContextMenuItem,
   ContextMenuTrigger
 } from '@/components/ui/context-menu'
+import { CommentContext } from '@/contexts/CommentContext'
 import { CommentsContext } from '@/contexts/CommentsContext'
 import type { Comment } from '@/types/api'
-import type { CommentsValues } from '@/types/contexts'
-import { useContext, useState, type FC } from 'react'
+import type { CommentsValues, CommentValues } from '@/types/contexts'
+import { useContext, type FC } from 'react'
 
-interface VideoCommentProps extends Comment {
-  fetchNextPage: () => void
-  isLast: boolean
-  isReply?: boolean
-  hasNextPage?: boolean
-}
-
-export const VideoComment: FC<VideoCommentProps> = ({
-  fetchNextPage,
-  isLast,
-  isReply = false,
-  ...props
-}) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+export const VideoComment: FC<Comment> = (props) => {
   const { setReplyingTo } = useContext(CommentsContext) as CommentsValues
+  const { setIsContextMenuOpen } = useContext(CommentContext) as CommentValues
 
   return (
-    <ContextMenu onOpenChange={setIsMenuOpen}>
+    <ContextMenu onOpenChange={setIsContextMenuOpen}>
       <ContextMenuTrigger asChild>
-        <VideoCommentContent
-          {...props}
-          fetchNextPage={fetchNextPage}
-          isLast={isLast}
-          isReply={isReply}
-          isMenuOpen={isMenuOpen}
-        />
+        <VideoCommentContent {...props} />
       </ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem onClick={() => setReplyingTo(props)}>

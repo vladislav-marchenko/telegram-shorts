@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils'
 import type { ButtonHTMLAttributes, FC, ReactNode } from 'react'
 
-interface VideoCommentOptionProps
+interface VideoCommentActionProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
 }
 
-export const VideoCommentOption: FC<VideoCommentOptionProps> = ({
+export const VideoCommentAction: FC<VideoCommentActionProps> = ({
   children,
   className,
   ...props
@@ -15,7 +15,7 @@ export const VideoCommentOption: FC<VideoCommentOptionProps> = ({
     <button
       {...props}
       className={cn(
-        'cursor-pointer self-start text-sm text-neutral-400 hover:underline',
+        'cursor-pointer self-start text-sm text-neutral-400 transition-colors hover:text-neutral-200 hover:underline',
         className
       )}
     >
