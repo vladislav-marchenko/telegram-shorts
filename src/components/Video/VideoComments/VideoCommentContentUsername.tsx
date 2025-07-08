@@ -1,14 +1,9 @@
+import type { User } from '@/types/api'
 import { Link } from '@tanstack/react-router'
 import type { FC } from 'react'
 
-interface VideoCommentUsernameProps {
-  userId: string
-  displayName: string
-  username: string
-}
-
-export const VideoCommentUsername: FC<VideoCommentUsernameProps> = ({
-  userId,
+export const VideoCommentUsername: FC<User> = ({
+  _id,
   displayName,
   username
 }) => {
@@ -16,7 +11,7 @@ export const VideoCommentUsername: FC<VideoCommentUsernameProps> = ({
     <div className='group/username flex items-center gap-1'>
       <Link
         to='/user/$userId'
-        params={{ userId }}
+        params={{ userId: _id }}
         className='cursor-pointer truncate text-sm font-bold text-neutral-200 hover:underline'
       >
         {displayName}

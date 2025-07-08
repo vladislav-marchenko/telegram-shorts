@@ -3,8 +3,7 @@ import type { User } from '@/types/api'
 import { Link } from '@tanstack/react-router'
 import type { FC } from 'react'
 
-interface VideoLikesContentItemProps
-  extends Omit<User, 'telegramId' | 'createdAt'> {
+interface VideoLikesContentItemProps extends User {
   fetchNextPage: () => void
   isLast: boolean
 }

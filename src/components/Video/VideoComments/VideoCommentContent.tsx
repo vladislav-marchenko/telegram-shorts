@@ -16,7 +16,6 @@ export const VideoCommentContent: FC<Comment> = ({ ...props }) => {
     CommentContext
   ) as CommentValues
   const ref = useObserver<HTMLDivElement>(fetchNextPage, isLast)
-  const { _id, displayName, username } = props.user
 
   return (
     <div className='flex flex-col'>
@@ -37,11 +36,7 @@ export const VideoCommentContent: FC<Comment> = ({ ...props }) => {
           className='h-9 w-9 rounded-full bg-neutral-700'
         />
         <div className='flex w-full max-w-full flex-auto flex-col gap-1 overflow-hidden'>
-          <VideoCommentUsername
-            userId={_id}
-            displayName={displayName}
-            username={username}
-          />
+          <VideoCommentUsername {...props.user} />
           <div className='flex items-start justify-between gap-4'>
             <span className='leading-tight break-words'>{props.text}</span>
             <VideoCommentLike />

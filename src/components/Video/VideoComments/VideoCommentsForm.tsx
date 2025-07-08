@@ -21,13 +21,14 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 
 export const VideoCommentsForm: FC<{ videoId: string }> = ({ videoId }) => {
-  const { replyingTo, setReplyingTo } = useContext(
-    CommentsContext
-  ) as CommentsValues
   const form = useForm<z.infer<typeof createCommentSchema>>({
     resolver: zodResolver(createCommentSchema),
     defaultValues: { text: '' }
   })
+
+  const { replyingTo, setReplyingTo } = useContext(
+    CommentsContext
+  ) as CommentsValues
 
   const queryClient = useQueryClient()
   const { mutate, isPending } = useMutation({

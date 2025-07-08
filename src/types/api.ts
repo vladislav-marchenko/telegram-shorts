@@ -36,7 +36,7 @@ export interface InfiniteVideos {
 export interface Like {
   _id: string
   videoId: string
-  user: Omit<User, 'telegramId' | 'createdAt'>
+  user: User
 }
 
 export interface InfiniteLikes {
@@ -48,7 +48,7 @@ export interface Comment {
   _id: string
   videoId: string
   parentId?: string
-  user: Omit<User, 'telegramId' | 'createdAt'>
+  user: User
   text: string
   repliesCount: number
   createdAt: string
