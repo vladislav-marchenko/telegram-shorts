@@ -48,7 +48,7 @@ export interface Comment {
   _id: string
   videoId: string
   parentId?: string
-  user: User
+  user: User | null
   text: string
   repliesCount: number
   createdAt: string

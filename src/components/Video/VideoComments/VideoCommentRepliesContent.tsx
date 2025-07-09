@@ -20,15 +20,12 @@ export const VideoCommentRepliesContent: FC<
     [data]
   )
 
-  const { commentId } = useContext(CommentContext) as CommentValues
-  const { fetchNextPage } = useCommentReplies(commentId)
+  const { comment } = useContext(CommentContext) as CommentValues
+  const { fetchNextPage } = useCommentReplies(comment._id)
 
   return replies.map((comment, index) => (
-    <CommentContextProvider
-      commentId={comment._id}
-      fetchNextPage={fetchNextPage}
-    >
-      <VideoComment key={index} {...comment} />
+    <CommentContextProvider comment={comment} fetchNextPage={fetchNextPage}>
+      <VideoComment key={index} />
     </CommentContextProvider>
   ))
 }

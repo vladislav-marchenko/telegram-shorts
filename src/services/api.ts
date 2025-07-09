@@ -177,3 +177,25 @@ export const getCommentReplies = async ({
     endpoint: `/comment/replies/${commentId}?page=${page}`
   })
 }
+
+export const editComment = async ({
+  commentId,
+  text
+}: {
+  commentId: string
+  text: string
+}) => {
+  return await customFetch({
+    endpoint: `/comment/${commentId}`,
+    method: 'PATCH',
+    body: JSON.stringify({ text }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+}
+
+export const deleteComment = async (commentId: string) => {
+  return await customFetch({
+    endpoint: `/comment/${commentId}`,
+    method: 'DELETE'
+  })
+}

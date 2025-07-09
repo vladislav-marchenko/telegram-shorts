@@ -1,12 +1,21 @@
-import type { User } from '@/types/api'
+import { CommentContext } from '@/contexts/CommentContext'
+import type { CommentValues } from '@/types/contexts'
 import { Link } from '@tanstack/react-router'
-import type { FC } from 'react'
+import { useContext } from 'react'
 
-export const VideoCommentUsername: FC<User> = ({
-  _id,
-  displayName,
-  username
-}) => {
+export const VideoCommentUsername = () => {
+  const { comment } = useContext(CommentContext) as CommentValues
+
+  if (!comment.user) {
+    return (
+      <span className='truncate text-sm font-bold text-neutral-200'>
+        Deleted
+      </span>
+    )
+  }
+
+  const { _id, displayName, username } = comment.user
+
   return (
     <div className='group/username flex items-center gap-1'>
       <Link

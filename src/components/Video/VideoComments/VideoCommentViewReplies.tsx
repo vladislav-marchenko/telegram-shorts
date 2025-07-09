@@ -3,21 +3,13 @@ import { CommentContext } from '@/contexts/CommentContext'
 import { useCommentReplies } from '@/hooks/useCommentReplies'
 import type { CommentValues } from '@/types/contexts'
 import { formatNumber } from '@/utils'
-import { useContext, type FC } from 'react'
+import { useContext } from 'react'
 
-interface VideoCommentViewRepliesProps {
-  commentId: string
-  count: number
-}
-
-export const VideoCommentViewReplies: FC<VideoCommentViewRepliesProps> = ({
-  commentId,
-  count
-}) => {
-  const { isFetched, refetch } = useCommentReplies(commentId)
-  const { isRepliesOpen, setIsRepliesOpen } = useContext(
+export const VideoCommentViewReplies = () => {
+  const { comment, isRepliesOpen, setIsRepliesOpen } = useContext(
     CommentContext
   ) as CommentValues
+  const { isFetched, refetch } = useCommentReplies(comment._id)
 
   const handleClick = () => {
     setIsRepliesOpen((isRepliesOpen) => !isRepliesOpen)
@@ -27,8 +19,8 @@ export const VideoCommentViewReplies: FC<VideoCommentViewRepliesProps> = ({
   return (
     <VideoCommentAction onClick={handleClick}>
       —— {isRepliesOpen ? 'Hide ' : 'View '}
-      {formatNumber(count)}
-      {count === 1 ? ' reply' : ' replies'}
+      {formatNumber(comment.repliesCount)}
+      {comment.repliesCount === 1 ? ' reply' : ' replies'}
     </VideoCommentAction>
   )
 }

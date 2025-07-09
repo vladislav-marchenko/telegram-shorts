@@ -1,9 +1,6 @@
 import { VideoComment } from './VideoComment'
 import { Empty } from '@/components/Empty'
-import {
-  CommentContext,
-  CommentContextProvider
-} from '@/contexts/CommentContext'
+import { CommentContextProvider } from '@/contexts/CommentContext'
 import type { InfiniteComments } from '@/types/api'
 import type { FC } from 'react'
 
@@ -24,11 +21,11 @@ export const VideoCommentsContent: FC<VideoCommentsContentProps> = ({
 
   return comments.map((comment, index) => (
     <CommentContextProvider
-      commentId={comment._id}
+      comment={comment}
       fetchNextPage={fetchNextPage}
       isLast={index === comments.length - 1}
     >
-      <VideoComment key={index} {...comment} />
+      <VideoComment key={index} />
     </CommentContextProvider>
   ))
 }

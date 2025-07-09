@@ -1,3 +1,4 @@
+import type { Comment } from '@/types/api'
 import type { CommentValues } from '@/types/contexts'
 import { createContext, useState, type FC, type ReactNode } from 'react'
 
@@ -5,14 +6,14 @@ export const CommentContext = createContext<CommentValues | null>(null)
 
 interface CommentContextProviderProps {
   children: ReactNode
-  commentId: string
+  comment: Comment
   fetchNextPage: () => void
   isLast?: boolean
 }
 
 export const CommentContextProvider: FC<CommentContextProviderProps> = ({
   children,
-  commentId,
+  comment,
   fetchNextPage,
   isLast = false
 }) => {
@@ -26,7 +27,7 @@ export const CommentContextProvider: FC<CommentContextProviderProps> = ({
         setIsContextMenuOpen,
         isRepliesOpen,
         setIsRepliesOpen,
-        commentId,
+        comment,
         fetchNextPage,
         isLast
       }}

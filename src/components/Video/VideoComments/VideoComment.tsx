@@ -1,4 +1,6 @@
 import { VideoCommentContent } from './VideoCommentContent'
+import { VideoCommentContextMenuDelete } from './VideoCommentContextMenu/VideoCommentContextMenuDelete'
+import { VideoCommentContextMenuReply } from './VideoCommentContextMenu/VideoCommentContextMenuReply'
 import {
   ContextMenu,
   ContextMenuContent,
@@ -6,31 +8,25 @@ import {
   ContextMenuTrigger
 } from '@/components/ui/context-menu'
 import { CommentContext } from '@/contexts/CommentContext'
-import { CommentsContext } from '@/contexts/CommentsContext'
 import { isMe } from '@/lib/utils'
-import type { Comment } from '@/types/api'
-import type { CommentsValues, CommentValues } from '@/types/contexts'
-import { useContext, type FC } from 'react'
+import type { CommentValues } from '@/types/contexts'
+import { useContext } from 'react'
 
-export const VideoComment: FC<Comment> = (props) => {
-  const { setReplyingTo } = useContext(CommentsContext) as CommentsValues
-  const { setIsContextMenuOpen } = useContext(CommentContext) as CommentValues
-
-  const isMyComment = isMe(props.user.telegramId)
+export const VideoComment = () => {
+  const { comment, setIsContextMenuOpen } = useContext(
+    CommentContext
+  ) as CommentValues
+  const isMyComment = comment.user ? isMe(comment.user.telegramId) : false
 
   return (
     <ContextMenu onOpenChange={setIsContextMenuOpen}>
       <ContextMenuTrigger asChild>
-        <VideoCommentContent {...props} />
+        <VideoCommentContent />
       </ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuItem onClick={() => setReplyingTo(props)}>
-          Reply
-        </ContextMenuItem>
+        {comment.user && <VideoCommentContextMenuReply />}
         {isMyComment && <ContextMenuItem>Edit</ContextMenuItem>}
-        {isMyComment && (
-          <ContextMenuItem variant='destructive'>Delete</ContextMenuItem>
-        )}
+        {isMyComment && <VideoCommentContextMenuDelete />}
         {!isMyComment && (
           <ContextMenuItem variant='destructive'>Report</ContextMenuItem>
         )}

@@ -28,7 +28,7 @@ export interface CommentValues {
   setIsContextMenuOpen: Dispatch<SetStateAction<boolean>>
   isRepliesOpen: boolean
   setIsRepliesOpen: Dispatch<SetStateAction<boolean>>
-  commentId: string
+  comment: Comment
   fetchNextPage: () => void
   isLast: boolean
 }

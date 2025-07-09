@@ -9,7 +9,7 @@ import type { CommentValues } from '@/types/contexts'
 import { useContext } from 'react'
 
 export const VideoCommentReplies = () => {
-  const { commentId, isRepliesOpen, setIsRepliesOpen } = useContext(
+  const { comment, isRepliesOpen, setIsRepliesOpen } = useContext(
     CommentContext
   ) as CommentValues
   const {
@@ -21,7 +21,7 @@ export const VideoCommentReplies = () => {
     isLoading,
     isError,
     error
-  } = useCommentReplies(commentId)
+  } = useCommentReplies(comment._id)
 
   return (
     <div className='pl-8'>

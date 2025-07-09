@@ -1,29 +1,26 @@
 import { VideoCommentAction } from './VideoCommentAction'
+import { VideoCommentDelete } from './VideoCommentDelete'
 import { VideoCommentReply } from './VideoCommentReply'
 import { VideoCommentReport } from './VideoCommentReport'
 import { VideoCommentViewReplies } from './VideoCommentViewReplies'
+import { CommentContext } from '@/contexts/CommentContext'
 import { isMe } from '@/lib/utils'
-import type { Comment } from '@/types/api'
-import type { FC } from 'react'
+import type { CommentValues } from '@/types/contexts'
+import { useContext } from 'react'
 
-export const VideoCommentActions: FC<Comment> = (props) => {
-  const isMyComment = isMe(props.user.telegramId)
+export const VideoCommentActions = () => {
+  const { comment } = useContext(CommentContext) as CommentValues
+  const isMyComment = comment.user ? isMe(comment.user.telegramId) : false
 
   return (
     <div className='flex justify-between'>
-      {props.repliesCount > 0 && (
-        <VideoCommentViewReplies
-          commentId={props._id}
-          count={props.repliesCount}
-        />
-      )}
+      {comment.repliesCount > 0 && <VideoCommentViewReplies />}
       <div className='flex gap-2'>
-        <VideoCommentReply {...props} />
+        {comment.user && <VideoCommentReply />}
         {!isMyComment && <VideoCommentReport />}
         {isMyComment && <VideoCommentAction>Edit</VideoCommentAction>}
-        {isMyComment && (
-          <VideoCommentAction variant='destructive'>Delete</VideoCommentAction>
-        )}
+        {isMyComment && <VideoCommentDelete />}
+        {isMyComment && <VideoCommentDelete />}
       </div>
     </div>
   )

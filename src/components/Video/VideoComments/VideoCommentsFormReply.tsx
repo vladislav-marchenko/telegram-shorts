@@ -16,7 +16,7 @@ export const VideoCommentsFormReply = () => {
       <div className='flex w-full flex-auto justify-between px-2 py-1'>
         <div className='flex flex-col overflow-hidden'>
           <h6 className='truncate text-xs font-bold'>
-            Reply to {replyingTo.user.displayName}
+            Reply to {replyingTo.user?.displayName ?? 'Deleted'}
           </h6>
           <p className='truncate text-sm text-neutral-200'>{replyingTo.text}</p>
         </div>
