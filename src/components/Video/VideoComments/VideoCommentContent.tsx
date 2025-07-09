@@ -3,6 +3,7 @@ import { VideoCommentAvatar } from './VideoCommentAvatar'
 import { VideoCommentUsername } from './VideoCommentContentUsername'
 import { VideoCommentLike } from './VideoCommentLike'
 import { VideoCommentReplies } from './VideoCommentReplies'
+import { VideoCommentText } from './VideoCommentText'
 import { CommentContext } from '@/contexts/CommentContext'
 import { CommentsContext } from '@/contexts/CommentsContext'
 import { useObserver } from '@/hooks/useObserver'
@@ -39,7 +40,7 @@ export const VideoCommentContent = ({ ...props }) => {
         <div className='flex w-full max-w-full flex-auto flex-col gap-1 overflow-hidden'>
           <VideoCommentUsername />
           <div className='flex items-start justify-between gap-4'>
-            <span className='leading-tight break-words'>{comment.text}</span>
+            <VideoCommentText />
             <VideoCommentLike />
           </div>
           <VideoCommentActions />
