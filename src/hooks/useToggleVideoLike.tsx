@@ -1,6 +1,6 @@
-import { getLikeStatus, toggleVideoLike } from '@/services/api'
+import { toggleVideoLike } from '@/services/api'
 import type { InfiniteVideos, Video } from '@/types/api'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 type VideoData = { pages: InfiniteVideos[] }
@@ -37,22 +37,11 @@ export const useToggleVideoLike = (videoId: string) => {
     }
   })
 
-  const { data, isSuccess } = useQuery({
-    queryKey: ['like', 'status', videoId],
-    queryFn: () => getLikeStatus(videoId)
-  })
-
   function updateVideoLikes(video: Video): Video {
-    if (!isSuccess) return video
-
-    queryClient.setQueryData(['like', 'status', videoId], {
-      isLiked: !data.isLiked
-    })
-
-    if (data.isLiked) {
-      return { ...video, likesCount: video.likesCount - 1 }
-    }
-    return { ...video, likesCount: video.likesCount + 1 }
+    const likesCount = video.isLiked
+      ? video.likesCount - 1
+      : video.likesCount + 1
+    return { ...video, isLiked: !video.isLiked, likesCount }
   }
 
   function findVideoAndIncrementLikes(videos: Video[]) {

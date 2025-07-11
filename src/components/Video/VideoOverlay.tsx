@@ -9,7 +9,12 @@ import type { VideoValues } from '@/types/contexts'
 import { Play } from 'lucide-react'
 import { useContext, type FC } from 'react'
 
-export const VideoOverlay: FC<Video> = ({ _id, likesCount, commentsCount }) => {
+export const VideoOverlay: FC<Video> = ({
+  _id,
+  likesCount,
+  commentsCount,
+  isLiked
+}) => {
   const { isManuallyPaused } = useContext(VideoContext) as VideoValues
 
   return (
@@ -18,7 +23,7 @@ export const VideoOverlay: FC<Video> = ({ _id, likesCount, commentsCount }) => {
         <button className='video-button p-2'>
           <div className='h-12 w-12 rounded-full bg-gray-600' />
         </button>
-        <VideoLikeButton count={likesCount} videoId={_id} />
+        <VideoLikeButton isLiked={isLiked} count={likesCount} videoId={_id} />
         <VideoComments count={commentsCount} videoId={_id} />
         <VideoOptions />
         <VideoVolume />

@@ -5,11 +5,16 @@ import { formatNumber } from '@/utils'
 import { type FC } from 'react'
 
 interface VideoLikeProps {
+  isLiked: boolean
   count: number
   videoId: string
 }
 
-export const VideoLikeButton: FC<VideoLikeProps> = ({ count, videoId }) => {
+export const VideoLikeButton: FC<VideoLikeProps> = ({
+  isLiked,
+  count,
+  videoId
+}) => {
   const { toggleLike, isPending } = useToggleVideoLike(videoId)
 
   return (
@@ -19,7 +24,7 @@ export const VideoLikeButton: FC<VideoLikeProps> = ({ count, videoId }) => {
         disabled={isPending}
         className='video-button pb-0'
       >
-        <VideoLikesIcon videoId={videoId} />
+        <VideoLikesIcon isLiked={isLiked} />
       </button>
       <VideoLikes videoId={videoId}>{formatNumber(count)}</VideoLikes>
     </>

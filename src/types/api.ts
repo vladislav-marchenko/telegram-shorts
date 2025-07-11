@@ -24,6 +24,7 @@ export interface Video {
   views: number
   likesCount: number
   commentsCount: number
+  isLiked: boolean
   createdAt: string
 }
 
